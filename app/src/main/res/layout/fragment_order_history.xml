@@ -37,7 +37,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Order History"
                     android:textColor="#000000"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
@@ -85,7 +85,7 @@
                     android:layout_below="@+id/tvOrdersYet"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="You’ll be able to see your order history here."
                     android:textColor="#666666"
                     android:textSize="@dimen/_10sdp" />
@@ -105,7 +105,7 @@
                         android:paddingVertical="@dimen/_8sdp"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:text="Start an order"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/light_green"
                         android:textSize="@dimen/_13sdp" />
 

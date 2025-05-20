@@ -39,12 +39,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relBreakfast"
-            android:fontFamily="@font/sarabun"
-            android:layout_margin="@dimen/_5sdp"
             android:layout_centerHorizontal="true"
-            android:text=""
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:singleLine="true"
+            android:text=""
             android:textColor="#32343E"
             android:textSize="@dimen/_12sdp" />
 

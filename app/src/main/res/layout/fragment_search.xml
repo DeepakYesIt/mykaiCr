@@ -31,7 +31,7 @@
             android:layout_toEndOf="@id/imageProfile"
             android:fontFamily="@font/montserrat_semibold"
             android:text=""
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_13sdp" />
 
         <ImageView
             android:id="@+id/imgHeartRed"
@@ -86,8 +86,9 @@
                         android:fontFamily="@font/montserrat_semibold"
                         android:gravity="center|start"
                         android:text="Preferences"
-                        android:textColor="@color/light_black"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
+
                     <ImageView
                         android:id="@+id/imgPreferences"
                         android:layout_width="wrap_content"
@@ -114,6 +115,9 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:background="@null"
                         android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/light_black"
+                        android:textColorHint="#999999"
                         android:drawableStart="@drawable/yellow_search_icon"
                         android:hint="Search ingredients or recipes"
                         android:paddingVertical="@dimen/_12sdp"
@@ -198,7 +202,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="Search recipe by ingredients"
                             android:textColor="#0A2533"
                             android:textSize="@dimen/_14sdp" />
@@ -245,7 +249,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Search By Meal"
                         android:textColor="#111111"
                         android:textSize="@dimen/_14sdp" />
@@ -274,7 +278,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Search by popular categories"
                         android:textColor="#111111"
                         android:textSize="@dimen/_14sdp" />
@@ -295,8 +299,6 @@
 
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 
     <RelativeLayout
         android:id="@+id/cardViewAddRecipe"
@@ -389,8 +391,6 @@
                         android:textSize="@dimen/_13sdp" />
 
                 </RelativeLayout>
-
-
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

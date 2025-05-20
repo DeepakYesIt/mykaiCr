@@ -32,8 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:gravity="center"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="Create Recipe"
-            android:textColor="#000000"
+            android:textColor="#171D1B"
             android:textSize="@dimen/_15sdp" />
     </LinearLayout>
 
@@ -42,7 +43,10 @@
         android:layout_height="match_parent"
         android:layout_above="@id/lay_bottom"
         android:layout_below="@id/lay_title"
-        android:layout_margin="@dimen/_6sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -72,8 +76,8 @@
                     layout="@layout/progess_loader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/addImageIcon"
@@ -88,8 +92,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="@dimen/_15sdp"
-                    android:visibility="gone"
-                    android:background="@drawable/edit_icon" />
+                    android:background="@drawable/edit_icon"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -98,9 +102,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_medium"
                 android:padding="@dimen/_5sdp"
                 android:text="Recipe Title"
-                android:textColor="#3C4541"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/recipe_title_icon" />
@@ -115,11 +120,11 @@
                     android:id="@+id/etRecipeName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins"
                     android:background="@null"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center|start"
                     android:hint="Pizza"
+                    android:paddingHorizontal="@dimen/_10sdp"
                     android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
@@ -133,12 +138,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_5sdp"
                     android:text="Servings"
-                    android:layout_centerVertical="true"
-                    android:textColor="#3C4541"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -163,10 +168,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="1"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/_13sdp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/_13sdp" />
 
                         <ImageView
                             android:id="@+id/imgPlus"
@@ -190,11 +195,11 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableStart="@drawable/ingredients_icon"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_5sdp"
                     android:text="Ingredients"
-                    android:textColor="#3C4541"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
 
                 <ImageView
                     android:id="@+id/imageCrtIngPlus"
@@ -209,13 +214,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcyCreateIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -230,11 +236,11 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableStart="@drawable/cooking_instructions_icon"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins"
                     android:padding="@dimen/_5sdp"
                     android:text="Cooking Instructions"
-                    android:textColor="#3C4541"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
 
                 <ImageView
                     android:id="@+id/imageCookIns"
@@ -249,13 +255,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcyCookInstructions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -270,11 +277,11 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableStart="@drawable/author_notes_icon"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_5sdp"
                     android:text="Total Time"
-                    android:textColor="#3C4541"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
 
@@ -287,13 +294,14 @@
                     android:id="@+id/edtTotalTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:fontFamily="@font/poppins"
                     android:background="@null"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center|start"
                     android:hint="Add the total time it takes to make this recipe in mins"
+                    android:inputType="number"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
@@ -310,13 +318,13 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableStart="@drawable/author_notes_icon"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_5sdp"
                     android:text="Author Notes (Optional)"
-                    android:textColor="#3C4541"
-                    android:textSize="@dimen/_13sdp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
 
-         <!--       <ImageView
+                <!--       <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -334,11 +342,12 @@
                     android:id="@+id/edtSummary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="top|start"
-                    android:fontFamily="@font/poppins"
                     android:background="@null"
-                    android:padding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="top|start"
                     android:hint="This recipe took only 5-6 minutes"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
@@ -350,15 +359,16 @@
                 android:drawableStart="@drawable/privacy_icon"
                 android:drawablePadding="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Privacy"
-                android:textColor="#3C4541"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -368,16 +378,18 @@
                         android:id="@+id/textPrivate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/poppins"
                         android:drawableStart="@drawable/radio_check_icon"
                         android:drawablePadding="@dimen/_10sdp"
                         android:padding="@dimen/_5sdp"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentStart="true"
                         android:text="Private"
                         android:textColor="#3C4541"
                         android:textSize="@dimen/_13sdp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -387,12 +399,13 @@
                         android:id="@+id/textPublic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:drawableStart="@drawable/radio_uncheck_gray_icon"
                         android:drawablePadding="@dimen/_10sdp"
                         android:padding="@dimen/_5sdp"
-                        android:layout_centerInParent="true"
-                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/poppins"
                         android:text="Public"
                         android:textColor="#3C4541"
                         android:textSize="@dimen/_13sdp" />
@@ -413,14 +426,27 @@
                     android:drawableStart="@drawable/add_to_cookbook_icon"
                     android:drawablePadding="@dimen/_10sdp"
                     android:padding="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Add to Cookbook"
-                    android:textColor="#3C4541"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
             <com.skydoves.powerspinner.PowerSpinnerView
                 android:id="@+id/spinnerCookBook"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/edittext_bg"
+                android:fontFamily="@font/poppins"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="@dimen/_10sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:text="Favorites"
+                android:textColor="#3C4541"
+                android:textColorHint="#3C4541"
+                android:textSize="14.5sp"
                 app:spinner_arrow_gravity="end"
                 app:spinner_arrow_padding="@dimen/_8sdp"
                 app:spinner_arrow_show="true"
@@ -430,18 +456,6 @@
                 app:spinner_popup_animation="fade"
                 app:spinner_popup_background="@color/white"
                 app:spinner_popup_elevation="@dimen/_14sdp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/edittext_bg"
-                android:fontFamily="@font/poppins"
-                android:foreground="?attr/selectableItemBackground"
-                android:text="Favorites"
-                android:padding="@dimen/_10sdp"
-                android:paddingStart="@dimen/_20sdp"
-                android:textColor="#3C4541"
-                android:textColorHint="#3C4541"
-                android:textSize="14.5sp"
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
@@ -461,6 +475,7 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/select_bg_add"
             android:gravity="center"
+            android:fontFamily="@font/poppins_medium"
             android:padding="@dimen/_10sdp"
             android:text="Save"
             android:textColor="#FFFFFF"

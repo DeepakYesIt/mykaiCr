@@ -51,7 +51,6 @@ class FilterSearchFragment : Fragment(), OnItemClickListener {
     private var fullListMealType: MutableList<MealType> = mutableListOf()
     private var originalFullList: MutableList<Diet> = mutableListOf()
     private var fullListCookTime: MutableList<CookTime> = mutableListOf()
-
     private var showMealType: MutableList<MealType> = mutableListOf()
     private var showFullList: MutableList<Diet> = mutableListOf()
     private var showListCookTime: MutableList<CookTime> = mutableListOf()

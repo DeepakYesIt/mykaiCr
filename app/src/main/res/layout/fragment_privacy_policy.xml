@@ -35,10 +35,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="#050505"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="#171D1B"
                     android:text="Privacy Policy"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
             </RelativeLayout>
 

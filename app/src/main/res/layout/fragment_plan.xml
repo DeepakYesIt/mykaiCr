@@ -28,9 +28,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@id/imageProfile"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="@string/let_s_plan_your_week"
-            android:textFontWeight="600"
             android:textSize="@dimen/_12sdp" />
 
         <ImageView
@@ -89,14 +88,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/orange_shape_bg">
+                    android:background="@drawable/redeem_filter_bg">
 
                     <TextView
                         android:id="@+id/tv_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:padding="@dimen/_7sdp"
                         android:text="June,2024"
                         android:textColor="#000000"
@@ -139,9 +138,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_12sdp"
-                        android:fontFamily="@font/montserrat_bold"
+                        android:fontFamily="@font/montserrat_semibold"
                         android:text="12 Sept - 18 Sept"
-                        android:textStyle="bold"
                         android:textColor="#000000"
                         android:textSize="@dimen/_10sdp" />
 
@@ -178,10 +176,10 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="@dimen/_20sdp"
                         android:paddingVertical="@dimen/_10sdp"
                         android:text="Add day to basket"
-                        android:fontFamily="@font/poppins"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         app:drawableStartCompat="@drawable/basket_icon" />
