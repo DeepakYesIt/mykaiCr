@@ -373,6 +373,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             recipesDateModel = data
 
             if (recipesDateModel != null) {
+
+
+
                 // Breakfast
                 if (recipesDateModel?.Breakfast != null && recipesDateModel?.Breakfast?.size!! > 0) {
                     setupDragScrollForRecyclerView(binding.rcySearchBreakFast, ErrorMessage.Breakfast)
@@ -450,6 +453,8 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 } else {
                     binding.llTeaTime.visibility = View.GONE
                 }
+
+
             }
         } catch (e: Exception) {
             showAlert(e.message, false)
@@ -869,6 +874,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
 
     override fun itemSelectUnSelect(id: Int?, status: String?, type: String?, position: Int?) {
+
         if (status == "heart") {
             if ((activity as? MainActivity)?.Subscription_status==1){
                 if ((activity as? MainActivity)?.favorite!! <= 2){
@@ -892,7 +898,6 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             /*if (status == "1") {*/
             removeDayDialog(id, position, type)
             /*}*/
-
         } else if (status == "missingIng") {
             val (mealList) = when (type) {
                 ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter

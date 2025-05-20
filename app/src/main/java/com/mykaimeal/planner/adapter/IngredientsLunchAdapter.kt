@@ -22,6 +22,7 @@ import com.mykaimeal.planner.R
 import com.mykaimeal.planner.adapter.IngredientsBreakFastAdapter.ViewHolder
 import com.mykaimeal.planner.databinding.AdapterIngredientsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.Breakfast
+import com.mykaimeal.planner.messageclass.ErrorMessage
 
 class IngredientsLunchAdapter(private var datalist:MutableList<Breakfast>?, private var requireActivity: FragmentActivity,
                               private var onItemClickListener: OnItemSelectUnSelectListener, private var onItemLongClickListener: OnItemLongClickListener,
@@ -105,22 +106,22 @@ class IngredientsLunchAdapter(private var datalist:MutableList<Breakfast>?, priv
 
         holder.binding.missingIngredientsImg.setOnClickListener{
             checkTypeStatus="missingIng"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Lunch",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus, ErrorMessage.Lunch,position)
         }
 
         holder.binding.imgHeartRed.setOnClickListener{
             checkTypeStatus="heart"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Lunch",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Lunch,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
             checkTypeStatus="recipeDetails"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Lunch",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Lunch,position)
         }
 
         holder.binding.imageMinus.setOnClickListener {
             checkTypeStatus="minus"
-            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,"Lunch",position)
+            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,ErrorMessage.Lunch,position)
 
         }
 
@@ -133,7 +134,8 @@ class IngredientsLunchAdapter(private var datalist:MutableList<Breakfast>?, priv
 
             val shadowBuilder = View.DragShadowBuilder(holder.itemView)
             holder.itemView.startDragAndDrop(clipData, shadowBuilder, null, 0)
-            onItemLongClickListener.itemLongClick(position,item?.id?.toString(), type,item?.recipe?.uri!!)
+            onItemLongClickListener.itemLongClick(position, item.id?.toString(), type,
+                item.recipe.uri!!)
             true
           /*  onItemLongClickListener.itemLongClick(position, checkStatus, datalist[position].type)*/
             true

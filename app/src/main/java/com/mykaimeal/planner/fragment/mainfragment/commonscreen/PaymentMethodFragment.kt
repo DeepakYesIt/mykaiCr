@@ -500,6 +500,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                     // Code for the else condition
                     binding.llBankAccount.visibility = View.VISIBLE
                     binding.llSavedBankAccountDetails4.visibility = View.GONE
+                    toggleBankAndCardView(true)
                 }
             } else {
                 if (apiModel.code == ErrorMessage.code) {
@@ -536,9 +537,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                     )
                 )
             }
-        }else{
-            binding.llBankAccount.visibility = View.VISIBLE
-            binding.llSavedBankAccountDetails4.visibility = View.GONE
         }
 
         if (dataLocal.size > 0 || bankDataLocal.size > 0) {
@@ -554,13 +552,13 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 adapterCardBank = MyWalletBankAdapter(requireContext(), bankDataLocal, "bank", this)
                 binding.rcvBankAccounts.adapter = adapterCardBank
             }
-
-
         } else {
             binding.llBankAccount.visibility = View.VISIBLE
             binding.llSavedBankAccountDetails4.visibility = View.GONE
-//            fetchDataOnLoad()
+            toggleBankAndCardView(true)
         }
+
+
 
 
     }

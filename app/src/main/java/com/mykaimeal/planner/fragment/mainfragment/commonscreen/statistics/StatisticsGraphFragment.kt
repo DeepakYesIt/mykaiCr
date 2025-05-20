@@ -403,7 +403,7 @@ class StatisticsGraphFragment : Fragment() {
         // Download image using Glide
         Glide.with(requireContext())
             .asBitmap() // Request a Bitmap image
-            .load(R.mipmap.app_icon_logo) // Provide the URL to load the image from
+            .load(R.drawable.shareicon) // Provide the URL to load the image from
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(
                     resource: Bitmap,

@@ -2,6 +2,7 @@ package com.mykaimeal.planner.adapter
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.drawable.Drawable
@@ -21,6 +22,7 @@ import com.mykaimeal.planner.OnItemSelectUnSelectListener
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.databinding.AdapterIngredientsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.Breakfast
+import com.mykaimeal.planner.messageclass.ErrorMessage
 import java.util.Collections
 
 class IngredientsTeaTimeAdapter(var datalist:MutableList<Breakfast>?, private var requireActivity: FragmentActivity,
@@ -117,27 +119,22 @@ class IngredientsTeaTimeAdapter(var datalist:MutableList<Breakfast>?, private va
         }
 
         holder.binding.missingIngredientsImg.setOnClickListener{
-            checkTypeStatus="missingIng"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"TeaTime",position)
+            onItemClickListener.itemSelectUnSelect(position,"missingIng", ErrorMessage.Brunch,position)
         }
 
         holder.binding.imgHeartRed.setOnClickListener{
-            checkTypeStatus="heart"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"TeaTime",position)
+            onItemClickListener.itemSelectUnSelect(position,"heart",ErrorMessage.Brunch,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
-            checkTypeStatus="recipeDetails"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"TeaTime",position)
+            onItemClickListener.itemSelectUnSelect(position,"recipeDetails",ErrorMessage.Brunch,position)
         }
 
          holder.binding.imageMinus.setOnClickListener {
-             checkTypeStatus="minus"
-             onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,"TeaTime",position)
+             onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,"minus",ErrorMessage.Brunch,position)
          }
 
         holder.itemView.setOnLongClickListener{
-
             val clipData = ClipData(
                 item?.recipe?.label, // Use the title as the drag data
                 arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
@@ -153,6 +150,7 @@ class IngredientsTeaTimeAdapter(var datalist:MutableList<Breakfast>?, private va
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setZiggleEnabled(enabled: Boolean) {
         isZiggleEnabled = enabled
         notifyDataSetChanged()  // Notify all items to start/stop the animation
@@ -185,15 +183,12 @@ class IngredientsTeaTimeAdapter(var datalist:MutableList<Breakfast>?, private va
     }
 
     private fun stopZiggle(holder: ViewHolder) {
-        /*ziggleAnimation?.cancel()
-        ziggleAnimation = null
-        view.rotation = 0f
-        isZiggleEnabled = false*/
         isZiggleEnabled = false
         holder.ziggleAnimation?.cancel()
         holder.itemView.rotation = 0f
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(mealList: MutableList<Breakfast>) {
         this.datalist=mealList
         notifyDataSetChanged()

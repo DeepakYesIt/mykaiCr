@@ -21,6 +21,7 @@ import com.mykaimeal.planner.OnItemSelectUnSelectListener
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.databinding.AdapterIngredientsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.Breakfast
+import com.mykaimeal.planner.messageclass.ErrorMessage
 import java.util.Collections
 
 class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private var requireActivity: FragmentActivity,
@@ -124,18 +125,19 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
 
         holder.binding.missingIngredientsImg.setOnClickListener{
             checkTypeStatus="missingIng"
-            onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,checkTypeStatus,
+                ErrorMessage.Breakfast,position)
             /*onItemClickListener.itemClick(position, checkStatus, checkTypeStatus)*/
         }
 
         holder.binding.imgHeartRed.setOnClickListener{
             checkTypeStatus="heart"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Breakfast,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
             checkTypeStatus="recipeDetails"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Breakfast,position)
         }
 
         holder.binding.imageMinus.setOnClickListener {
@@ -145,7 +147,7 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
             } else {
                 checkStatus = "0"
             }*/
-            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,ErrorMessage.Breakfast,position)
         }
 
         holder.itemView.setOnLongClickListener{
