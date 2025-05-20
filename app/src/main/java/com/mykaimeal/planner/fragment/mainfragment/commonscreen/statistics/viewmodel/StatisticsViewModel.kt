@@ -49,6 +49,10 @@ class StatisticsViewModel @Inject constructor(private val repository: MainReposi
         repository.referralUrl{ successCallback(it)}
     }
 
+    suspend fun referralRedeem(successCallback: (response: NetworkResult<String>) -> Unit) {
+        repository.referralRedeem{ successCallback(it)}
+    }
+
     suspend fun orderWeekUrl(successCallback: (response: NetworkResult<String>) -> Unit, start_date: String?,end_date:String?,year:String?) {
         repository.orderWeekUrl({ successCallback(it) }, start_date,end_date,year)
     }
