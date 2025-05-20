@@ -6,41 +6,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.mainfragment.commonscreen.InvitationsScreenFragment">
 
+    <RelativeLayout
+        android:id="@+id/rlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_16sdp">
+
+        <ImageView
+            android:id="@+id/imgBackInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/black_images_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Invitations"
+            android:textColor="#171D1B"
+            android:textSize="@dimen/_13sdp" />
+
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/rlToolbar"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/rlToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_16sdp">
 
-                <ImageView
-                    android:id="@+id/imgBackInvite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:padding="@dimen/_5sdp"
-                    android:src="@drawable/black_images_back" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Invitations"
-                    android:textColor="#171D1B"
-                    android:textSize="@dimen/_13sdp" />
-
-            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/imageInvitationsIcon"
@@ -234,6 +238,4 @@
         </RelativeLayout>
 
     </ScrollView>
-
-
 </RelativeLayout>

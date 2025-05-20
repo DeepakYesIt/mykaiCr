@@ -860,6 +860,10 @@ interface ApiInterface {
     @POST(ApiEndPoint.referralUrl)
     suspend fun referralUrl(): Response<JsonObject>
 
+
+    @GET(ApiEndPoint.reedemUrl)
+    suspend fun referralRedeem(): Response<JsonObject>
+
     @Multipart
     @POST(ApiEndPoint.generateLinkUrl)
     suspend fun generateLinkUrl(

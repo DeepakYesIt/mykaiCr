@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">My Kai</string>
     <string name="my_kitchen_assistant">My Kitchen Assistant</string>
-    <string name="publish_key">pk_test_51PdDwn2MfdrjGdokeRO8ulheGv5oP8xXkvE7izmXQbSrmXPO2g6S9x0QoiafnAi3F52AwyC1NHJWOOJqPpcmNbuw00Q2OcA9nr</string>
+<!--    <string name="publish_key">pk_test_51PdDwn2MfdrjGdokeRO8ulheGv5oP8xXkvE7izmXQbSrmXPO2g6S9x0QoiafnAi3F52AwyC1NHJWOOJqPpcmNbuw00Q2OcA9nr</string>-->
+    <string name="publish_key">pk_test_51Qko2KEowij4RlG8Ehh3tKQVhxVJUMzAPIi0rTnsX77jwtz5F8LfHfSvS9d2PTg8G7I5NQ3x19JlqdMaAihRcXAn00MvY1CI0X</string>
 
     <string name="simplify_cooking_meal_planning_and_shopping_all_in_one_place">Simplify cooking, meal planning and\n grocery shopping all in one place</string>
     <!-- TODO: Remove or change this placeholder text -->

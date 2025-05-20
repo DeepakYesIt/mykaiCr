@@ -532,10 +532,13 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                         0,
                         dataLoop.bank_account[0].account_holder_name + "," + dataLoop.bank_account[0].last4 + "(" + dataLoop.bank_account[0].currency.uppercase() + ")",
                         dataLoop.bank_account[0].bank_name,
-                        dataLoop.bank_account[0].account.toString()
+                        dataLoop.bank_account[0].account
                     )
                 )
             }
+        }else{
+            binding.llBankAccount.visibility = View.VISIBLE
+            binding.llSavedBankAccountDetails4.visibility = View.GONE
         }
 
         if (dataLocal.size > 0 || bankDataLocal.size > 0) {
@@ -639,7 +642,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                     dialog.dismiss()
                     fileIntentMulti()
                 }
-
                 dialog.show()
             } else {
                 Toast.makeText(

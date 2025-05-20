@@ -80,10 +80,21 @@ class InvitationsScreenFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+
+
+        binding.textRedeemNow.setOnClickListener {
+            if (referralList.size>0){
+                val count = referralList.count { it.status.equals("Mykai",true) }
+                if (count>0){
+                    redeemApi()
+                }
+            }
+        }
+
         binding.spinnerFilterType.setIsFocusable(true)
 
         binding.spinnerFilterType.setItems(
-            listOf("All", "Trial", "Trial over", "Myka", "Redeemed")
+            listOf("All", "Trial", "Trial over", "Mykai", "Redeemed")
         )
 
         binding.spinnerFilterType.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newItem ->
@@ -111,6 +122,20 @@ class InvitationsScreenFragment : Fragment() {
 
     }
 
+
+    private fun redeemApi(){
+        if (BaseApplication.isOnline(requireContext())) {
+            BaseApplication.showMe(requireContext())
+            lifecycleScope.launch {
+                statisticsViewModel.referralRedeem {
+                    BaseApplication.dismissMe()
+                    handleApiReferralResponse(it,"redeem")
+                }
+            }
+        } else {
+            BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+        }
+    }
     private fun shareImageWithText(description: String, link: String) {
         // Download image using Glide
         Glide.with(requireContext())
@@ -222,15 +247,15 @@ class InvitationsScreenFragment : Fragment() {
         lifecycleScope.launch {
             statisticsViewModel.referralUrl {
                 BaseApplication.dismissMe()
-                handleApiReferralResponse(it)
+                handleApiReferralResponse(it,"list")
             }
         }
     }
 
 
-    private fun handleApiReferralResponse(result: NetworkResult<String>) {
+    private fun handleApiReferralResponse(result: NetworkResult<String>,type:String) {
         when (result) {
-            is NetworkResult.Success -> handleSuccessReferralResponse(result.data.toString())
+            is NetworkResult.Success -> handleSuccessReferralResponse(result.data.toString(),type)
             is NetworkResult.Error -> showAlert(result.message, false)
             else -> showAlert(result.message, false)
         }
@@ -241,33 +266,40 @@ class InvitationsScreenFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleSuccessReferralResponse(data: String) {
+    private fun handleSuccessReferralResponse(data: String,type:String) {
         try {
             val apiModel = Gson().fromJson(data, ReferralInvitationModel::class.java)
             Log.d("@@@ addMea List ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success == true) {
-                apiModel.data?.let {
-                    showInvitationList(it)
-                }?:run {
-                    invitedValue()
+                if (type.equals("list",true)){
+                    apiModel.data?.let {
+                        showInvitationList(it)
+                    }?:run {
+                        invitedValue()
+                    }
+                }else{
+                    findNavController().navigate(R.id.walletFragment)
                 }
             } else {
-                invitedValue()
+                if (type.equals("list",true)){
+                    invitedValue()
+                }
                 if (apiModel.code == ErrorMessage.code) {
                     showAlert(apiModel.message, true)
                 } else {
                     showAlert(apiModel.message, false)
                 }
-
             }
         } catch (e: Exception) {
-            invitedValue()
+            if (type.equals("list",true)){
+                invitedValue()
+            }
             showAlert(e.message, false)
         }
     }
 
     private fun invitedValue(){
-        val htmlText = "You have invited 0 friends to use<b> My Kai</b>"
+        val htmlText = "You have invited 0 friend to use<b> My Kai</b>"
         val formattedText = HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
         binding.tvFriendsCountNumber.text = formattedText
     }
@@ -279,7 +311,8 @@ class InvitationsScreenFragment : Fragment() {
                 referralList.addAll(it)
                 if (referralList.size > 0) {
                     val invitedCount = referralList.size.toString()
-                    val htmlText = "You have invited $invitedCount friends to use<b> My Kai</b>"
+                    val plural = if (invitedCount.equals("1", true)) "friend" else "friends"
+                    val htmlText = "You have invited $invitedCount $plural to use<b> My Kai</b>"
                     val formattedText = HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
                     binding.tvFriendsCountNumber.text = formattedText
                     binding.rcyFriendsInvite.visibility = View.VISIBLE

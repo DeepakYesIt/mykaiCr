@@ -125,5 +125,6 @@ object ApiEndPoint {
     const val orderHistoryUrl="order-history"
     const val graphWeekUrl="graph-week"
     const val referralUrl="referral"
+    const val reedemUrl="reedem"
 
 }

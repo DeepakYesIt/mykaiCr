@@ -289,5 +289,6 @@ interface MainRepository {
     suspend fun orderWeekUrl(successCallback: (response: NetworkResult<String>) -> Unit, start_date:String?,end_date:String?,year:String?)
     suspend fun orderHistoryUrl(successCallback: (response: NetworkResult<String>) -> Unit)
     suspend fun referralUrl(successCallback: (response: NetworkResult<String>) -> Unit)
+    suspend fun referralRedeem(successCallback: (response: NetworkResult<String>) -> Unit)
 
 }

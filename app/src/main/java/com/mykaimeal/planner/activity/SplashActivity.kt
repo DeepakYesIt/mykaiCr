@@ -120,14 +120,14 @@ class SplashActivity : AppCompatActivity() {
                     sessionManagement.setOpenCookBookUsingShare("CookBooksType")
                     sessionManagement.setCookBookId(cookbooksId.toString())
                     sessionManagement.setCookBookName(itemName.toString())
-                    providerName?.let {
-                        sessionManagement.setProviderName(it)
-                    }
-                    providerImage?.let {
-                        sessionManagement.setProviderImage(it)
-                    }
-                    Log.d("***********MY kai", "******:----$referrer----$providerName-------$providerImage")
 
+                    Log.d("***********MY kai", "******:----$referrer----$providerName-------$providerImage")
+                }
+                providerName?.let {
+                    sessionManagement.setProviderName(it)
+                }
+                providerImage?.let {
+                    sessionManagement.setProviderImage(it)
                 }
                 sessionManagement.setReferralCode(referrer.toString())
             }
