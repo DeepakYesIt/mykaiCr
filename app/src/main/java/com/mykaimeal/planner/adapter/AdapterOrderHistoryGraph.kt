@@ -21,7 +21,6 @@ class AdapterOrderHistoryGraph(private var datalist: MutableList<OrderHistoryMod
                                private var requireActivity: FragmentActivity,
                                private var onItemClickedListener: OnItemClickedListener): RecyclerView.Adapter<AdapterOrderHistoryGraph.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding: AdapterOrderHistoryGraphBinding = AdapterOrderHistoryGraphBinding.inflate(inflater, parent,false);

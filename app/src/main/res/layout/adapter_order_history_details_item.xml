@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/order_details_number_bg"
         android:text=""
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="#3C4541"
         android:padding="@dimen/_5sdp"/>
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/tvNumber"
         android:layout_toStartOf="@+id/tvOrderPrice"
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/poppins_medium"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_marginEnd="@dimen/_20sdp"

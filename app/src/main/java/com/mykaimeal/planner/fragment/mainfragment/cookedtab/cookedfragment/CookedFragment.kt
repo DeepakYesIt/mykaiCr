@@ -69,7 +69,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
     private lateinit var spinnerActivityLevel: PowerSpinnerView
     private var cookbookList: MutableList<com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data> = mutableListOf()
 
-    var updatedDaysBetween: List<DateModel> = emptyList()
+    private var updatedDaysBetween: List<DateModel> = emptyList()
     private var lastDateSelected: String = ""
 
     @RequiresApi(Build.VERSION_CODES.O)

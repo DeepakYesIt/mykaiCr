@@ -16,7 +16,7 @@
             android:id="@+id/tvPreferencesName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/poppins"
             android:text="Goal"
             android:textColor="#000000"
             android:textSize="@dimen/_13sdp" />

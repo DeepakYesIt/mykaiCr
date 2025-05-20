@@ -45,7 +45,7 @@
             android:id="@+id/tvRecipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sarabun"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="Apple"
             android:singleLine="true"

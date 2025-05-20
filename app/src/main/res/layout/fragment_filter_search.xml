@@ -37,10 +37,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Filter Screen"
-                    android:fontFamily="@font/montserrat_bold"
                     android:textColor="#171D1B"
                     android:textSize="@dimen/_15sdp" />
 
@@ -64,9 +64,12 @@
                     android:layout_toStartOf="@+id/imgFilterIcon"
                     android:background="@null"
                     android:hint="Quick Search"
+                    android:fontFamily="@font/poppins"
                     android:drawableStart="@drawable/yellow_search_icon"
                     android:drawablePadding="@dimen/_10sdp"
                     android:paddingVertical="@dimen/_10sdp"
+                    android:textColor="@color/light_black"
+                    android:textColorHint="#999999"
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp" />
 
@@ -208,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_65sdp"
                     android:paddingVertical="@dimen/_12sdp"
                     android:text="Apply"

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/root"
     tools:context=".fragment.mainfragment.profilesetting.HealthDataFragment">
+
     <RelativeLayout
         android:id="@+id/relToolbar"
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:fontFamily="@font/montserrat_semibold"
             android:text="Health Data"
             android:textColor="@color/black"
-            android:textSize="@dimen/_18sdp" />
+            android:textSize="@dimen/_16sdp" />
 
     </RelativeLayout>
     <ScrollView

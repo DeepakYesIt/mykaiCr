@@ -14,10 +14,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:id="@+id/layImg"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_140sdp">
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageShapeable"
                     android:layout_width="match_parent"
@@ -49,14 +51,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layImg"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
                 android:layout_margin="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
                 android:maxLines="2"
                 android:padding="@dimen/_2sdp"
-                android:fontFamily="@font/poppins_semibold"
                 android:text=""
                 android:textColor="#000000"
                 android:textSize="@dimen/_14sdp" />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

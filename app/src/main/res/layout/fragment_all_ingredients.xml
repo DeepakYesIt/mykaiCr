@@ -22,15 +22,16 @@
                     android:layout_height="@dimen/_20sdp"
                     android:padding="@dimen/_4sdp"
                     android:src="@drawable/back_icon" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="All Ingredients"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_15sdp" />
+
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/relSearchIngredients"
@@ -47,8 +48,11 @@
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:layout_toStartOf="@+id/imgFilterIcon"
                     android:background="@null"
+                    android:textColor="@color/light_black"
+                    android:fontFamily="@font/poppins"
                     android:drawableStart="@drawable/yellow_search_icon"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:textColorHint="#999999"
                     android:hint="Search Ingredients or recipes"
                     android:paddingVertical="@dimen/_8sdp"
                     android:singleLine="true"
@@ -132,6 +136,7 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_15sdp"
         android:background="@drawable/green_btn_background">
+
         <TextView
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"

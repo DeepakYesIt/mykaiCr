@@ -53,6 +53,7 @@
                 android:gravity="center|start"
                 android:layout_gravity="center_vertical"
                 android:hint="Pizza"
+                android:textColor="@color/light_black"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:singleLine="true"
                 android:textSize="@dimen/_10sdp" />
@@ -77,9 +78,11 @@
                     android:inputType="number"
                     android:layout_centerVertical="true"
                     android:maxLength="3"
+                    android:textColor="@color/light_black"
                     android:paddingHorizontal="@dimen/_10sdp"
                     android:singleLine="true"
                     android:textSize="@dimen/_10sdp" />
+
                 <RelativeLayout
                     android:id="@+id/relQuantity"
                     android:layout_weight="0.3"
@@ -98,7 +101,7 @@
                         android:hint="Type"
                         android:padding="5dp"
                         android:singleLine="true"
-                        android:textColor="#3C4541"
+                        android:textColor="@color/light_black"
                         android:textColorHint="#3C4541"
                         android:textSize="@dimen/_10sdp"
                         app:spinner_arrow_gravity="end"

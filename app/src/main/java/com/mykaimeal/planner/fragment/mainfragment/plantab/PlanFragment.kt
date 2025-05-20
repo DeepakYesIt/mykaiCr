@@ -105,7 +105,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
     private lateinit var spinnerActivityLevel: PowerSpinnerView
     private var mealRoutineList: MutableList<MealRoutineModelData> = mutableListOf()
     private var cookbookList: MutableList<com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data> = mutableListOf()
-    var updatedDaysBetween: List<DateModel> = emptyList()
+    private var updatedDaysBetween: List<DateModel> = emptyList()
     val dataList = arrayListOf<DataModel>()
 
     @SuppressLint("SetTextI18n")

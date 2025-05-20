@@ -36,10 +36,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Add Meal"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textColor="#171D1B"
+                    android:textSize="@dimen/_15sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -58,9 +58,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/poppins"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_toStartOf="@+id/relSearch"
                     android:background="@null"
+                    android:textColor="@color/light_black"
+                    android:textColorHint="#999999"
                     android:hint="Search Cooked Dishes"
                     android:paddingVertical="@dimen/_8sdp"
                     android:singleLine="true"
@@ -146,11 +149,9 @@
                 android:visibility="invisible"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content"/>
 
             <include
-
                 layout="@layout/progess_loader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,7 +181,7 @@
                         android:id="@+id/tvDateCooked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_semibold"
                         android:hint="Date Cooked"
                         android:textSize="@dimen/_11sdp"
                         android:textColor="@color/black"
@@ -234,6 +235,7 @@
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:layout_marginVertical="@dimen/_5sdp"
                         android:layout_weight="1"
+                        android:textColor="@color/light_black"
                         android:background="@drawable/unselected_button_bg"
                         android:fontFamily="@font/poppins"
                         android:paddingVertical="@dimen/_5sdp"
@@ -363,6 +365,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/gray_btn_unselect_background"
                 android:paddingVertical="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Add Meal"
                 android:textAlignment="center"
                 android:textColor="@color/white"

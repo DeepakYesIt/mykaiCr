@@ -39,9 +39,9 @@
                 android:layout_marginHorizontal="@dimen/_4sdp"
                 android:layout_toLeftOf="@id/left"
                 android:fontFamily="@font/montserrat_semibold"
-                android:text=""
                 android:gravity="center"
-                android:textColor="#000000"
+                android:text=""
+                android:textColor="#171D1B"
                 android:textSize="@dimen/_15sdp" />
             <LinearLayout
                 android:id="@+id/left"

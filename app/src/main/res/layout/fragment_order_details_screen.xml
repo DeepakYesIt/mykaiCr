@@ -89,14 +89,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp">
+                    android:layout_marginTop="@dimen/_8sdp">
 
                     <TextView
                         android:id="@+id/tvOrderCompleted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Order Completed"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins"
                         android:textColor="#06C169"
                         android:textSize="@dimen/_10sdp" />
 
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@+id/tvOrderCompleted"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="11 january 2025 at 11:47 am"
                         android:textColor="@color/light_grays"
                         android:textSize="@dimen/_10sdp" />
@@ -144,6 +144,7 @@
                 android:layout_below="@+id/relOrderComDate"
                 android:layout_centerVertical="true"
                 android:gravity="center|start"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Your order &amp; receipt"
                 android:textColor="@color/black"
@@ -184,10 +185,9 @@
                         android:id="@+id/textSubTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColor="#111111"
-                        android:text="Subtotal"
-                          />
+                        android:text="Subtotal" />
 
                     <TextView
                         android:id="@+id/textSubTotalPrices"
@@ -206,13 +206,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relSubTotal"
-                    android:layout_marginTop="@dimen/_5sdp">
+                    android:layout_marginTop="@dimen/_8sdp">
 
                     <TextView
                         android:id="@+id/textTotalProduct"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColor="#111111"
                         android:text="Service Fee"
                 />
@@ -241,7 +241,7 @@
                         android:id="@+id/textServices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text=""
                         android:textColor="#4A4A4A" />
 
@@ -268,7 +268,7 @@
                         android:id="@+id/textSales"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColor="#111111"
                         android:text="Sales Tax"
                         />
@@ -377,7 +377,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvVisaName"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="01/11/2025 10:40 am"
                             android:textColor="@color/grey"
                             android:textSize="@dimen/_11sdp" />
@@ -393,7 +393,7 @@
                         android:fontFamily="@font/poppins_semibold"
                         android:paddingHorizontal="@dimen/_20sdp"
                         android:text="$48.47"
-                        android:textColor="@color/light_green"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>

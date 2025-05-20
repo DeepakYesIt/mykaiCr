@@ -38,7 +38,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Edit Profile"
                     android:textColor="#171D1B"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
 
             </RelativeLayout>
@@ -69,6 +69,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:textColor="@color/light_green"
                     android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/poppins_semibold"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:layout_below="@id/imageEditProfile"
                     android:layout_marginTop="@dimen/_10sdp"/>
@@ -93,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name"
+                    android:fontFamily="@font/poppins_medium"
                     android:textSize="@dimen/_13sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:textColor="@color/black"
@@ -116,6 +118,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:singleLine="true"
                     android:background="@null"
+                    android:textColor="@color/black"
                     android:padding="@dimen/_10sdp"
                     android:textColorHint="@color/light_black"
                     android:fontFamily="@font/poppins"/>
@@ -134,9 +137,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Save Changes"
-                    android:fontFamily="@font/poppins"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp" />
 
