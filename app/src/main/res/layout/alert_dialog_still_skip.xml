@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
                 android:layout_below="@+id/tvSkipDesc"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Still want to skip?"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17sdp" />
@@ -64,6 +65,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
                     android:background="@drawable/outline_green_border_bg"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
@@ -76,6 +78,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_25sdp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
                     android:background="@drawable/green_fill_corner_bg"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"

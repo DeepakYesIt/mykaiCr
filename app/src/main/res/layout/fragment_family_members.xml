@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/sarabun_medium"
                     android:text="1/11"
                     android:textColor="@color/light_black" />
             </RelativeLayout>
@@ -150,6 +150,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@+id/checkBoxImages"
                     android:text="Child Friendly Meals."
+                    android:fontFamily="@font/poppins"
                     android:textColor="#3C4541"
                     android:textSize="@dimen/_13sdp" />
             </RelativeLayout>

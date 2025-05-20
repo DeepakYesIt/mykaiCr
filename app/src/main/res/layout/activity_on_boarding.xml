@@ -80,7 +80,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_weight="0.3"
                 android:layout_marginHorizontal="@dimen/_18sdp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Plan a Meal"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp" />
@@ -114,10 +114,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_50sdp"
                     android:paddingVertical="@dimen/_8sdp"
                     android:text="Next"
-                    android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
 

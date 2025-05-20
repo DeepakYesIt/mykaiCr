@@ -52,8 +52,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:textAlignment="center"
                         android:text="Allow “My Kai” to use\nyour location?"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp" />
 
@@ -78,8 +78,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relMainImage"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Find stores near you"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
@@ -89,6 +90,7 @@
                     android:layout_below="@+id/tvTurnOnLocations"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/poppins"
+                    android:textColor="@color/light_black"
                     android:text="We need your location to find grocery stores nearby for you."
                     android:textSize="@dimen/_11sdp" />
 
@@ -117,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingVertical="@dimen/_12sdp"
                         android:text="Share Location"
                         android:textColor="@color/white"

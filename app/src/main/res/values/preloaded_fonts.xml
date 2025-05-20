@@ -15,5 +15,8 @@
         <item>@font/poppins_medium</item>
         <item>@font/poppins_semibold</item>
         <item>@font/sarabun</item>
+        <item>@font/sarabun_bold</item>
+        <item>@font/sarabun_medium</item>
+        <item>@font/sarabun_semibold</item>
     </array>
 </resources>

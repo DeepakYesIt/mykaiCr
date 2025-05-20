@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imagesNotifications"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/turn_on_notifications"
                     android:textSize="@dimen/_14sdp" />
 

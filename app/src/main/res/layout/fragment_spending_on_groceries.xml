@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/sarabun_medium"
                 android:textColor="@color/light_black" />
 
         </RelativeLayout>
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlProgressBar9"
             android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/spending_on_groceries"
             android:textSize="@dimen/_18sdp" />
 
@@ -68,6 +68,7 @@
             android:layout_below="@+id/textSpendGroceries"
             android:layout_marginTop="@dimen/_10sdp"
             android:text=""
+            android:fontFamily="@font/poppins"
             android:textColor="@color/light_black"
             android:textSize="@dimen/_15sdp" />
 
@@ -208,6 +209,7 @@
                     android:visibility="gone"
                     android:background="@drawable/outline_green_border_bg"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_10sdp"
                     android:text="Skip"
                     android:textColor="@color/light_green"
@@ -223,6 +225,7 @@
                     android:background="@drawable/gray_btn_unselect_background"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Next"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp" />
@@ -241,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Update"
                     android:textColor="@color/white"

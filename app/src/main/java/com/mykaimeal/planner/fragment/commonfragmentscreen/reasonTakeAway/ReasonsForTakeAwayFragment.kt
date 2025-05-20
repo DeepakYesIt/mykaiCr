@@ -85,7 +85,6 @@ class ReasonsForTakeAwayFragment : Fragment(), OnItemClickListener {
 
         sessionManagement = SessionManagement(requireContext())
 
-
         val progressValue = if (sessionManagement.getCookingFor().equals("Myself")) 10 else 11
         binding.progressBar11.max = progressValue
         totalProgressValue = progressValue
