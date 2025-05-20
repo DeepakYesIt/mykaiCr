@@ -44,9 +44,7 @@ class InvitationsScreenFragment : Fragment() {
     private lateinit var statisticsViewModel: StatisticsViewModel
     private var referralList: MutableList<ReferralInvitationModelData> =mutableListOf()
     private var referLink: String = ""
-
     private lateinit var sessionManagement: SessionManagement
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -142,7 +140,7 @@ class InvitationsScreenFragment : Fragment() {
         // Download image using Glide
         Glide.with(requireContext())
             .asBitmap() // Request a Bitmap image
-            .load(R.mipmap.app_icon) // Provide the URL to load the image from
+            .load(R.mipmap.app_icon_logo) // Provide the URL to load the image from
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(
                     resource: Bitmap,

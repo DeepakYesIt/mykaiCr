@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Enter your address"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17sdp" />
@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvAddresses"
+                android:fontFamily="@font/poppins"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="We need your location to find grocery stores nearby for you."
                 android:textColor="#3C4541"
@@ -52,13 +53,14 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:background="@null"
+                    android:fontFamily="@font/poppins_medium"
                     android:drawableStart="@drawable/yellow_search_icon"
                     android:drawablePadding="@dimen/_10sdp"
                     android:gravity="center|start"
                     android:hint="Enter Address"
                     android:paddingStart="@dimen/_10sdp"
                     android:singleLine="true"
-                    android:textColor="#58585A"
+                    android:textColor="#3C4541"
                     android:textSize="@dimen/_13sdp" />
             </RelativeLayout>
 
@@ -95,7 +97,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:text="Set home"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/light_black"
                         android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
@@ -124,7 +127,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:text="Set work"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/light_black"
                         android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
@@ -180,7 +184,7 @@
                         android:id="@+id/tvStatusBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/montserrat_semibold"
                         android:paddingHorizontal="@dimen/_20sdp"
                         android:paddingVertical="@dimen/_4sdp"
                         android:text="Turn on"
@@ -250,7 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/montserrat_medium"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Confirm location"
                     android:textColor="@color/white"

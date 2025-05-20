@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/myka_kitchen_ai"
                     android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:layout_below="@+id/images_1"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textSize="@dimen/_18sdp"/>

@@ -119,7 +119,6 @@ class VerificationFragment : Fragment() {
 
         binding.tvCodeSent.text = if (isEmail) "We have sent the code to the$loginType below \n$value" else "*******"+value?.takeLast(3)
 
-
         /// screen type value for signup screen
         if (screenType.equals("signup",true)) {
             arguments?.let {

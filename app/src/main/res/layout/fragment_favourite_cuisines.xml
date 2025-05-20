@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/sarabun_medium"
                 android:textColor="@color/light_black" />
 
         </RelativeLayout>
@@ -109,7 +109,6 @@
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/poppins_semibold"
                         android:gravity="center_vertical"
-
                         android:paddingHorizontal="@dimen/_15sdp"
                         android:paddingVertical="@dimen/_10sdp"
                         android:singleLine="true"

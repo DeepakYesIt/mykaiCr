@@ -38,7 +38,7 @@
                     android:textColor="#171D1B"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Stats"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_17sdp" />
 
 
             </RelativeLayout>
@@ -72,6 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/imageProfile"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins"
                         android:text="Good job Danny you're on track to big savings! Stick with your plan and watch the results add up."
                         android:textColor="@color/light_black"
                         android:textSize="@dimen/_12sdp" />
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/orange_shape_bg">
+                    android:background="@drawable/redeem_filter_bg">
 
                     <TextView
                         android:id="@+id/tvDateCalendar"
@@ -105,7 +106,7 @@
                         android:padding="@dimen/_7sdp"
                         android:text="June,2024"
                         android:textColor="#171D1B"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:textSize="@dimen/_13sdp"
                         app:drawableEndCompat="@drawable/drop_down_icon" />
 
@@ -117,6 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:fontFamily="@font/montserrat_semibold"
                 android:layout_marginHorizontal="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/light_black"
@@ -128,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:fontFamily="@font/montserrat_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:layout_marginHorizontal="@dimen/_16sdp"
@@ -159,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/invitefriends"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColor="@color/black"
                     android:layout_marginHorizontal="@dimen/_16sdp"
@@ -170,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save your friends money and\nearn $5"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColor="@color/black"
                     android:layout_below="@+id/textInviteMykai"
@@ -182,12 +184,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See Details"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColor="@color/light_green"
                     android:layout_below="@+id/textShareFriends"
                     android:layout_marginHorizontal="@dimen/_16sdp"
-                    android:textSize="@dimen/_11sdp"/>
+                    android:textSize="@dimen/_12sdp"/>
 
             </RelativeLayout>
 
@@ -199,6 +201,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/button_bg"
                 android:layout_below="@+id/relInvite"
+                android:fontFamily="@font/poppins_medium"
                 android:paddingVertical="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_35sdp"
                 android:text="Invite Friends"
