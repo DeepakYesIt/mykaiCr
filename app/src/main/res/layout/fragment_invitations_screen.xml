@@ -35,8 +35,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="Invitations"
+                    android:textColor="#171D1B"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
@@ -65,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
                     android:textAlignment="center"
                     android:text=""/>
 
@@ -82,11 +84,12 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/poppins_medium"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/relQuantity"
-                    android:text="Friends using MyKai App"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textColor="@color/black"
+                    android:text="Friends using My Kai App"
+                    android:textSize="@dimen/_12sdp" />
 
                 <RelativeLayout
                     android:id="@+id/relQuantity"
@@ -98,14 +101,14 @@
 
                     <com.skydoves.powerspinner.PowerSpinnerView
                         android:id="@+id/spinnerFilterType"
-                        android:layout_width="@dimen/_90sdp"
+                        android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:foreground="?attr/selectableItemBackground"
                         android:hint="Filter"
                         android:padding="@dimen/_7sdp"
                         android:singleLine="true"
-                        android:textColor="#3C4541"
+                        android:textColor="#000000"
                         android:textColorHint="#3C4541"
                         android:textSize="@dimen/_10sdp"
                         app:spinner_arrow_gravity="end"
@@ -168,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Friends"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_semibold"
                         android:textSize="@dimen/_13sdp"
                         android:textColor="@color/black"/>
 
@@ -177,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:text="Status"
                         android:layout_alignParentEnd="true"
-                        android:fontFamily="@font/poppins_medium"
+                        android:fontFamily="@font/poppins_semibold"
                         android:textSize="@dimen/_13sdp"
                         android:textColor="@color/black"/>
 
@@ -186,7 +189,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcyFriendsInvite"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -201,6 +204,7 @@
                         android:background="@drawable/trial_btn_bg"
                         android:layout_below="@+id/rcyFriendsInvite"
                         android:paddingVertical="@dimen/_10sdp"
+                        android:fontFamily="@font/poppins_medium"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:text="Redeem Now"
                         android:textAlignment="center"
@@ -223,6 +227,7 @@
                 android:layout_marginBottom="@dimen/_35sdp"
                 android:text="Share App"
                 android:textAlignment="center"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />
 

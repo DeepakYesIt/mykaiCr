@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text=""
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/poppins"
         android:textSize="@dimen/_13sdp"
         android:textColor="@color/black"/>
 

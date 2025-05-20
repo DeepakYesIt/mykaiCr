@@ -102,9 +102,9 @@ class InvitationsScreenFragment : Fragment() {
         binding.textInviteFriends.setOnClickListener {
 
             shareImageWithText(
-                "Hey! I put together this cookbook in My" +
-                        "Kai, and I think you’ll love it! It’s packed with delicious meals, check it out and let me know what you think!" +
-                        "\nclick on the link below:\n\n",
+                "Hey, My kai an all-in-one app that’s completely changed the way I shop. It saves me time, money," +
+                        " and even helps with meal planning without having to step into a supermarket.\" +\n" +
+                        " See for yourself with a free gift from me. \nClick on link below:\n\n",
                 referLink
             )
         }
@@ -269,7 +269,7 @@ class InvitationsScreenFragment : Fragment() {
     }
 
     private fun invitedValue(){
-        val htmlText = "You have invited 0 friends to use<b> MyKai</b>"
+        val htmlText = "You have invited 0 friends to use<b> My Kai</b>"
         val formattedText = HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
         binding.tvFriendsCountNumber.text = formattedText
     }
@@ -281,7 +281,7 @@ class InvitationsScreenFragment : Fragment() {
                 referralList.addAll(it)
                 if (referralList.size > 0) {
                     val invitedCount = referralList.size.toString()
-                    val htmlText = "You have invited $invitedCount friends to use<b> MyKai</b>"
+                    val htmlText = "You have invited $invitedCount friends to use<b> My Kai</b>"
                     val formattedText = HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
                     binding.tvFriendsCountNumber.text = formattedText
                     binding.rcyFriendsInvite.visibility = View.VISIBLE

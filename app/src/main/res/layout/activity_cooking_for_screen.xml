@@ -141,10 +141,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_50sdp"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Next"
-                    android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp" />
 
