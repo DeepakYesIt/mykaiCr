@@ -262,10 +262,10 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         } else if (edtStreetNumber.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.streetNumberError, false)
             return false
-        } else if (edtApartNumber.text.toString().trim().isEmpty()) {
+        } else /*if (edtApartNumber.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.apartNumberError, false)
             return false
-        } else if (edtCity.text.toString().trim().isEmpty()) {
+        } else*/ if (edtCity.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.cityEnterError, false)
             return false
         } else if (edtStates.text.toString().trim().isEmpty()) {
@@ -380,7 +380,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         mMap.isIndoorEnabled = false
 
         val initialPosition = LatLng(lat, lng) // Example: Sydney
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 30f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 20f))
 
         // 🔹 Change marker image when map is moving
         mMap.setOnCameraMoveStartedListener {
@@ -415,6 +415,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
                 address = getAddressFromLatLng(lat, lng)
                 getAddressFromLocation(lat, lng)
             }else{
+                getAddressFromLocation(lat, lng)
                 userAddress=binding.tvAddress.text.toString()
             }
 
