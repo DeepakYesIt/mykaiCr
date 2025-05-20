@@ -411,6 +411,7 @@ class VerificationFragment : Fragment() {
             sessionManagement.setAuthToken(signUpVerificationModelData.token?:"")
             val id= signUpVerificationModelData.id?:0
             sessionManagement.setId(id.toString())
+            sessionManagement.setReferralCode("")
             successDialog(signUpVerificationModelData.is_cooking_complete)
         }catch (e:Exception){
             Log.d("verification","message"+e.message)
