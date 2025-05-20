@@ -42,7 +42,7 @@
                     android:layout_below="@+id/imagesAssistant"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="@string/myka_meal_planner"
                     android:textSize="@dimen/_18sdp" />
 
@@ -182,9 +182,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingVertical="@dimen/_10sdp"
                         android:text="Log In"
-                        android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_13sdp" />
 
@@ -197,7 +197,7 @@
                     android:text="Or"
                     android:textSize="@dimen/_13sdp"
                     android:layout_below="@+id/rlLogIn"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_centerHorizontal="true"
                     android:textColor="#3C4541"/>
@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:text="Login with"
                         android:textSize="@dimen/_13sdp"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:layout_centerHorizontal="true"
                         android:textColor="#3C4541"/>
 

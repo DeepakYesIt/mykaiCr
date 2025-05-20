@@ -83,12 +83,7 @@ class StatisticsGraphFragment : Fragment() {
 
         backButton()
 
-
-
         initialize()
-
-
-
 
         return binding.root
     }
@@ -169,9 +164,9 @@ class StatisticsGraphFragment : Fragment() {
         binding.textInviteFriends.setOnClickListener {
 
             shareImageWithText(
-                "Hey! I put together this cookbook in My" +
-                        "Kai, and I think you’ll love it! It’s packed with delicious meals, check it out and let me know what you think!" +
-                        "\nclick on the link below:\n\n",
+                "Hey, My kai an all-in-one app that’s completely changed the way I shop. It saves me time, money," +
+                        " and even helps with meal planning without having to step into a supermarket." +
+                        " See for yourself with a free gift from me. \nClick on link below:\n\n",
                 referLink
             )
         }

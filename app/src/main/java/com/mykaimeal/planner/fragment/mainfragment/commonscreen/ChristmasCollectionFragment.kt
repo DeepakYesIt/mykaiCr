@@ -354,10 +354,13 @@ class ChristmasCollectionFragment : Fragment(), OnItemClickListener {
             findNavController().navigate(R.id.createCookBookFragment, bundle)
         }
 
+
+
         binding.relShareCookBook.setOnClickListener {
             if (type == "1") {
                 shareImageWithText(
-                    "Hey! I am inviting you to download My-Kai App!" + "\nclick on the link below:\n\n",
+                    "Hey! I put together this cookbook in My Kai, and I think you’ll love it! It’s packed with delicious meals, check it out and let me know what you think!\n" +
+                            "Click on the link below:\n\n",
                     referLink
                 )
                 binding.cardViewMenuPopUp.visibility = View.GONE
