@@ -4,7 +4,7 @@
     android:id="@+id/relMainLayouts"
     android:layout_width="@dimen/_120sdp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_8sdp">
+    android:layout_marginStart="@dimen/_5sdp">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -194,8 +194,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
             <LinearLayout
@@ -221,8 +220,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </LinearLayout>
             <LinearLayout
@@ -248,9 +246,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_10sdp" />
-
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llSnacks"
@@ -259,7 +255,6 @@
                 android:layout_below="@+id/llLunch"
                 android:layout_marginTop="@dimen/_18sdp"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,16 +263,13 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textSize="@dimen/_14sdp"/>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchSnacks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_10sdp" />
-
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llDinner"
@@ -286,7 +278,6 @@
                 android:layout_below="@+id/llSnacks"
                 android:layout_marginTop="@dimen/_18sdp"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -295,7 +286,6 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textSize="@dimen/_14sdp"/>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchDinner"
                     android:layout_width="match_parent"
@@ -303,10 +293,8 @@
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/_10sdp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/_10sdp" />
-
+                   />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-
 </RelativeLayout>
