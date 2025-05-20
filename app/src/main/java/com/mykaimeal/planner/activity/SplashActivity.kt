@@ -127,8 +127,9 @@ class SplashActivity : AppCompatActivity() {
                         sessionManagement.setProviderImage(it)
                     }
                     Log.d("***********MY kai", "******:----$referrer----$providerName-------$providerImage")
-                    sessionManagement.setReferralCode(referrer.toString())
+
                 }
+                sessionManagement.setReferralCode(referrer.toString())
             }
         }
 

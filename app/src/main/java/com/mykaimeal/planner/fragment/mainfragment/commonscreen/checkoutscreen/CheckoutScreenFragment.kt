@@ -610,7 +610,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
 
         mMap?.clear()
         val customMarker = bitmapDescriptorFromVector(
-            R.drawable.pin, 60, 60
+            R.drawable.pin, 70, 70
         ) // Change with your drawable
         mMap?.addMarker(MarkerOptions().position(newYork).icon(customMarker))
 
@@ -1184,8 +1184,8 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
 
         val customMarker = bitmapDescriptorFromVector(
             R.drawable.pin,
-            60,
-            60
+            70,
+            70
         )
 
 //        val customMarker = bitmapDescriptorFromVector(

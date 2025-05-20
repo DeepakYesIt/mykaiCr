@@ -474,7 +474,7 @@ class SignUpFragment : Fragment() {
 
     private fun showDataInSession(signUpVerificationModelData: SignUpVerificationModelData, personEmail: String?) {
         try {
-
+            sessionManagement.setReferralCode("")
             sessionManagement.setEmail(personEmail ?: "")
 
             sessionManagement.setUserName(signUpVerificationModelData.name ?: "")

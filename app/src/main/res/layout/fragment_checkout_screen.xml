@@ -127,7 +127,7 @@
                     android:layout_toStartOf="@+id/imgForward"
                     android:layout_toEndOf="@+id/imageHome"
                     android:fontFamily="@font/montserrat"
-                    android:text="188 King Street, San Francisco, CA 94107, USA"
+                    android:text=""
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_11sdp" />
 

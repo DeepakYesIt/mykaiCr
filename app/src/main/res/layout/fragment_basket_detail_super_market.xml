@@ -34,9 +34,8 @@
                 android:id="@+id/tescoLogoImage"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="@dimen/_60sdp"
-                android:elevation="@dimen/_2sdp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_walmart_star_icon"
+                android:src="@drawable/no_image"
                 app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
             <!--  <ImageView

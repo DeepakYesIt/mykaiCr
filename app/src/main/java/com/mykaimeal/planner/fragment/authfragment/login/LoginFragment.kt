@@ -536,6 +536,7 @@ class LoginFragment : Fragment() {
                                 val apiModel = Gson().fromJson(it.data, LoginModel::class.java)
                                 if (apiModel.code == 200 && apiModel.success) {
                                     apiModel.data?.let {
+                                        sessionManagement.setReferralCode("")
                                         showDataInUi(apiModel.data)
                                     }?: run {
                                         showAlertFunction(apiModel.message, false)
