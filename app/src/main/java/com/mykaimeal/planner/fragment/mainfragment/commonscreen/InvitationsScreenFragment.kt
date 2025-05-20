@@ -44,9 +44,7 @@ class InvitationsScreenFragment : Fragment() {
     private lateinit var statisticsViewModel: StatisticsViewModel
     private var referralList: MutableList<ReferralInvitationModelData> =mutableListOf()
     private var referLink: String = ""
-
     private lateinit var sessionManagement: SessionManagement
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

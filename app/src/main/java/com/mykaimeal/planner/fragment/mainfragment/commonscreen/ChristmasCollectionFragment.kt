@@ -354,8 +354,6 @@ class ChristmasCollectionFragment : Fragment(), OnItemClickListener {
             findNavController().navigate(R.id.createCookBookFragment, bundle)
         }
 
-
-
         binding.relShareCookBook.setOnClickListener {
             if (type == "1") {
                 shareImageWithText(
