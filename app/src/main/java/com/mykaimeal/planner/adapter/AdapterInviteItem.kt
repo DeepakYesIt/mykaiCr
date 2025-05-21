@@ -54,7 +54,7 @@ class AdapterInviteItem(
         return datalist!!.size
     }
 
-    fun updateList(referralList: MutableList<ReferralInvitationModelData>) {
+    fun  updateList(referralList: MutableList<ReferralInvitationModelData>) {
         datalist = referralList
         notifyDataSetChanged()
 

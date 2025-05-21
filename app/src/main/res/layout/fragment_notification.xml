@@ -37,7 +37,7 @@
                    android:fontFamily="@font/montserrat_semibold"
                    android:text="Notifications"
                    android:textColor="#171D1B"
-                   android:textSize="@dimen/_13sdp" />
+                   android:textSize="@dimen/_14sdp" />
 
            </RelativeLayout>
 
@@ -47,7 +47,7 @@
                android:layout_height="wrap_content"
                android:layout_below="@+id/rlToolbar"
                android:layout_marginTop="@dimen/_10sdp"
-               android:fontFamily="@font/montserrat_semibold"
+               android:fontFamily="@font/poppins_medium"
                android:text="Notification"
                android:textColor="@color/black"
                android:textSize="@dimen/_14sdp" />
@@ -67,7 +67,7 @@
                    android:gravity="center|start"
                    android:drawableStart="@drawable/notification_icons"
                    android:drawablePadding="@dimen/_10sdp"
-                   android:fontFamily="@font/poppins_medium"
+                   android:fontFamily="@font/poppins"
                    android:textColor="#000000"
                    android:text="@string/enable_all_notification"
                    android:textSize="@dimen/_13sdp"
@@ -87,14 +87,12 @@
                    android:id="@+id/textPushNotification"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_centerVertical="true"
-                   android:fontFamily="@font/poppins_medium"
-                   android:textColor="#000000"
-
-                   android:gravity="center|start"
                    android:drawableStart="@drawable/push_notification_icon"
                    android:drawablePadding="@dimen/_10sdp"
+                   android:fontFamily="@font/poppins"
+                   android:gravity="center|start"
                    android:text="Push notification"
+                   android:textColor="#000000"
                    android:textSize="@dimen/_13sdp"
                    app:drawableEndCompat="@drawable/toggle_gray_off_icon" />
 
@@ -113,7 +111,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_centerVertical="true"
-                   android:fontFamily="@font/poppins_medium"
+                   android:fontFamily="@font/poppins"
                    android:textColor="#000000"
                    android:gravity="center|start"
                    android:drawableStart="@drawable/recipe_recommendation_icon"
@@ -136,7 +134,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_centerVertical="true"
-                   android:fontFamily="@font/poppins_medium"
+                   android:fontFamily="@font/poppins"
                    android:textColor="#000000"
                    android:gravity="center|start"
                    android:drawableStart="@drawable/product_updates_icon"
@@ -158,7 +156,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:layout_centerVertical="true"
-                   android:fontFamily="@font/poppins_medium"
+                   android:fontFamily="@font/poppins"
                    android:textColor="#000000"
                    android:gravity="center|start"
                    android:drawablePadding="@dimen/_10sdp"
@@ -166,6 +164,7 @@
                    android:textSize="@dimen/_13sdp"
                    app:drawableEndCompat="@drawable/toggle_gray_off_icon"
                    app:drawableStartCompat="@drawable/promotional_icon" />
+
            </RelativeLayout>
        </RelativeLayout>
    </ScrollView>

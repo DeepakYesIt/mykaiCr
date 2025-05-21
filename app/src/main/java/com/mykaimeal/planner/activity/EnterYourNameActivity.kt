@@ -45,14 +45,13 @@ class EnterYourNameActivity : AppCompatActivity() {
 
         // click event for Next Choose Cooking for Screen
         binding!!.rlSelectNextBtn.setOnClickListener {
-            if (validate()) {
-                if (statusCheck == "2") {
-                    sessionManagement.setUserName(binding!!.etUserName.text.toString().trim())
-                    sessionManagement.setGender(binding!!.tvChooseGender.text.toString().trim())
-                    val intent = Intent(this@EnterYourNameActivity, CookingForScreenActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+            if (statusCheck == "2") {
+                sessionManagement.setUserName(binding!!.etUserName.text.toString().trim())
+                sessionManagement.setGender(binding!!.tvChooseGender.text.toString().trim())
+                val intent =
+                    Intent(this@EnterYourNameActivity, CookingForScreenActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
 

@@ -141,6 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:layout_toEndOf="@+id/imgHealthGender"
                     android:text="Gender"
                     android:textColor="@color/black"
@@ -169,8 +170,7 @@
                     android:padding="@dimen/_10sdp"
                     android:singleLine="true"
                     android:text="Male"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/light_black"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_14sdp" />
 
                 <TextView
@@ -187,8 +187,7 @@
                     android:padding="@dimen/_10sdp"
                     android:singleLine="true"
                     android:text="Female"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/light_black"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_14sdp" />
 
             </RelativeLayout>
@@ -212,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/poppins_medium"
                     android:layout_toEndOf="@+id/imgDateBirth"
                     android:text="Date of Birth"
                     android:textColor="@color/black"
@@ -240,7 +240,7 @@
                     android:paddingStart="@dimen/_15sdp"
                     android:paddingEnd="@dimen/_15sdp"
                     android:singleLine="true"
-                    android:textColor="@color/black"
+                    android:textColor="@color/light_black"
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
 
@@ -266,6 +266,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imgHeight"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Height"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
@@ -292,8 +293,7 @@
                     android:paddingVertical="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:text="4'0&quot;"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/light_black"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_12sdp" />
 
                 <RelativeLayout
@@ -367,6 +367,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imgweight"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Weight "
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
@@ -396,7 +397,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:inputType="numberDecimal"
-                    android:textColor="@color/black"
+                    android:textColor="@color/light_black"
                     android:textColorHint="@color/light_black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -456,6 +457,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:text="Activity Level"
+                    android:fontFamily="@font/poppins_medium"
                     android:layout_toEndOf="@+id/imgactivity"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
@@ -503,6 +505,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:drawableStart="@drawable/nutrition_goals_icon"
                     android:text="Daily Nutrition Goals"
+                    android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp" />
 
@@ -542,7 +545,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:layout_toEndOf="@+id/imageAddPlan"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/sarabun_medium"
                         android:text="Add Your Goals"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -608,7 +611,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:padding="@dimen/_5sdp"
                                 android:text="0"
-                                android:textColor="#000000"
+                                android:textColor="@color/light_black"
                                 android:textSize="@dimen/_11sdp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -666,7 +669,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Carbs"
-                            android:textColor="#000000"
+                            android:textColor="@color/light_black"
                             android:textSize="@dimen/_11sdp" />
 
                         <LinearLayout
@@ -690,7 +693,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:padding="@dimen/_5sdp"
                                 android:text="0"
-                                android:textColor="#000000"
+                                android:textColor="@color/light_black"
                                 android:textSize="@dimen/_11sdp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -731,7 +734,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:padding="@dimen/_5sdp"
                                 android:text="0"
-                                android:textColor="#000000"
+                                android:textColor="@color/light_black"
                                 android:textSize="@dimen/_11sdp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -756,6 +759,7 @@
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:background="@drawable/select_bg_add"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="@dimen/_10sdp"
                     android:text="Done"
                     android:textColor="#FFFFFF"

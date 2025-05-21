@@ -22,16 +22,17 @@
             android:padding="@dimen/_4sdp"
             android:src="@drawable/back_icon"
             app:tint="@color/black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="My Wallet"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_14sdp"/>
+
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -47,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
@@ -82,6 +84,7 @@
                                 android:orientation="vertical"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_toLeftOf="@id/imageInfo">
+
                                 <TextView
                                     android:id="@+id/textCurrentBalanceTitle"
                                     android:layout_width="wrap_content"
@@ -90,16 +93,16 @@
                                     android:singleLine="true"
                                     android:text="Your Current Balance"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/_11ssp" />
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <TextView
                                     android:id="@+id/textCurrentBalance"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_medium"
+                                    android:fontFamily="@font/montserrat_bold"
                                     android:text="$ 0"
-                                    android:textColor="@color/white"
-                                    android:textStyle="bold" />
+                                    android:textColor="@color/white"/>
+
                             </LinearLayout>
 
                             <ImageView
@@ -111,38 +114,64 @@
                                 android:src="@drawable/white_info_icon" />
                         </RelativeLayout>
                     </LinearLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_45sdp"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/bottom_bg">
+
                         <TextView
                             android:id="@+id/textWalletHolderName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_bold"
                             android:text=""
                             android:gravity="center|start"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:singleLine="true"
-                            android:layout_toLeftOf="@id/textOnDateMonthYear"
+                            android:layout_toStartOf="@id/textOnDateMonthYear"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_11ssp"/>
+
                         <TextView
                             android:id="@+id/textOnDateMonthYear"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:gravity="center"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="On "
                             android:layout_alignParentEnd="true"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_11ssp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_11ssp"/>
+
                     </RelativeLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardViewInfo"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="You can withdraw the amount from your wallet after 15 days."
+                            android:textSize="@dimen/_9sdp"
+                            android:padding="@dimen/_4sdp"
+                            android:textColor="@color/black"/>
+
+                    </androidx.cardview.widget.CardView>
+
                 </RelativeLayout>
             </LinearLayout>
 
@@ -162,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/money_withdraw_icon_on_button"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:drawablePadding="@dimen/_10sdp"
                     android:text="Withdraw Amount"
                     android:textAlignment="center"

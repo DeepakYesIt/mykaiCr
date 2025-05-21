@@ -126,7 +126,6 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
 
          backButton()
 
-
         cookbookList.clear()
 
         val data =
