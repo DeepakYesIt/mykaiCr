@@ -112,7 +112,7 @@ class InvitationsScreenFragment : Fragment() {
 
             shareImageWithText(
                 "Hey, My kai an all-in-one app that’s completely changed the way I shop. It saves me time, money," +
-                        " and even helps with meal planning without having to step into a supermarket.\" +\n" +
+                        " and even helps with meal planning without having to step into a supermarket." +
                         " See for yourself with a free gift from me. \nClick on link below:\n\n",
                 referLink
             )

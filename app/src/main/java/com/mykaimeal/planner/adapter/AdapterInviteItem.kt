@@ -24,16 +24,12 @@ class AdapterInviteItem(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = datalist!![position]
-
         try {
 
             item.name?.let {
                 holder.binding.tvFriendsName.text=it
             }
 
-            if (item.status!=null){
-
-            }
             item.status?.let {
                 if (it!=""){
                     holder.binding.tvStatusBtn.text=it

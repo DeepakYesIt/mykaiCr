@@ -143,12 +143,12 @@ class SessionManagement(var context: Context) {
     }
 
     fun getProviderImage(): String? {
-        return pref?.getString(AppConstant.ProviderName, "")
+        return pref?.getString(AppConstant.ProviderImage, "")
     }
 
 
-    fun setProviderImage(name: String) {
-        editor!!.putString(AppConstant.ProviderImage, name)
+    fun setProviderImage(image: String) {
+        editor!!.putString(AppConstant.ProviderImage, image)
         editor!!.commit()
     }
 
