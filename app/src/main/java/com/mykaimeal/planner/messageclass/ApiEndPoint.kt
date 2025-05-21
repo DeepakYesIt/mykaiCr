@@ -51,6 +51,7 @@ object ApiEndPoint {
     const val moveRecipeUrl="move-recipe"
     const val removeCookBookUrl="remove-cook-book"
     const val addBasketeUrl="add-to-basket"
+
     const val addBasketeDetailsUrl="ingredient-basket"
 
     const val  getUserPreferences="user-prefrence"

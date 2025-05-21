@@ -583,7 +583,9 @@ interface ApiInterface {
         @Field("food_ids[]") foodIds: MutableList<String>?,
         @Field("sch_id") schId: String?,
         @Field("names[]") foodName: MutableList<String>?,
-        @Field("status[]") status: MutableList<String>?
+        @Field("status[]") status: MutableList<String>?,
+        @Field("uri") recipeUri: String?,
+        @Field("type") type: String?
     ): Response<JsonObject>
 
 

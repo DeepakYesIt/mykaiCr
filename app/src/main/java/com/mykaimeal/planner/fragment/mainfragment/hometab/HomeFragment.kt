@@ -720,7 +720,10 @@ class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnIt
             "1" -> {
                 val bundle = Bundle().apply {
                     putString("uri", type)
-                    putString("schId", position.toString())
+                    putString("schId", userDataLocal.userData?.get(position!!)?.recipe?.yield.toString())
+                    val data= userDataLocal.userData?.get(position!!)?.recipe?.mealType?.get(0)?.split("/")
+                    val formattedFoodName = data?.get(0)!!.replaceFirstChar { it.uppercase() }
+                    putString("mealType", formattedFoodName)
                 }
                 findNavController().navigate(R.id.missingIngredientsFragment, bundle)
             }

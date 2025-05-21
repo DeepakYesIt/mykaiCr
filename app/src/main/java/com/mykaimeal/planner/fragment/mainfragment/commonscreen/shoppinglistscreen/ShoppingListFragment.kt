@@ -363,6 +363,8 @@ class ShoppingListFragment : Fragment(), OnItemClickListener, OnItemSelectListen
                     statusType.add("3")
                 }
             }
+
+
         lifecycleScope.launch {
             shoppingListViewModel.addShoppingCartUrlApi({
                 BaseApplication.dismissMe()

@@ -22,6 +22,7 @@ import com.mykaimeal.planner.R
 import com.mykaimeal.planner.adapter.IngredientsDinnerAdapter.ViewHolder
 import com.mykaimeal.planner.databinding.AdapterIngredientsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.Breakfast
+import com.mykaimeal.planner.messageclass.ErrorMessage
 import java.util.Collections
 
 class IngredientsSnacksAdapter(var datalist:MutableList<Breakfast>?, private var requireActivity: FragmentActivity,
@@ -117,22 +118,23 @@ class IngredientsSnacksAdapter(var datalist:MutableList<Breakfast>?, private var
 
         holder.binding.missingIngredientsImg.setOnClickListener{
             checkTypeStatus="missingIng"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Snacks",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,
+                ErrorMessage.Snacks,position)
         }
 
         holder.binding.imgHeartRed.setOnClickListener{
             checkTypeStatus="heart"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Snacks",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Snacks,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
             checkTypeStatus="recipeDetails"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"Snacks",position)
+            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,ErrorMessage.Snacks,position)
         }
 
          holder.binding.imageMinus.setOnClickListener {
              checkTypeStatus="minus"
-             onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,"Snacks",position)
+             onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,ErrorMessage.Snacks,position)
 
          }
 

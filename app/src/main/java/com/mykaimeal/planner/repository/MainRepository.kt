@@ -176,7 +176,7 @@ interface MainRepository {
     suspend fun updateAllergiesApi(successCallback: (response: NetworkResult<String>) -> Unit, allergies:List<String>?)
     suspend fun userPreferencesAllergiesApi(successCallback: (response: NetworkResult<String>) -> Unit,allergicSearch:String?,allergicNum:String?)
     suspend fun addToCartUrlApi(successCallback: (response: NetworkResult<String>) -> Unit,foodIds: MutableList<String>?,
-                                schId:String?, foodName:MutableList<String>?,status: MutableList<String>?)
+                                schId:String?, foodName:MutableList<String>?,status: MutableList<String>?,recipeUri:String,mealType:String)
 
     suspend fun addShoppingCartUrlApi(successCallback: (response: NetworkResult<String>) -> Unit,foodIds: MutableList<String>?,
                                 schId:MutableList<String>?, foodName:MutableList<String>?,status: MutableList<String>?)

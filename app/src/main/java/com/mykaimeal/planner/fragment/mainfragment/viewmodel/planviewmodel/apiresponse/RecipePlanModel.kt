@@ -10,12 +10,4 @@ data class RecipePlanModel(
     val totalNutrients: TotalNutrientsModel?,
     val calories: Double?,
     val totalTime: Int?
-
-    /*  val label: String?,
-      val uri: String?,
-      val images: Any?,
-      val totalNutrients: TotalNutrientsModel?,
-      val calories: Double?,
-      val totalTime: Int?*/
-
 )

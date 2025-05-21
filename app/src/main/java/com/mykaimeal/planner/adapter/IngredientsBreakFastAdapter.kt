@@ -2,6 +2,7 @@ package com.mykaimeal.planner.adapter
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.drawable.Drawable
@@ -21,6 +22,7 @@ import com.mykaimeal.planner.OnItemSelectUnSelectListener
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.databinding.AdapterIngredientsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.Breakfast
+import com.mykaimeal.planner.messageclass.ErrorMessage
 import java.util.Collections
 
 class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private var requireActivity: FragmentActivity,
@@ -114,38 +116,21 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
             holder.binding.checkBoxImg.visibility=View.VISIBLE
         }
 
-    /*    if (datalist[position].isOpen){
-            holder.binding.missingIngredientsImg.visibility=View.VISIBLE
-            holder.binding.checkBoxImg.visibility=View.GONE
-        }else{
-            holder.binding.missingIngredientsImg.visibility=View.GONE
-            holder.binding.checkBoxImg.visibility=View.VISIBLE
-        }*/
-
-        holder.binding.missingIngredientsImg.setOnClickListener{
-            checkTypeStatus="missingIng"
-            onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,checkTypeStatus,"BreakFast",position)
-            /*onItemClickListener.itemClick(position, checkStatus, checkTypeStatus)*/
-        }
 
         holder.binding.imgHeartRed.setOnClickListener{
-            checkTypeStatus="heart"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(position,"heart",type,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
-            checkTypeStatus="recipeDetails"
-            onItemClickListener.itemSelectUnSelect(position,checkTypeStatus,"BreakFast",position)
+            if (datalist!![position].is_missing==0){
+                onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,"missingIng", type,position)
+            }else{
+                onItemClickListener.itemSelectUnSelect(position,"recipeDetails",type,position)
+            }
         }
 
         holder.binding.imageMinus.setOnClickListener {
-            checkTypeStatus="minus"
-           /* if (datalist[position].isOpen) {
-                checkStatus = "1"
-            } else {
-                checkStatus = "0"
-            }*/
-            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,checkTypeStatus,"BreakFast",position)
+            onItemClickListener.itemSelectUnSelect(datalist?.get(position)!!.id,"minus",type,position)
         }
 
         holder.itemView.setOnLongClickListener{
@@ -154,13 +139,10 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
                 arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
                 ClipData.Item(item?.recipe?.label)
             )
-
             val shadowBuilder = View.DragShadowBuilder(holder.itemView)
             holder.itemView.startDragAndDrop(clipData, shadowBuilder, null, 0)
             onItemLongClickListener.itemLongClick(position,item?.id?.toString(), type,item?.recipe?.uri!!)
             true
-            /*onItemLongClickListener.itemLongClick(position, checkStatus, datalist[position].type)
-            true*/
         }
     }
 
@@ -179,29 +161,6 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
 
     }
 
-  /*  private fun startZiggleAnimation(holder: ViewHolder) {
-//        val startAngle = -5f // -2 degrees
-//        val stopAngle = 5f   // 2 degrees
-//
-////        holder.ziggleAnimation? = ObjectAnimator.ofFloat(holder.itemView, "rotation", startAngle, stopAngle)
-//        holder.ziggleAnimation?.duration = 80
-//        holder.ziggleAnimation?.repeatMode = ValueAnimator.REVERSE
-//        holder.ziggleAnimation?.repeatCount = ValueAnimator.INFINITE
-//        holder.ziggleAnimation?.start()
-
-        holder.ziggleAnimation?.cancel()
-        holder.itemView.rotation = 0f
-        val startAngle = -5f
-        val stopAngle = 5f
-        holder.ziggleAnimation = ObjectAnimator.ofFloat(holder.itemView, "rotation", startAngle, stopAngle).apply {
-            duration = 80
-            repeatMode = ValueAnimator.REVERSE
-            repeatCount = ValueAnimator.INFINITE
-            start()
-        }
-    }*/
-
-
     private fun startZiggleAnimation(holder: ViewHolder) {
         holder.ziggleAnimation?.cancel()
         holder.itemView.rotation = 0f
@@ -218,42 +177,17 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
         }
     }
 
-  /*  private fun stopZiggle(view: View) {
-        // Ensure the animation is properly canceled and the object is reset.
-        ziggleAnimation?.cancel()
-        ziggleAnimation = null
-
-        // Reset the rotation of the view to 0f
-        view.rotation = 0f
-
-        // Optionally set the view to be static again if needed (especially if other properties change).
-        view.clearAnimation()
-
-        // Ensure the "isZiggleEnabled" flag is updated.
-        isZiggleEnabled = false
-    }*/
 
     private fun stopZiggle(holder: ViewHolder) {
-       /* ziggleAnimation?.cancel()
-        view.animate().cancel()  // Cancel any ongoing animations on the view
-        view.rotation = 0f
-        ziggleAnimation = null
-        isZiggleEnabled = false*/
-        /*ziggleAnimation?.cancel()
-        ziggleAnimation = null
-        view.rotation = 0f
-        isZiggleEnabled = false*/
-
         isZiggleEnabled = false
         holder.ziggleAnimation?.cancel()
         holder.itemView.rotation = 0f
-
-
-
     }
 
-    fun updateList(mealList: MutableList<Breakfast>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(mealList: MutableList<Breakfast>?, typeData: String?) {
         this.datalist=mealList
+        this.type=typeData.toString()
         notifyDataSetChanged()
     }
 

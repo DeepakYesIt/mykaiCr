@@ -55,11 +55,12 @@
             android:layout_marginHorizontal="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_below="@+id/relBreakfast">
+
             <TextView
                 android:id="@+id/tvBreakfast"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/poppins_medium"
                 android:text=""
                 android:textColor="#0A2533"
                 android:maxLines="2"

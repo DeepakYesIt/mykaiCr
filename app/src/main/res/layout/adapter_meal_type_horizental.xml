@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/tvBread"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_toStartOf="@id/tvSwap"

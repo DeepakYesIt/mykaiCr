@@ -35,10 +35,6 @@ import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.adapter.CalendarDayAdapter
 import com.mykaimeal.planner.adapter.CalendarDayDateAdapter
 import com.mykaimeal.planner.adapter.IngredientsBreakFastAdapter
-import com.mykaimeal.planner.adapter.IngredientsDinnerAdapter
-import com.mykaimeal.planner.adapter.IngredientsLunchAdapter
-import com.mykaimeal.planner.adapter.IngredientsSnacksAdapter
-import com.mykaimeal.planner.adapter.IngredientsTeaTimeAdapter
 import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.basedata.NetworkResult
 import com.mykaimeal.planner.basedata.SessionManagement
@@ -66,10 +62,10 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
     private lateinit var binding: FragmentFullCookedScheduleBinding
     private var ingredientBreakFastAdapter: IngredientsBreakFastAdapter? = null
-    private var ingredientLunchAdapter: IngredientsLunchAdapter? = null
-    private var ingredientDinnerAdapter: IngredientsDinnerAdapter? = null
-    private var ingredientSnacksAdapter: IngredientsSnacksAdapter? = null
-    private var ingredientTeaTimeAdapter: IngredientsTeaTimeAdapter? = null
+    private var ingredientLunchAdapter: IngredientsBreakFastAdapter? = null
+    private var ingredientDinnerAdapter: IngredientsBreakFastAdapter? = null
+    private var ingredientSnacksAdapter: IngredientsBreakFastAdapter? = null
+    private var ingredientTeaTimeAdapter: IngredientsBreakFastAdapter? = null
     private var tvWeekRange: TextView? = null
     private var calendarDayAdapter: CalendarDayAdapter? = null
     private var calendarAdapter: CalendarDayDateAdapter? = null
@@ -356,23 +352,88 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                     showDataAccordingDate(apiModel.data)
                 }
             } else {
-                if (apiModel.code == ErrorMessage.code) {
-                    showAlert(apiModel.message, true)
-                } else {
-                    showAlert(apiModel.message, false)
-                }
+                handleError(apiModel.code,apiModel.message)
             }
         } catch (e: Exception) {
             showAlert(e.message, false)
         }
     }
 
+    private fun handleError(code: Int, message: String) {
+        if (code == ErrorMessage.code) {
+            showAlert(message, true)
+        } else {
+            showAlert(message, false)
+        }
+    }
+
     private fun showDataAccordingDate(data: CookedTabModelData) {
         try {
-            recipesDateModel = null
+
             recipesDateModel = data
 
-            if (recipesDateModel != null) {
+            recipesDateModel?.let {
+
+                fun setupMealAdapter(mealRecipes: MutableList<Breakfast>?, recyclerView: RecyclerView, type: String): IngredientsBreakFastAdapter? {
+                    return if (mealRecipes != null && mealRecipes.isNotEmpty()) {
+                        setupDragScrollForRecyclerView(recyclerView, type)
+                        val adapter = IngredientsBreakFastAdapter(mealRecipes, requireActivity(), this,this, type)
+                        recyclerView.adapter = adapter
+                        adapter
+                    } else {
+                        null
+                    }
+                }
+
+                // Breakfast
+                if (it.Breakfast != null && it.Breakfast.size > 0) {
+                    ingredientBreakFastAdapter = setupMealAdapter(it.Breakfast, binding.rcySearchBreakFast, ErrorMessage.Breakfast)
+                    binding.llBreakFast.visibility = View.VISIBLE
+                } else {
+                    binding.llBreakFast.visibility = View.GONE
+                }
+
+
+                // Lunch
+                if (it.Lunch != null && it.Lunch.size > 0) {
+                    ingredientLunchAdapter = setupMealAdapter(it.Lunch, binding.rcySearchLunch, ErrorMessage.Lunch)
+                    binding.llLunch.visibility = View.VISIBLE
+                } else {
+                    binding.llLunch.visibility = View.GONE
+                }
+
+                // Dinner
+                if (it.Dinner != null && it.Dinner.size > 0) {
+                    ingredientDinnerAdapter = setupMealAdapter(it.Dinner, binding.rcySearchDinner, ErrorMessage.Dinner)
+                    binding.llDinner.visibility = View.VISIBLE
+                } else {
+                    binding.llDinner.visibility = View.GONE
+                }
+
+                // Snacks
+                if (it.Snacks != null && it.Snacks.size > 0) {
+                    ingredientSnacksAdapter = setupMealAdapter(it.Snacks, binding.rcySearchSnacks, ErrorMessage.Snacks)
+                    binding.llSnacks.visibility = View.VISIBLE
+                } else {
+                    binding.llSnacks.visibility = View.GONE
+                }
+
+                // Teatime
+                if (it.Teatime != null && it.Teatime.size > 0) {
+                    ingredientTeaTimeAdapter = setupMealAdapter(it.Teatime, binding.rcySearchTeaTime, ErrorMessage.Brunch)
+                    binding.llTeaTime.visibility = View.VISIBLE
+                } else {
+                    binding.llTeaTime.visibility = View.GONE
+                }
+
+
+
+            }
+
+            /*if (recipesDateModel != null) {
+
+
+
                 // Breakfast
                 if (recipesDateModel?.Breakfast != null && recipesDateModel?.Breakfast?.size!! > 0) {
                     setupDragScrollForRecyclerView(binding.rcySearchBreakFast, ErrorMessage.Breakfast)
@@ -450,7 +511,12 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 } else {
                     binding.llTeaTime.visibility = View.GONE
                 }
-            }
+
+
+            }*/
+
+
+
         } catch (e: Exception) {
             showAlert(e.message, false)
         }
@@ -869,97 +935,139 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
 
     override fun itemSelectUnSelect(id: Int?, status: String?, type: String?, position: Int?) {
-        if (status == "heart") {
+
+        val (mealList,adapter) = when (type) {
+            ErrorMessage.Breakfast -> recipesDateModel?.Breakfast to ingredientBreakFastAdapter
+            ErrorMessage.Lunch -> recipesDateModel?.Lunch to ingredientLunchAdapter
+            ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
+            ErrorMessage.Snacks -> recipesDateModel?.Snacks to ingredientSnacksAdapter
+            ErrorMessage.Brunch -> recipesDateModel?.Teatime to ingredientTeaTimeAdapter
+            else -> null to null
+        }
+
+        // Safely get the item and position
+        val item = mealList?.get(position!!)
+
+
+        if (status.equals("minus",true)){
+            removeDayDialog(item,adapter, position,mealList, type)
+        }
+
+        if (status.equals("missingIng",true)){
+            val bundle = Bundle().apply {
+                        putString("uri", item?.recipe?.uri)
+                        putString("schId", item?.id.toString())
+                        val data= item?.recipe?.mealType?.get(0)?.split("/")
+                        val formattedFoodName = data?.get(0)!!.replaceFirstChar { it.uppercase() }
+                        putString("mealType", formattedFoodName)
+                    }
+            findNavController().navigate(R.id.missingIngredientsFragment, bundle)
+        }
+
+        if (status.equals("recipeDetails",true)){
+            val bundle = Bundle().apply {
+                        putString("uri", item?.recipe?.uri)
+                val data= item?.recipe?.mealType?.get(0)?.split("/")
+                val formattedFoodName = data?.get(0)!!.replaceFirstChar { it.uppercase() }
+                        putString("mealType", formattedFoodName)
+                    }
+            findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+        }
+
+        if (status.equals("heart",true)){
             if ((activity as? MainActivity)?.Subscription_status==1){
                 if ((activity as? MainActivity)?.favorite!! <= 2){
                     if (BaseApplication.isOnline(requireActivity())) {
-                        toggleIsLike(type ?: "", position)
+                        toggleIsLike(item,adapter, position,mealList, type)
                     } else {
                         BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
                     }
                 }else{
                     (activity as? MainActivity)?.subscriptionAlertError(requireContext())
                 }
-
             }else{
                 if (BaseApplication.isOnline(requireActivity())) {
-                    toggleIsLike(type ?: "", position)
+                    toggleIsLike(item,adapter, position,mealList, type)
                 } else {
                     BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
                 }
             }
-        } else if (status == "minus") {
-            /*if (status == "1") {*/
-            removeDayDialog(id, position, type)
-            /*}*/
-
-        } else if (status == "missingIng") {
-            val (mealList) = when (type) {
-                ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
-                ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
-                ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
-                ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
-                ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
-                else -> null to null
-            }
-
-            // Safely get the item and position
-            val item = mealList?.get(position!!)
-            if (item != null) {
-                if (item.recipe?.uri != null) {
-                    val bundle = Bundle().apply {
-                        putString("uri", item.recipe.uri)
-                        putString("schId", item.id.toString())
-                    }
-                    findNavController().navigate(R.id.missingIngredientsFragment, bundle)
-                }
-            }
-        } else {
-            val (mealList) = when (type) {
-                ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
-                ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
-                ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
-                ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
-                ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
-                else -> null to null
-            }
-
-            // Safely get the item and position
-            val item = mealList?.get(position!!)
-            if (item != null) {
-                if (item.recipe?.uri != null) {
-                    val bundle = Bundle().apply {
-                        putString("uri", item.recipe.uri)
-                        putString("mealType", item.recipe.mealType.toString())
-                    }
-                    findNavController().navigate(R.id.recipeDetailsFragment, bundle)
-                }
-            }
-
-            /*findNavController().navigate(R.id.recipeDetailsFragment)*/
         }
+
+//        if (status == "heart") {
+//            if ((activity as? MainActivity)?.Subscription_status==1){
+//                if ((activity as? MainActivity)?.favorite!! <= 2){
+//                    if (BaseApplication.isOnline(requireActivity())) {
+//                        toggleIsLike(type ?: "", position)
+//                    } else {
+//                        BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+//                    }
+//                }else{
+//                    (activity as? MainActivity)?.subscriptionAlertError(requireContext())
+//                }
+//
+//            }else{
+//                if (BaseApplication.isOnline(requireActivity())) {
+//                    toggleIsLike(type ?: "", position)
+//                } else {
+//                    BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+//                }
+//            }
+//        }  else if (status == "missingIng") {
+//            val (mealList) = when (type) {
+//                ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
+//                ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
+//                ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
+//                ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
+//                ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
+//                else -> null to null
+//            }
+//
+//            // Safely get the item and position
+//            val item = mealList?.get(position!!)
+//            if (item != null) {
+//                if (item.recipe?.uri != null) {
+//                    val bundle = Bundle().apply {
+//                        putString("uri", item.recipe.uri)
+//                        putString("schId", item.id.toString())
+//                    }
+//                    findNavController().navigate(R.id.missingIngredientsFragment, bundle)
+//                }
+//            }
+//        } else {
+//            val (mealList) = when (type) {
+//                ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
+//                ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
+//                ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
+//                ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
+//                ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
+//                else -> null to null
+//            }
+//
+//            // Safely get the item and position
+//            val item = mealList?.get(position!!)
+//            if (item != null) {
+//                if (item.recipe?.uri != null) {
+//                    val bundle = Bundle().apply {
+//                        putString("uri", item.recipe.uri)
+//                        putString("mealType", item.recipe.mealType.toString())
+//                    }
+//                    findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+//                }
+//            }
+//
+//            /*findNavController().navigate(R.id.recipeDetailsFragment)*/
+//        }
     }
 
-    private fun toggleIsLike(type: String, position: Int?) {
-        // Map the type to the corresponding list and adapter
-        val (mealList) = when (type) {
-            ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
-            ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
-            ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
-            ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
-            ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
-            else -> null to null
-        }
-
-        // Safely get the item and position
-        val item = mealList?.get(position!!)
+    private fun toggleIsLike(item: Breakfast?, adapter: IngredientsBreakFastAdapter?, position: Int?, mealList: MutableList<Breakfast>?, type: String?) {
         if (item != null) {
             if (item.recipe?.uri != null) {
                 val newLikeStatus = if (item.is_like == 0) "1" else "0"
                 if (newLikeStatus.equals("0", true)) {
-                    recipeLikeAndUnlikeData(item, type, mealList, position, newLikeStatus, "", null)
+                    recipeLikeAndUnlikeData(item,adapter, type, mealList, position, newLikeStatus, "", null)
                 } else {
-                    addFavTypeDialog(item, type, mealList, position, newLikeStatus)
+                    addFavTypeDialog(item, adapter,type, mealList, position, newLikeStatus)
                 }
             }
         }
@@ -967,8 +1075,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
     private fun recipeLikeAndUnlikeData(
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         likeType: String,
         cookBookType: String,
@@ -978,7 +1087,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         lifecycleScope.launch {
             fUllCookingScheduleViewModel.likeUnlikeRequest({
                 BaseApplication.dismissMe()
-                handleLikeAndUnlikeApiResponse(it, item, type, mealList, position, dialogAddRecipe)
+                handleLikeAndUnlikeApiResponse(it, item,adapter, type, mealList, position, dialogAddRecipe)
             }, item.recipe?.uri.toString(), likeType, cookBookType)
 
         }
@@ -987,8 +1096,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     private fun handleLikeAndUnlikeApiResponse(
         result: NetworkResult<String>,
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         dialogAddRecipe: Dialog?
     ) {
@@ -996,6 +1106,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             is NetworkResult.Success -> handleLikeAndUnlikeSuccessResponse(
                 result.data.toString(),
                 item,
+                adapter,
                 type,
                 mealList,
                 position,
@@ -1011,8 +1122,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     private fun handleLikeAndUnlikeSuccessResponse(
         data: String,
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         dialogAddRecipe: Dialog?
     ) {
@@ -1023,16 +1135,11 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 dialogAddRecipe?.dismiss()
                 // Toggle the is_like value
                 item.is_like = if (item.is_like == 0) 1 else 0
-                mealList[position!!] = item
-
-                when (type) {
-                    ErrorMessage.Breakfast -> ingredientBreakFastAdapter?.updateList(mealList)
-                    ErrorMessage.Lunch -> ingredientLunchAdapter?.updateList(mealList)
-                    ErrorMessage.Dinner -> ingredientDinnerAdapter?.updateList(mealList)
-                    ErrorMessage.Snacks -> ingredientSnacksAdapter?.updateList(mealList)
-                    ErrorMessage.Brunch -> ingredientTeaTimeAdapter?.updateList(mealList)
-                }
-
+                mealList?.set(position!!, item)
+                // Update the adapter
+                adapter?.updateList(mealList, type)
+                (activity as MainActivity?)?.upDateHomeData()
+                (activity as MainActivity?)?.upDatePlan()
             } else {
                 if (apiModel.code == ErrorMessage.code) {
                     showAlert(apiModel.message, true)
@@ -1046,8 +1153,8 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     }
 
     private fun addFavTypeDialog(
-        item: Breakfast, type: String,
-        mealList: MutableList<Breakfast>, position: Int?, likeType: String
+        item: Breakfast,adapter: IngredientsBreakFastAdapter?, type: String?,
+        mealList: MutableList<Breakfast>?, position: Int?, likeType: String
     ) {
         val dialogAddRecipe: Dialog = context?.let { Dialog(it) }!!
         dialogAddRecipe.setContentView(R.layout.alert_dialog_add_recipe)
@@ -1084,7 +1191,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 BaseApplication.alertError(requireContext(), ErrorMessage.selectCookBookError, false)
             } else {
                 val cookBookType = cookbookList[spinnerActivityLevel.selectedIndex].id
-                recipeLikeAndUnlikeData(item, type, mealList, position, likeType, cookBookType.toString(), dialogAddRecipe)
+                recipeLikeAndUnlikeData(item, adapter,type, mealList, position, likeType, cookBookType.toString(), dialogAddRecipe)
             }
         }
     }
@@ -1131,7 +1238,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         }
     }
 
-    private fun removeDayDialog(id: Int?, position: Int?, type: String?) {
+    private fun removeDayDialog(item: Breakfast?, adapter: IngredientsBreakFastAdapter?, position: Int?, mealList: MutableList<Breakfast>?, type: String?) {
         val dialogScheduleDay: Dialog = context?.let { Dialog(it) }!!
         dialogScheduleDay.setContentView(R.layout.alert_dialog_remove_day)
         dialogScheduleDay.window!!.setLayout(
@@ -1150,17 +1257,14 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
         tvDialogYesBtn.setOnClickListener {
             if (BaseApplication.isOnline(requireActivity())) {
-                removeCookBookApi(id.toString(), dialogScheduleDay, position, type)
+                removeCookBookApi(item,adapter, dialogScheduleDay, position,mealList, type)
             } else {
                 BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
             }
         }
     }
 
-    private fun removeCookBookApi(
-        cookedId: String, dialogScheduleDay: Dialog,
-        position: Int?, status: String?
-    ) {
+    private fun removeCookBookApi(item: Breakfast?, adapter: IngredientsBreakFastAdapter?, dialogScheduleDay: Dialog, position: Int?, mealList: MutableList<Breakfast>?, type: String?) {
         BaseApplication.showMe(requireActivity())
         lifecycleScope.launch {
             fUllCookingScheduleViewModel.removeMealApi({
@@ -1170,20 +1274,29 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                         val gson = Gson()
                         val cookedModel = gson.fromJson(it.data, CookedTabModel::class.java)
                         if (cookedModel.code == 200 && cookedModel.success) {
-                            when (status) {
-                                ErrorMessage.Breakfast -> ingredientBreakFastAdapter?.removeItem(position!!)
-                                ErrorMessage.Lunch -> ingredientLunchAdapter?.removeItem(position!!)
-                                ErrorMessage.Dinner -> ingredientDinnerAdapter?.removeItem(position!!)
-                                ErrorMessage.Snacks -> ingredientSnacksAdapter?.removeItem(position!!)
-                                ErrorMessage.Brunch -> ingredientTeaTimeAdapter?.removeItem(position!!)
+                            // Remove item from the list
+                            mealList?.removeAt(position!!)
+                            // Define meal types and corresponding UI elements
+                            val mealVisibilityMap = mapOf(
+                                ErrorMessage.Breakfast to binding.llBreakFast,
+                                ErrorMessage.Lunch to binding.llLunch,
+                                ErrorMessage.Dinner to binding.llDinner,
+                                ErrorMessage.Snacks to binding.llSnacks,
+                                ErrorMessage.Brunch to binding.llTeaTime
+                            )
+                            // Update adapter and visibility
+                            mealVisibilityMap[type]?.let { view ->
+                                if (mealList?.isNotEmpty() == true) {
+                                    adapter?.updateList(mealList, type)
+                                    view.visibility = View.VISIBLE
+                                } else {
+                                    view.visibility = View.GONE
+                                }
                             }
+                            (activity as MainActivity?)?.upDateHomeData()
                             dialogScheduleDay.dismiss()
                         } else {
-                            if (cookedModel.code == ErrorMessage.code) {
-                                showAlertFunction(cookedModel.message, true)
-                            } else {
-                                showAlertFunction(cookedModel.message, false)
-                            }
+                            handleError(cookedModel.code,cookedModel.message)
                         }
                     }
 
@@ -1195,7 +1308,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                         showAlertFunction(it.message, false)
                     }
                 }
-            }, cookedId)
+            }, item?.id.toString())
         }
     }
 
@@ -1208,7 +1321,6 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         uri = uriItem
         mealType = type
         onClickEnabled()
-
     }
 
     private fun onClickEnabled() {
