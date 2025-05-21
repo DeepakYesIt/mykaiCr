@@ -562,6 +562,11 @@ interface ApiInterface {
         @Body jsonObject: JsonObject?
     ): Response<JsonObject>
 
+    @POST(ApiEndPoint.recipeSearchFromSearch)
+    suspend fun recipeSearchFromSearchApi(
+        @Body jsonObject: JsonObject?
+    ): Response<JsonObject>
+
     @FormUrlEncoded
     @POST(ApiEndPoint.recipeSearch)
     suspend fun recipeFilterSearchApi(

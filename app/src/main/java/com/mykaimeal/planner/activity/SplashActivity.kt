@@ -14,6 +14,7 @@ import com.appsflyer.AppsFlyerLib
 import com.appsflyer.deeplink.DeepLinkResult
 import com.google.gson.Gson
 import com.mykaimeal.planner.R
+import com.mykaimeal.planner.apiInterface.BaseUrl
 import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.basedata.BaseApplication.alertError
 import com.mykaimeal.planner.basedata.NetworkResult
@@ -66,8 +67,6 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun handleApiResponse(result: NetworkResult<String>) {
         when (result) {
             is NetworkResult.Success -> handleSuccessResponse(result.data.toString())
@@ -101,7 +100,6 @@ class SplashActivity : AppCompatActivity() {
         handleDeepLink()
     }
 
-
     @SuppressLint("SuspiciousIndentation")
     private fun handleDeepLink() {
         // 4. Handle deep link only now
@@ -116,6 +114,8 @@ class SplashActivity : AppCompatActivity() {
                 val providerName = data.getQueryParameter("providerName")
                 val providerImage = data.getQueryParameter("providerImage")
                 Log.d("***********MY kai", "$screenName  & $cookbooksId")
+                Log.d("***********MY kai providerName", "$providerName")
+                Log.d("***********MY kai providerImage", "$providerImage")
                 if (screenName.equals("CookBooksType") && cookbooksId != null && referrer!=null) {
                     sessionManagement.setOpenCookBookUsingShare("CookBooksType")
                     sessionManagement.setCookBookId(cookbooksId.toString())
@@ -127,16 +127,13 @@ class SplashActivity : AppCompatActivity() {
                     sessionManagement.setProviderName(it)
                 }
                 providerImage?.let {
-                    sessionManagement.setProviderImage(it)
+                    sessionManagement.setProviderImage(BaseUrl.imageBaseUrl+it)
                 }
                 sessionManagement.setReferralCode(referrer.toString())
             }
         }
-
         navigateNext()
-
     }
-
 
     private fun navigateNext() {
         lifecycleScope.launch {
@@ -157,4 +154,5 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
+
 }

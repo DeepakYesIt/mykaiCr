@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,11 +20,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.mykaimeal.planner.OnItemClickListener
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.adapter.SearchMealAdapter
 import com.mykaimeal.planner.adapter.SearchMealCatAdapter
+import com.mykaimeal.planner.adapter.SearchMealRecipeAdapter
 import com.mykaimeal.planner.adapter.SearchRecipeAdapter
 import com.mykaimeal.planner.apiInterface.BaseUrl
 import com.mykaimeal.planner.basedata.BaseApplication
@@ -36,21 +39,27 @@ import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apires
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Data
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Ingredient
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.MealType
+import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Recipe
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.SearchApiResponse
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.viewmodel.SearchRecipeViewModel
+import com.mykaimeal.planner.fragment.mainfragment.viewmodel.recipedetails.apiresponse.RecipeModel
+import com.mykaimeal.planner.listener.RecipeDetailListener
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
+class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener, RecipeDetailListener {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private var searchRecipeAdapter: SearchRecipeAdapter? = null
     private var searchMealAdapter: SearchMealAdapter? = null
     private var searchMealCatAdapter: SearchMealCatAdapter? = null
+    private var searchMealRecipeAdapter: SearchMealRecipeAdapter? = null
     private lateinit var commonWorkUtils: CommonWorkUtils
     private lateinit var sessionManagement: SessionManagement
     private lateinit var searchRecipeViewModel:SearchRecipeViewModel
@@ -58,7 +67,11 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
     private var ingredient: MutableList<Ingredient> = mutableListOf()
     private var mealType: MutableList<MealType> = mutableListOf()
     private var category: MutableList<Category> = mutableListOf()
+    private var recipe: MutableList<Recipe> = mutableListOf()
     private var cookbookList: MutableList<com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data> = mutableListOf()
+    private lateinit var textListener: TextWatcher
+    private var textChangedJob: Job? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,23 +113,144 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
 
         initialize()
 
-        if (searchRecipeViewModel.data!=null){
-            showData(searchRecipeViewModel.data)
-        }else{
-            // This Api call when the screen in loaded
-            lunchApi()
+
+        searchRecipeViewModel.search?.let {
+            binding.etIngRecipeSearchBar.setText(it)
         }
 
+        if (searchRecipeViewModel.data!=null){
+            showDataInUi(searchRecipeViewModel.data)
+        }else{
+            // This Api call when the screen in loaded
+            searchApi("")
+        }
 
 
         binding.scrollview.setOnRefreshListener {
             // This Api call when the screen in loaded
             binding.etIngRecipeSearchBar.text.clear()
-            lunchApi()
+            searchApi("")
         }
         return binding.root
     }
 
+
+    private fun searchRecipeApi(searchText: String) {
+        BaseApplication.showMe(requireContext())
+        lifecycleScope.launch {
+            // Create a JsonObject for the main JSON structure
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("search",searchText)
+            // Log the final JSON data
+            Log.d("final data", "******$jsonObject")
+            searchRecipeViewModel.recipeSearchApi({
+                binding.scrollview.isRefreshing=false
+                BaseApplication.dismissMe()
+                when (it) {
+                    is NetworkResult.Success -> {
+                        try {
+                            val apiModel = Gson().fromJson(it.data, SearchApiResponse::class.java)
+                            Log.d("@@@ Recipe Details ", "message :- $it.data")
+                            if (apiModel.code == 200 && apiModel.success) {
+                                apiModel.data.let {
+                                    it1 -> showDataInUi(it1)
+                                }
+                            } else {
+                                if (apiModel.code == ErrorMessage.code) {
+                                    showAlert(apiModel.message, true)
+                                } else {
+                                    if (!apiModel.message.equals("Search query cannot be empty.")) {
+                                        showAlert(apiModel.message, false)
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Log.d("AddMeal", "message:--" + e.message)
+                        }
+                    }
+                    is NetworkResult.Error -> {
+                        showAlert(it.message, false)
+                    }
+                    else -> {
+                        showAlert(it.message, false)
+                    }
+                }
+            }, jsonObject)
+        }
+    }
+
+    private fun showDataInUi(it1: Data?) {
+
+        try {
+
+            searchRecipeViewModel.setData(it1,binding.etIngRecipeSearchBar.text.toString())
+
+            ingredient.clear()
+            mealType.clear()
+            category.clear()
+            recipe.clear()
+
+
+            it1?.ingredient?.let {
+                ingredient.addAll(it)
+            }
+            it1?.mealType?.let {
+                mealType.addAll(it)
+            }
+            it1?.category?.let {
+                category.addAll(it)
+            }
+
+            it1?.recipes?.let {
+                recipe.addAll(it)
+            }
+
+            if (ingredient.size>0){
+                searchRecipeAdapter = SearchRecipeAdapter(ingredient, requireActivity(),this)
+                binding.rcySearchRecipe.adapter = searchRecipeAdapter
+                binding.llSearchRecipientIng.visibility=View.VISIBLE
+            }else{
+                binding.llSearchRecipientIng.visibility=View.GONE
+            }
+
+            if (mealType.size>0){
+                searchMealAdapter = SearchMealAdapter(mealType, requireActivity(),this)
+                binding.rcySearchMeal.adapter = searchMealAdapter
+                binding.llSearchByMeal.visibility=View.VISIBLE
+            }else{
+                binding.llSearchByMeal.visibility=View.GONE
+            }
+
+            if (category.size>0){
+                searchMealCatAdapter = SearchMealCatAdapter(category, requireActivity(),this)
+                binding.rcyPopularCat.adapter = searchMealCatAdapter
+                binding.llPopularCat.visibility=View.VISIBLE
+            }else{
+                binding.llPopularCat.visibility=View.GONE
+            }
+
+            if (recipe.size>0){
+                searchMealRecipeAdapter=SearchMealRecipeAdapter(recipe,requireActivity(),this)
+                binding.rcyrecipe.adapter=searchMealRecipeAdapter
+                binding.llrecipe.visibility = View.VISIBLE
+            }else{
+                binding.llrecipe.visibility = View.GONE
+            }
+
+            if (it1?.preference_status!=null){
+                if (it1.preference_status == 0){
+                    binding.imgPreferences.setImageResource(R.drawable.toggle_off_icon)
+                }else{
+                    binding.imgPreferences.setImageResource(R.drawable.toggle_on_icon)
+                }
+            }else{
+                binding.imgPreferences.setImageResource(R.drawable.toggle_off_icon)
+            }
+
+        }catch (e:Exception){
+            Log.d("Error","*****"+e.message)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -202,7 +336,7 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
 
     private fun showData(data: Data?) {
         try {
-            searchRecipeViewModel.setData(data)
+//            searchRecipeViewModel.setData(data)
 
             ingredient.clear()
             mealType.clear()
@@ -216,8 +350,9 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
             data?.category?.let {
                 category.addAll(it)
             }
+
             if (ingredient.size>0){
-                searchRecipeAdapter = SearchRecipeAdapter(ingredient, requireActivity())
+                searchRecipeAdapter = SearchRecipeAdapter(ingredient, requireActivity(),this)
                 binding.rcySearchRecipe.adapter = searchRecipeAdapter
                 binding.llSearchRecipientIng.visibility=View.VISIBLE
             }else{
@@ -280,31 +415,66 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
         binding.imgFilterIcon.setOnClickListener(this)
         binding.imgPreferences.setOnClickListener(this)
 
-        binding.etIngRecipeSearchBar.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(editable: Editable) {
-                val query = editable.toString().trim()
-                if (query.isNotEmpty()) {
-                    if (binding.rcySearchRecipe.visibility == View.VISIBLE) {
-                        filterIngredients(query)
+//        binding.etIngRecipeSearchBar.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+//            override fun afterTextChanged(editable: Editable) {
+//                val query = editable.toString().trim()
+//                if (query.isNotEmpty()) {
+//                    if (binding.rcySearchRecipe.visibility == View.VISIBLE) {
+//                        filterIngredients(query)
+//                    }
+//                    if (binding.rcySearchMeal.visibility == View.VISIBLE) {
+//                        filterMealType(query)
+//                    }
+//                    if (binding.rcyPopularCat.visibility == View.VISIBLE) {
+//                        filterPopular(query)
+//                    }
+//                } else {
+//                    // If the query is empty, reset the lists to show all original data
+//                    resetLists()
+//                }
+//            }
+//        })
+
+
+        textListener = object : TextWatcher {
+            private var searchFor = "" // Or view.editText.text.toString()
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString()
+                if (searchText != searchFor) {
+                    searchFor = searchText
+                    textChangedJob?.cancel()
+                    // Launch a new coroutine in the lifecycle scope
+                    textChangedJob = lifecycleScope.launch {
+                        delay(1000)  // Debounce time
+                        if (searchText.equals(searchFor,true)) {
+                            searchApi(searchText)
+                        }
                     }
-                    if (binding.rcySearchMeal.visibility == View.VISIBLE) {
-                        filterMealType(query)
-                    }
-                    if (binding.rcyPopularCat.visibility == View.VISIBLE) {
-                        filterPopular(query)
-                    }
-                } else {
-                    // If the query is empty, reset the lists to show all original data
-                    resetLists()
+                }else{
+                    searchApi("")
                 }
             }
-        })
+        }
+    }
+
+    private fun searchApi(value:String){
+        if (BaseApplication.isOnline(requireActivity())) {
+            searchRecipeApi(value)
+        } else {
+            binding.scrollview.isRefreshing=false
+            BaseApplication.alertError(
+                requireContext(),
+                ErrorMessage.networkError,
+                false
+            )
+        }
     }
 
     private fun resetLists() {
-
         if (ingredient.size>0) {
             ingredient.let { searchRecipeAdapter?.submitList(it) } // Reset recipe list
             binding.llSearchRecipientIng.visibility = View.VISIBLE
@@ -432,7 +602,7 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
             val updateModel = Gson().fromJson(data, UpdatePreferenceSuccessfully::class.java)
             if (updateModel.code == 200 && updateModel.success) {
                 (activity as MainActivity?)?.upDatePlan()
-                lunchApi()
+                searchApi("")
             } else {
                 handleError(updateModel.code,updateModel.message)
             }
@@ -442,12 +612,22 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
     }
 
     override fun itemClick(position: Int?, status: String?, type: String?) {
+
+        if (type.equals("MealCat",true) || type.equals("Meal",true) ){
             val bundle = Bundle().apply {
                 putString("recipeName",status)
                 putString("screenType","Search")
                 putString("type",type)
             }
             findNavController().navigate(R.id.searchedRecipeBreakfastFragment,bundle)
+        }
+        if (type.equals("ingredient",true)){
+            val bundle = Bundle().apply {
+                putString("recipeName",status)
+                putString("screenType","Ingredients")
+            }
+            findNavController().navigate(R.id.searchedRecipeBreakfastFragment,bundle)
+        }
     }
 
 
@@ -456,7 +636,23 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.etIngRecipeSearchBar.addTextChangedListener(textListener)
+    }
 
+    override fun onPause() {
+        binding.etIngRecipeSearchBar.removeTextChangedListener(textListener)
+        super.onPause()
+    }
+
+    override fun itemRecipeSelect(uri: String?, mealType: String?, type: String?) {
+        val bundle = Bundle().apply {
+            putString("uri", uri)
+            putString("mealType", mealType)
+        }
+        findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+    }
 
 
 }

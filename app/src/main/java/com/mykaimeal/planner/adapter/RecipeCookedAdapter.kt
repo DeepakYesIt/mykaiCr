@@ -98,13 +98,12 @@ class RecipeCookedAdapter(var datalist: MutableList<UserDataModel>?, var require
 
         holder.itemView.setOnClickListener {
             if (data != null) {
-                if (datalist!![position].is_missing==0){
-                    onItemClickListener.itemClick(position, "1", datalist?.get(position)?.uri)
-                }else{
-                    onItemClickListener.itemClick(position, "5", data.recipe?.uri)
-                }
-
+                onItemClickListener.itemClick(position, "5", data.recipe?.uri)
             }
+        }
+
+        holder.binding.missingIngredientsImg.setOnClickListener{
+            onItemClickListener.itemClick(position, "1", datalist?.get(position)?.uri)
         }
 
         holder.binding.imgHeartRed.setOnClickListener {
@@ -112,6 +111,7 @@ class RecipeCookedAdapter(var datalist: MutableList<UserDataModel>?, var require
                 onItemClickListener.itemClick(position,"4", data.is_like.toString())
             }
         }
+
     }
 
     override fun getItemCount(): Int {

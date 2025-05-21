@@ -400,7 +400,6 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
     }
 
     private fun searchRecipeApi(searchText: String) {
-//        binding.layProgress.visibility=View.VISIBLE
         BaseApplication.showMe(requireContext())
         lifecycleScope.launch {
             // Create a JsonObject for the main JSON structure

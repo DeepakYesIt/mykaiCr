@@ -116,17 +116,16 @@ class IngredientsBreakFastAdapter(var datalist:MutableList<Breakfast>?, private 
             holder.binding.checkBoxImg.visibility=View.VISIBLE
         }
 
+        holder.binding.missingIngredientsImg.setOnClickListener{
+            onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,"missingIng", type,position)
+        }
 
         holder.binding.imgHeartRed.setOnClickListener{
             onItemClickListener.itemSelectUnSelect(position,"heart",type,position)
         }
 
         holder.binding.relMainLayouts.setOnClickListener{
-            if (datalist!![position].is_missing==0){
-                onItemClickListener.itemSelectUnSelect(datalist?.get(position)?.id,"missingIng", type,position)
-            }else{
-                onItemClickListener.itemSelectUnSelect(position,"recipeDetails",type,position)
-            }
+            onItemClickListener.itemSelectUnSelect(position,"recipeDetails",type,position)
         }
 
         holder.binding.imageMinus.setOnClickListener {
