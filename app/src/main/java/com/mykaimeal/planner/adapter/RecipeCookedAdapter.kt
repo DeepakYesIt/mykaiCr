@@ -103,7 +103,7 @@ class RecipeCookedAdapter(var datalist: MutableList<UserDataModel>?, var require
         }
 
         holder.binding.missingIngredientsImg.setOnClickListener{
-            onItemClickListener.itemClick(datalist?.get(position)?.recipe?.yield?.toInt(), "1", datalist?.get(position)?.uri)
+            onItemClickListener.itemClick(position, "1", datalist?.get(position)?.uri)
         }
 
         holder.binding.imgHeartRed.setOnClickListener {

@@ -616,18 +616,6 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
                 }
 
 
-//                if (recipesDateModel!!.fat != null || recipesDateModel!!.protein != null || recipesDateModel!!.kcal != null || recipesDateModel!!.carbs != null) {
-////                    if (recipesDateModel!!.fat != 0 || recipesDateModel!!.protein != 0 || recipesDateModel!!.kcal != 0 || recipesDateModel!!.carbs != 0) {
-////                        if (recipesDateModel!!.show == 1) {
-////                            binding.tvCalories.text = ""+recipesDateModel!!.kcal
-////                            binding.tvFats.text = ""+recipesDateModel!!.fat
-////                            binding.tvCarbohydrates.text = ""+recipesDateModel!!.carbs
-////                            binding.tvProteins.text = ""+recipesDateModel!!.protein
-////                        }
-////                    }
-//
-//                }
-
 
                 var status = false
 
@@ -1374,7 +1362,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
             Log.d("@@@ user click  List ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success) {
                 Toast.makeText(requireContext(), "" + apiModel.message, Toast.LENGTH_LONG).show()
-
+                (activity as MainActivity?)?.upDateHomeData()
                 // Fetch data for the selected date if online
                 if (BaseApplication.isOnline(requireActivity())) {
                     dataFatchByDate(currentDateSelected,"2")
