@@ -63,6 +63,9 @@ import com.mykaimeal.planner.fragment.mainfragment.viewmodel.walletviewmodel.api
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.walletviewmodel.apiresponsetransfer.TransferModel
 import com.mykaimeal.planner.listener.CardBankListener
 import com.mykaimeal.planner.messageclass.ErrorMessage
+import com.stripe.android.exception.StripeException
+import com.stripe.android.model.Card
+import com.stripe.android.model.PaymentMethodCreateParams
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -125,7 +128,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
         amount = arguments?.getString("amount", "$ 0")?:"$ 0"
 
         ActivityCompat.requestPermissions(requireActivity(), permissions(), REQUEST_CODE_STORAGE_PERMISSION)
-
 
         setupBackNavigation()
 
@@ -941,7 +943,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
     }
 
     private fun paymentApi() {
-        BaseApplication.showMe(requireContext())
+   /*     BaseApplication.showMe(requireContext())
         val cardNumber: String = Objects.requireNonNull(binding.etCardNumber.text.toString()).toString()
         val cvvNumber: String = Objects.requireNonNull(binding.etCVVNumber.text.toString()).toString()
         val name: String = binding.etName.text.toString()
@@ -958,7 +960,50 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 Log.d("@@@Token:-", "data$id")
                 saveCardApi(id)
             }
+        })*/
+
+        BaseApplication.showMe(requireContext())
+        val cardNumber: String = Objects.requireNonNull(binding.etCardNumber.text.toString()).toString()
+        val cvvNumber: String = Objects.requireNonNull(binding.etCVVNumber.text.toString()).toString()
+        val name: String = binding.etName.text.toString()
+
+        val cardParams = CardParams(cardNumber, Integer.valueOf(month), Integer.valueOf(year), cvvNumber, name)
+
+        val params = PaymentMethodCreateParams.create(
+            PaymentMethodCreateParams.Card.Builder()
+                .setNumber(cardNumber)
+                .setExpiryMonth(month)
+                .setExpiryYear(year)
+                .setCvc(cvvNumber)
+                .build()
+        )
+
+        stripe?.createCardToken(cardParams,null,null, object : ApiResultCallback<Token> {
+            override fun onSuccess(token: Token) {
+                try {
+                    val paymentMethod = stripe!!.createPaymentMethodSynchronous(params)
+                    if (paymentMethod != null) {
+                        val id = paymentMethod.id
+                        Log.d("@@@Token:-", "data$id")
+                        if (id != null) {
+                            saveCardApi(id)
+                        }
+                    } else {
+                        // Handle null paymentMethod
+                    }
+                } catch (e: StripeException) {
+                    Log.e("Stripe", "Error creating PaymentMethod: ${e.localizedMessage}")
+                }
+            }
+
+            override fun onError(e: Exception) {
+                BaseApplication.dismissMe()
+                Log.d("PaymentActivity1", "data$e")
+                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+            }
         })
+
+
     }
 
     private fun saveCardApi(id: String) {

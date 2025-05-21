@@ -39,10 +39,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Nutrition Goal"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -52,11 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="General"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_13ssp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -71,11 +70,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_toEndOf="@+id/imagePersonIconLastName"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Macro Type"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_13ssp"/>
 
                 <ImageView
                     android:id="@+id/imagePersonIconLastName"
@@ -117,11 +115,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Nutrition Goals"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_13sdp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -134,11 +131,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_toEndOf="@+id/imageCalories"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Calories"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:id="@+id/imageCalories"
@@ -180,11 +176,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_toEndOf="@+id/imageFat"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Fat"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp"/>
 
                 <ImageView
                     android:id="@+id/imageFat"
@@ -225,11 +220,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_toEndOf="@+id/imageCarbs"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Carbs"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp"/>
 
                 <ImageView
                     android:id="@+id/imageCarbs"
@@ -270,11 +264,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_toEndOf="@+id/imageProtien"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Protein"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp"/>
 
                 <ImageView
                     android:id="@+id/imageProtien"
@@ -324,8 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_2sdp"
-
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Update"
                     android:textAlignment="center"
                     android:textColor="@color/white" />

@@ -137,6 +137,14 @@ class WalletFragment : Fragment() {
             }
         }
 
+        binding.imageInfo.setOnClickListener{
+            binding.cardViewInfo.visibility = if (binding.cardViewInfo.visibility == View.VISIBLE) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
+
     }
 
 }

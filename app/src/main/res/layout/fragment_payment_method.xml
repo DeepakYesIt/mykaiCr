@@ -1517,9 +1517,7 @@
 
                                 </LinearLayout>
 
-
                             </RelativeLayout>
-
 
                             <TextView
                                 android:id="@+id/textAddCardDebitCard"
