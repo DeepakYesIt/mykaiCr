@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivitySplashBinding
     private lateinit var sessionManagement: SessionManagement
     private lateinit var viewModel: SubscriptionPlanViewModel

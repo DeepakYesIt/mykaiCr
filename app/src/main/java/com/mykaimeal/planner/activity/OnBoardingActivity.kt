@@ -49,7 +49,7 @@ class OnBoardingActivity : AppCompatActivity() {
             if (binding.viewpager.currentItem == 0) {
                 binding.viewpager.currentItem =+1
             } else {
-                
+
                 binding.viewpager.currentItem =binding.viewpager.currentItem+1
             }
         }
