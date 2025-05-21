@@ -102,6 +102,7 @@
                         android:textSize="@dimen/_10ssp"
                         android:visibility="gone" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/relPriceQuantitys"
                     android:layout_width="wrap_content"
@@ -109,14 +110,13 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/_10sdp">
+                    android:layout_marginEnd="@dimen/_20sdp">
 
                     <TextView
                         android:id="@+id/tvFoodPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginEnd="@dimen/_38sdp"
                         android:singleLine="true"
                         android:text=""
                         android:textColor="#06C169"

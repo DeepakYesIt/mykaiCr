@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/sarabun_semibold"
                     android:text="Addresses"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_17sdp" />
@@ -55,11 +55,12 @@
                         android:ellipsize="end"
                         android:gravity="center|start"
                         android:hint="@string/enter_address"
+                        android:fontFamily="@font/poppins"
                         android:inputType="textMultiLine"
                         android:paddingVertical="@dimen/_10sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:singleLine="true"
-                        android:textColor="#58585A"
+                        android:textColor="#8B8B8B"
                         android:textSize="@dimen/_13sdp"
                         tools:ignore="RtlSymmetry" />
 
@@ -98,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:text="Set home"
-                            android:fontFamily="@font/montserrat"
+                            android:fontFamily="@font/montserrat_medium"
                             android:textColor="#3C4541"
                             android:textSize="@dimen/_13sdp" />
 
@@ -128,7 +129,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:text="Set work"
-                            android:fontFamily="@font/montserrat"
+                            android:fontFamily="@font/montserrat_medium"
                             android:textColor="#3C4541"
                             android:textSize="@dimen/_13sdp" />
 
@@ -146,7 +147,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Explore Nearby"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
                 <RelativeLayout
                     android:id="@+id/relUseCurrentLocation"
@@ -187,7 +188,7 @@
                             android:id="@+id/tvStatusBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:paddingHorizontal="@dimen/_20sdp"
                             android:paddingVertical="@dimen/_4sdp"
                             android:text="Turn on"
@@ -248,7 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingVertical="@dimen/_10sdp"
                         android:text="Done"
                         android:textColor="@color/white"

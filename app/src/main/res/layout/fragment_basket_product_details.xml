@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@+id/tvProductsprices"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp" />
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvProductName"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="View Details"
                 android:textColor="#06C169"
                 android:textSize="@dimen/_12sdp" />
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text=""
                 android:textColor="#06C169"
                 android:textSize="@dimen/_14sdp" />
@@ -129,6 +129,9 @@
                 android:layout_toEndOf="@+id/imgIngSearch"
                 android:background="@null"
                 android:hint="Search here"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/light_black"
+                android:textColorLink="@color/grey"
                 android:paddingVertical="@dimen/_8sdp"
                 android:singleLine="true"
                 android:textSize="@dimen/_12sdp" />
@@ -158,6 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="No Products found"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp" />
 

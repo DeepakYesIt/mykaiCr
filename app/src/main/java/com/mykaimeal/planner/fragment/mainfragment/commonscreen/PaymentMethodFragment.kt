@@ -1283,7 +1283,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
 
                 if (dataLocal.size > 0 || bankDataLocal.size > 0) {
 
-
                     if (bankDataLocal.size > 0) {
                         adapterCardBank.upDateList(bankDataLocal, "bank")
                         binding.rcvBankAccounts.adapter = adapterCardBank

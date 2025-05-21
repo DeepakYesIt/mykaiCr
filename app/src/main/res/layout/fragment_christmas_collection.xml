@@ -80,9 +80,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@+id/imageLogout"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/sarabun"
                     android:text="Edit Cookbook"
-                    android:textColor="@color/black"
+                    android:textColor="#0D0D0D"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
@@ -105,9 +105,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@+id/imageShare"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/sarabun"
                     android:text="Share Cookbook"
-                    android:textColor="@color/black"
+                    android:textColor="#0D0D0D"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
@@ -130,9 +130,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@+id/imageDeleteCook"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/sarabun"
                     android:text="Delete Cookbook"
-                    android:textColor="@color/black"
+                    android:textColor="#0D0D0D"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
@@ -182,11 +182,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_toEndOf="@+id/imageRecipes"
+            android:fontFamily="@font/poppins_medium"
             android:paddingVertical="@dimen/_10sdp"
             android:text="Add Recipe"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_marginStart="@dimen/_5sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp" />
 
@@ -202,6 +202,7 @@
         android:layout_centerInParent="true"
         android:singleLine="true"
         android:textSize="@dimen/_15sdp" />
+
    <RelativeLayout
         android:id="@+id/btnLock"
         android:layout_width="match_parent"

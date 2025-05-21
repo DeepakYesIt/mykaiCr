@@ -71,7 +71,7 @@
                 android:layout_below="@+id/relMainImages"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Great Value, Large White Eggs, 12 Count"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
@@ -117,7 +117,7 @@
                 android:layout_below="@+id/relPrices"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/montserrat_medium"
                 android:text=""
                 android:textColor="@color/grey2"
                 android:textSize="@dimen/_12sdp" />
@@ -143,6 +143,7 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_toEndOf="@+id/imageMinusIcon"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_medium"
                     android:text="1"
                     android:textColor="@color/black" />
 
@@ -162,7 +163,7 @@
                 android:layout_below="@+id/rlServing"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Remove from basket"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12sdp" />
@@ -330,7 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_65sdp"
                     android:paddingVertical="@dimen/_12sdp"
                     android:text="Update"

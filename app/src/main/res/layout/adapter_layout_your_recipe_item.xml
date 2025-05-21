@@ -53,11 +53,10 @@
             android:layout_below="@+id/relImageFood"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_8sdp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/montserrat_medium"
             android:text="Sandwich coconut flour zuchini bread"
             android:textColor="#0A2533"
-            android:textSize="@dimen/_11ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_11ssp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/poppins"
                 android:text="Serves 1"
                 android:textColor="#3C4541"
                 android:textSize="@dimen/_11sdp" />
@@ -94,6 +93,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
 </androidx.cardview.widget.CardView>

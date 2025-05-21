@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imageHome"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Set Home"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
@@ -126,7 +126,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_toStartOf="@+id/imgForward"
                     android:layout_toEndOf="@+id/imageHome"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text=""
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_11sdp" />
@@ -174,9 +174,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imageMeet"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Meet at my door"
-                    android:textColor="@color/black"
+                    android:textColor="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
 
                 <TextView
@@ -186,7 +186,7 @@
                     android:layout_below="@+id/tvSetDoorStep"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imageMeet"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text="Add delivery instructions"
                     android:textColor="@color/light_green"
                     android:textSize="@dimen/_11sdp" />
@@ -233,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imageCall"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Add number"
                     android:textColor="@color/light_green"
                     android:textSize="@dimen/_13sdp" />
@@ -279,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/imagesTimer"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="Delivery time"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_13sdp" />
@@ -290,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text=""
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_11sdp" />
@@ -312,7 +312,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Standard"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13sdp" />
@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvStandard"
                     android:layout_marginStart="@dimen/_7sdp"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text=""
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/_11sdp" />
@@ -399,7 +399,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="Welmart"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_13sdp" />
@@ -409,8 +409,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvSuperMarketName"
+                        android:fontFamily="@font/poppins_medium"
                         android:text=""
-                        android:textColor="#ADADAD"
+                        android:textColor="#999999"
                         android:textSize="@dimen/_13sdp" />
 
                     <ImageView
@@ -431,7 +432,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relSuperMarketsItems"
-                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:visibility="gone">
 
@@ -464,7 +465,7 @@
                         android:id="@+id/textRecipe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="Subtotal"
                         android:textColor="#4A4A4A" />
 
@@ -491,7 +492,7 @@
                         android:id="@+id/textTotalProduct"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="Tax"
                         android:textColor="#4A4A4A" />
 
@@ -518,14 +519,16 @@
                         android:id="@+id/textTax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="Fee"
                         android:textColor="#4A4A4A" />
 
                     <ImageView
+                        android:id="@+id/icInfoIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textTax"
                         android:src="@drawable/ic_info_icon" />
 
@@ -552,7 +555,7 @@
                         android:id="@+id/textServices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="Processing"
                         android:textColor="#4A4A4A" />
 
@@ -579,7 +582,7 @@
                         android:id="@+id/textDelivery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/poppins"
                         android:text="Delivery"
                         android:textColor="#4A4A4A" />
 
@@ -606,7 +609,7 @@
                         android:id="@+id/textTotalAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Total"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
@@ -616,7 +619,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="@dimen/_20sdp"
                         android:text="$00"
                         android:textColor="@color/black"
@@ -650,7 +653,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_12sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/montserrat_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Payment Method"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
@@ -696,7 +699,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/montserrat_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Debit/Credit Card"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
@@ -708,7 +711,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Add card"
                             android:textColor="@color/light_green"
                             android:textSize="@dimen/_13sdp" />
@@ -864,7 +867,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/montserrat_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Pay Via Wallet"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13sdp" />

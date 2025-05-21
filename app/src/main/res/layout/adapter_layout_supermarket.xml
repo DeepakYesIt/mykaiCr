@@ -53,8 +53,7 @@
             android:maxLines="2"
             android:text="Tesco"
             android:textColor="#0A2533"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_9sdp"/>
 
         <TextView
             android:id="@+id/tvSuperMarketRupees"
@@ -62,14 +61,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvSuperMarketItems"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_medium"
             android:maxWidth="@dimen/_40sdp"
             android:gravity="center"
             android:singleLine="true"
             android:text=""
             android:textColor="#000000"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_9sdp"/>
+
         <TextView
             android:id="@+id/tvMiles"
             android:layout_width="wrap_content"

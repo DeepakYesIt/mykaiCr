@@ -6,6 +6,7 @@
     app:cardCornerRadius="@dimen/_10sdp"
     android:layout_margin="@dimen/_5sdp"
     app:cardElevation="@dimen/_3sdp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,8 +50,9 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text=""
+                     android:textSize="@dimen/_12sdp"
                      android:textColor="@color/black"
-                     android:fontFamily="@font/poppins_bold"/>
+                     android:fontFamily="@font/poppins_semibold"/>
 
                  <TextView
                      android:id="@+id/tvTitleDesc"
@@ -59,7 +61,7 @@
                      android:text=""
                      android:layout_below="@+id/tvTitleName"
                      android:textColor="#999999"
-                     android:fontFamily="@font/poppins"/>
+                     android:fontFamily="@font/poppins_medium"/>
 
              </RelativeLayout>
              <ImageView

@@ -22,16 +22,17 @@
             android:padding="@dimen/_4sdp"
             android:src="@drawable/back_icon"
             app:tint="@color/black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="My Wallet"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_15sdp"/>
+
     </RelativeLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -65,7 +66,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_12sdp"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textSize="@dimen/_13sdp"
                         android:text="Select payment method"
                         android:textColor="@color/black" />
 
@@ -85,12 +87,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/selected_green_toogle_bg"
-                            android:fontFamily="@font/poppins"
+                            android:fontFamily="@font/poppins_medium"
                             android:paddingVertical="@dimen/_6sdp"
                             android:text="Bank Account"
                             android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:textColor="@color/white"/>
 
 
                         <TextView
@@ -98,7 +99,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/poppins"
+                            android:fontFamily="@font/poppins_medium"
                             android:paddingVertical="@dimen/_6sdp"
                             android:text="Debit Card"
                             android:textAlignment="center"
@@ -129,10 +130,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:fontFamily="@font/montserrat_medium"
+                                android:textSize="@dimen/_12sdp"
+                                android:fontFamily="@font/montserrat_semibold"
                                 android:text="Bank Account"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                                android:textColor="@color/black"/>
 
 
                             <RelativeLayout
@@ -149,6 +150,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imagePersonIcon"
                                     android:text="First Name"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -171,8 +173,8 @@
                                     android:layout_toEndOf="@+id/imagePersonIcon"
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter first name"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
-
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
                                     android:textColor="#8B8B8B"
@@ -195,6 +197,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imagePersonIconLastName"
                                     android:text="Last Name"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -217,6 +220,7 @@
                                     android:layout_toEndOf="@+id/imagePersonIconLastName"
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter last name"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -242,6 +246,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageEmailIcon"
                                     android:text="Email"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -264,6 +269,7 @@
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter email"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
                                     android:textColor="#8B8B8B"
@@ -288,6 +294,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imagePhoneNumberIcon"
                                     android:text="Phone Number"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -311,6 +318,7 @@
                                     android:hint="Enter phone"
                                     android:singleLine="true"
                                     android:inputType="number"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -334,6 +342,7 @@
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageDOBIcon"
+                                    android:fontFamily="@font/poppins"
                                     android:text="D.O.B"
                                     android:textColor="@color/black" />
 
@@ -357,6 +366,7 @@
                                     android:layout_toEndOf="@+id/imageDOBIcon"
                                     android:background="@drawable/edittext_bg"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_8sdp"
                                     android:text="MM/DD/YYYY"
@@ -382,6 +392,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageIDTypeIcon"
                                     android:text="ID Type"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -407,8 +418,8 @@
                                     android:gravity="center|start"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:text="Select ID type"
-                                    android:textColor="#3C4541"
-                                    android:textColorHint="#3C4541"
+                                    android:textColor="#8B8B8B"
+                                    android:textColorHint="#8B8B8B"
                                     android:textSize="@dimen/_10ssp"
                                     app:spinner_arrow_gravity="end"
                                     app:spinner_arrow_padding="5dp"
@@ -416,6 +427,7 @@
                                     app:spinner_arrow_tint="#3A4B4C"
                                     app:spinner_divider_show="false"
                                     app:spinner_item_height="34dp"
+                                    app:fontFamily="@font/poppins"
                                     app:spinner_popup_animation="fade"
                                     app:spinner_popup_background="@color/white"
                                     app:spinner_popup_elevation="14dp"
@@ -435,6 +447,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
+                                    android:fontFamily="@font/poppins"
                                     android:layout_toEndOf="@+id/imagePersonalIdentificationNumberIcon"
                                     android:text="Personal Identification Number"
                                     android:textColor="@color/black" />
@@ -458,6 +471,7 @@
                                     android:singleLine="true"
                                     android:layout_toEndOf="@+id/imagePersonalIdentificationNumberIcon"
                                     android:background="@drawable/edittext_bg"
+                                    android:fontFamily="@font/poppins"
                                     android:hint="Enter Identification Number"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
@@ -482,6 +496,7 @@
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageSSNIcon"
+                                    android:fontFamily="@font/poppins"
                                     android:text="SSN (Last 4 Number)"
                                     android:textColor="@color/black" />
 
@@ -505,6 +520,7 @@
                                     android:layout_toEndOf="@+id/imageSSNIcon"
                                     android:background="@drawable/edittext_bg"
                                     android:hint="SSN"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLength="4"
                                     android:inputType="number"
                                     android:maxLines="1"
@@ -531,6 +547,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageAddressIcon"
                                     android:text="Address"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -552,6 +569,7 @@
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_toEndOf="@+id/imageAddressIcon"
                                     android:background="@drawable/edittext_bg"
+                                    android:fontFamily="@font/poppins"
                                     android:hint="Enter address"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
@@ -577,6 +595,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageCountryIcon"
                                     android:text="Country"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -604,10 +623,11 @@
                                     android:text="Select Country"
                                     android:gravity="center|start"
                                     android:paddingHorizontal="@dimen/_10sdp"
-                                    android:textColor="#3C4541"
-                                    android:textColorHint="#3C4541"
+                                    android:textColor="#8B8B8B"
+                                    android:textColorHint="#8B8B8B"
                                     android:textSize="@dimen/_10ssp"
                                     app:spinner_arrow_gravity="end"
+                                    app:fontFamily="@font/poppins"
                                     app:spinner_arrow_padding="5dp"
                                     app:spinner_arrow_show="true"
                                     app:spinner_arrow_tint="#3A4B4C"
@@ -634,6 +654,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageStateIcon"
                                     android:text="State"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -661,12 +682,13 @@
                                     app:spinner_popup_height="@dimen/_200sdp"
                                     android:gravity="center|start"
                                     android:paddingHorizontal="@dimen/_10sdp"
-                                    android:textColor="#3C4541"
-                                    android:textColorHint="#3C4541"
+                                    android:textColor="#8B8B8B"
+                                    android:textColorHint="#8B8B8B"
                                     android:textSize="@dimen/_10ssp"
                                     app:spinner_arrow_gravity="end"
                                     app:spinner_arrow_padding="5dp"
                                     app:spinner_arrow_show="true"
+                                    app:fontFamily="@font/poppins"
                                     app:spinner_arrow_tint="#3A4B4C"
                                     app:spinner_divider_show="false"
                                     app:spinner_item_height="34dp"
@@ -692,6 +714,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageCityIcon"
                                     android:text="City"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -719,10 +742,11 @@
                                     app:spinner_popup_height="@dimen/_200sdp"
                                     android:gravity="center|start"
                                     android:paddingHorizontal="@dimen/_10sdp"
-                                    android:textColor="#3C4541"
-                                    android:textColorHint="#3C4541"
+                                    android:textColor="#8B8B8B"
+                                    android:textColorHint="#8B8B8B"
                                     android:textSize="@dimen/_10ssp"
                                     app:spinner_arrow_gravity="end"
+                                    app:fontFamily="@font/poppins"
                                     app:spinner_arrow_padding="5dp"
                                     app:spinner_arrow_show="true"
                                     app:spinner_arrow_tint="#3A4B4C"
@@ -750,6 +774,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imagePostalCodeIcon"
                                     android:text="Postal Code"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -773,6 +798,7 @@
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Postal Code"
                                     android:inputType="number"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -797,6 +823,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageBankNameIcon"
                                     android:text="Bank Name"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -819,6 +846,7 @@
                                     android:layout_toEndOf="@+id/imageBankNameIcon"
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter Bank Name"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -843,6 +871,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageAccountHolderNameIcon"
                                     android:text="Account Holder Name"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -866,6 +895,7 @@
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter Account Holder Name"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
                                     android:textColor="#8B8B8B"
@@ -887,6 +917,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
+                                    android:fontFamily="@font/poppins"
                                     android:layout_toEndOf="@+id/imageBankAccountNumberIcon"
                                     android:text="Bank Account Number"
                                     android:textColor="@color/black" />
@@ -912,6 +943,7 @@
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Enter Account Number"
                                     android:inputType="number"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -936,6 +968,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageConfirmAccountNumberIcon"
                                     android:text="Confirm Account Number"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -958,6 +991,7 @@
                                     android:layout_toEndOf="@+id/imageConfirmAccountNumberIcon"
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Confirm Account Number"
+                                    android:fontFamily="@font/poppins"
                                     android:inputType="number"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
@@ -983,6 +1017,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageRoutingNumberIcon"
                                     android:text="Routing Number"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -1007,6 +1042,7 @@
                                     android:hint="Enter Routing Number"
                                     android:inputType="number"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
                                     android:textColor="#8B8B8B"
@@ -1030,6 +1066,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageSelectBankProofTypeIcon"
                                     android:text="SelectBankProofType"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -1056,8 +1093,8 @@
                                     android:hint="Select an Option"
                                     android:gravity="center|start"
                                     android:paddingHorizontal="@dimen/_10sdp"
-                                    android:textColor="#3C4541"
-                                    android:textColorHint="#3C4541"
+                                    android:textColor="#8B8B8B"
+                                    android:textColorHint="#8B8B8B"
                                     android:textSize="@dimen/_10ssp"
                                     app:spinner_arrow_gravity="end"
                                     app:spinner_arrow_padding="5dp"
@@ -1086,6 +1123,7 @@
                                     android:layout_marginStart="@dimen/_5sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:text="Bank Proof"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
 
@@ -1107,7 +1145,6 @@
                                         android:layout_marginStart="@dimen/_10sdp"
                                         android:fontFamily="@font/poppins"
                                         android:singleLine="true"
-
                                         android:text="@string/choose_a_file"
                                         android:textColor="#8B8B8B" />
 
@@ -1146,6 +1183,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/_5sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
+                                    android:fontFamily="@font/poppins"
                                     android:text="Verification Document (front &amp; back)"
                                     android:textColor="@color/black" />
 
@@ -1247,7 +1285,6 @@
                                 android:layout_marginHorizontal="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_marginBottom="@dimen/_20sdp"
-
                                 android:background="@drawable/button_bg"
                                 android:fontFamily="@font/poppins"
                                 android:paddingVertical="@dimen/_7sdp"
@@ -1281,10 +1318,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:fontFamily="@font/montserrat_medium"
+                                android:fontFamily="@font/montserrat_semibold"
                                 android:text="Debit Card"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                                android:textColor="@color/black" />
 
 
                             <RelativeLayout
@@ -1301,6 +1337,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageIcon"
                                     android:text="Name"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -1323,6 +1360,7 @@
                                     android:background="@drawable/edittext_bg"
                                     android:hint="Card Holder Name"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_7sdp"
                                     android:singleLine="true"
@@ -1346,6 +1384,7 @@
                                     android:layout_marginStart="@dimen/_6sdp"
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageCardNumber"
+                                    android:fontFamily="@font/poppins"
                                     android:text="Card Number"
                                     android:textColor="@color/black" />
 
@@ -1371,6 +1410,7 @@
                                     android:inputType="number"
                                     android:maxLength="16"
                                     android:maxLines="1"
+                                    android:fontFamily="@font/poppins"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
                                     android:singleLine="true"
@@ -1394,6 +1434,7 @@
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_toEndOf="@+id/imageCVVNumber"
                                     android:text="CVV Number"
+                                    android:fontFamily="@font/poppins"
                                     android:textColor="@color/black" />
 
                                 <ImageView
@@ -1417,6 +1458,7 @@
                                     android:hint="Enter CVV"
                                     android:inputType="numberPassword"
                                     android:maxLength="4"
+                                    android:fontFamily="@font/poppins"
                                     android:maxLines="1"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_9sdp"
@@ -1451,6 +1493,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="Month"
+                                        android:fontFamily="@font/poppins"
                                         android:textColor="@color/black" />
 
                                     <TextView
@@ -1459,6 +1502,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="Year"
+                                        android:fontFamily="@font/poppins"
                                         android:textColor="@color/black" />
                                 </LinearLayout>
 
@@ -1492,6 +1536,7 @@
                                         android:drawableEnd="@drawable/ic_drop_down"
                                         android:maxLines="1"
                                         android:paddingHorizontal="@dimen/_10sdp"
+                                        android:fontFamily="@font/poppins"
                                         android:paddingVertical="@dimen/_9sdp"
                                         android:text="Month"
                                         android:textColor="#8B8B8B"
@@ -1508,6 +1553,7 @@
                                         android:background="@drawable/edittext_bg"
                                         android:drawableEnd="@drawable/ic_drop_down"
                                         android:maxLines="1"
+                                        android:fontFamily="@font/poppins"
                                         android:paddingHorizontal="@dimen/_10sdp"
                                         android:paddingVertical="@dimen/_9sdp"
                                         android:text="Year"
@@ -1526,7 +1572,7 @@
                                 android:layout_marginHorizontal="@dimen/_5sdp"
                                 android:layout_marginBottom="@dimen/_20sdp"
                                 android:background="@drawable/button_bg"
-                                android:fontFamily="@font/poppins"
+                                android:fontFamily="@font/poppins_medium"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:paddingVertical="@dimen/_10sdp"
                                 android:text="Add Card"

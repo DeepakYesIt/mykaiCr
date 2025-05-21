@@ -16,12 +16,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_semibold"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/select_supermarkets_to_compare"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvBottomDialog"
             android:layout_width="match_parent"

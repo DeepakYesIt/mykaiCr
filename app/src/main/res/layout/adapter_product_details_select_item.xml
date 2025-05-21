@@ -43,10 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ketchup"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/montserrat_medium"
             android:textColor="@color/black"
             android:maxLines="3"
-            android:textStyle="bold"
             android:textSize="@dimen/_12sdp" />
 
         <TextView
@@ -54,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="View Details"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat_medium"
             android:textColor="@color/light_green"
             android:paddingTop="@dimen/_4sdp" />
 
@@ -71,12 +71,13 @@
 
         <TextView
             android:id="@+id/textPrice"
-            android:layout_width="@dimen/_40sdp"
+            android:layout_width="@dimen/_55sdp"
             android:layout_height="wrap_content"
-            android:text="$00"
+            android:text=""
             android:textColor="#06C169"
             android:textAlignment="center"
             android:textSize="@dimen/_11sdp"
+            android:fontFamily="@font/montserrat_semibold"
             android:layout_centerHorizontal="true"
             android:padding="@dimen/_2sdp" />
 
@@ -92,12 +93,16 @@
             android:background="#E7FFF4"
             android:padding="@dimen/_3sdp" />-->
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textPrice"
+            android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/imageAddIcon"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:layout_below="@+id/textPrice"
             android:layout_toEndOf="@+id/textCount"
             android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/ic_add_square_icon" />
@@ -108,8 +113,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@+id/textPrice"
             android:layout_toEndOf="@+id/imageMinusIcon"
+            android:fontFamily="@font/montserrat_medium"
             android:text="1"
             android:textColor="@color/black" />
 
@@ -119,8 +124,9 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@+id/textPrice"
             android:src="@drawable/ic_minus_square_icon"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </LinearLayout>

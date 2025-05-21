@@ -30,13 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/_10sdp"
-
-            android:fontFamily="@font/montserrat_medium"
+            android:fontFamily="@font/montserrat_semibold"
             android:text="Basket"
             android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="bold" />
-
+            android:textSize="@dimen/_14sdp"/>
 
         <TextView
             android:id="@+id/textShoppingList"
@@ -84,11 +81,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="Grocery stores"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_12sdp"/>
 
                         <TextView
                             android:id="@+id/textSeeAll1"
@@ -96,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="@dimen/_15sdp"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="See All"
                             android:textColor="#06C169"
                             android:textSize="@dimen/_12ssp"
@@ -131,11 +127,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="Your Recipes"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_12sdp"/>
 
                         <TextView
                             android:id="@+id/textSeeAll2"
@@ -143,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="@dimen/_15sdp"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="See All"
                             android:textColor="#06C169"
                             android:textSize="@dimen/_12ssp"
@@ -179,11 +174,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:text="Ingredients"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_12sdp"/>
 
                         <TextView
                             android:visibility="gone"
@@ -225,11 +219,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/montserrat_semibold"
                         android:text="Billing details"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -251,7 +244,7 @@
                             android:id="@+id/textRecipe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:paddingHorizontal="@dimen/_20sdp"
                             android:text="Recipes"
                             android:textColor="#4A4A4A" />
@@ -261,7 +254,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:paddingHorizontal="@dimen/_20sdp"
                             android:text=""
                             android:textColor="#4A4A4A" />
@@ -279,7 +272,7 @@
                             android:id="@+id/textTotalProduct"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:paddingHorizontal="@dimen/_20sdp"
                             android:text="Net Total"
                             android:textColor="#3C4541" />
@@ -289,7 +282,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/montserrat_semibold"
                             android:paddingHorizontal="@dimen/_20sdp"
                             android:text=""
                             android:textColor="#3C4541" />
@@ -423,11 +416,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relBillingDetailAmount"
                     android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginVertical="@dimen/_20sdp"
                     android:background="@drawable/green_outline_border_bg"
                     android:fontFamily="@font/montserrat_bold"
-                    android:paddingVertical="@dimen/_7sdp"
+                    android:paddingVertical="@dimen/_10sdp"
                     android:text="Confirm Order"
                     android:textAlignment="center"
                     android:textColor="@color/light_green" />
