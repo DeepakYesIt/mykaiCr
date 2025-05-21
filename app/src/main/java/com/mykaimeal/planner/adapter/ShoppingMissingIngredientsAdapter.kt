@@ -30,7 +30,6 @@ class ShoppingMissingIngredientsAdapter(private var foodList: MutableList<Missin
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val binding = AdapterIngredientsRecipeBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-
         return FoodViewHolder(binding)
     }
 

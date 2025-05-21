@@ -32,7 +32,7 @@
                 android:layout_below="@+id/imageRemoveDay"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Remove"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17sdp" />
@@ -46,7 +46,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/do_you_really_want_to_remove_this_cookbook"
-                android:textColor="@color/light_black"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp" />
 
 
@@ -68,6 +68,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/outline_green_border_bg"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/light_green"
                     android:padding="@dimen/_10sdp"
                     android:text="Cancel" />
 
@@ -78,6 +80,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_25sdp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
                     android:background="@drawable/green_fill_corner_bg"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"

@@ -37,7 +37,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Home"
-                android:textColor="@color/black"
+                android:textColor="@color/light_black"
                 android:textSize="@dimen/_12sdp" />
 
             <ImageView

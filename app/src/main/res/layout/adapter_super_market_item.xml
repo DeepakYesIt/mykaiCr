@@ -45,12 +45,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/relSuperMarkets"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/montserrat_semibold"
             android:singleLine="true"
             android:text=""
             android:textColor="#0A2533"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_9ssp"/>
 
         <TextView
             android:id="@+id/tvSuperMarketRupees"
@@ -58,14 +57,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvSuperMarketItems"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/poppins_medium"
             android:maxWidth="@dimen/_40sdp"
             android:gravity="center"
             android:singleLine="true"
             android:text="$0*"
-            android:textColor="#0A2533"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold" />
+            android:textColor="#000000"
+            android:textSize="@dimen/_9ssp" />
 
         <TextView
             android:id="@+id/tvMiles"
@@ -80,8 +78,7 @@
             android:drawableStart="@drawable/basket_location"
             android:text="0 miles"
             android:textColor="#3C4541"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_9ssp" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

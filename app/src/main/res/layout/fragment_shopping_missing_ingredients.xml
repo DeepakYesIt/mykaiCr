@@ -39,11 +39,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Missing Ingredients"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_14sdp"/>
 
             </RelativeLayout>
 
@@ -87,7 +86,10 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_toEndOf="@+id/imgIngSearch"
                     android:background="@null"
+                    android:textColor="@color/light_black"
+                    android:textColorHint="@color/grey"
                     android:hint="Search here"
+                    android:fontFamily="@font/poppins"
                     android:paddingVertical="@dimen/_8sdp"
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp" />
@@ -99,10 +101,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="My Cooking Schedule"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relIngSearchBar" />
 
@@ -123,7 +125,7 @@
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/poppins"
                     android:text="@string/select_the_ingredients_that_are_missing_at_tesco"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <TextView
                     android:id="@+id/tvSelectAllBtn"
@@ -193,6 +195,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
                     android:background="@drawable/green_fill_corner_bg"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
@@ -207,6 +210,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
                     android:background="@drawable/outline_green_border_bg"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"

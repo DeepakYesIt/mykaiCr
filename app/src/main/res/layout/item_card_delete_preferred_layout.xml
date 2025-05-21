@@ -30,11 +30,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="center|start"
                     android:paddingStart="@dimen/_5sdp"
                     android:text="Set as preferred"
-                    android:textColor="@color/black"
+                    android:textColor="#333333"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>
@@ -50,11 +50,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="center|start"
                     android:paddingStart="@dimen/_5sdp"
                     android:text="Delete"
-                    android:textColor="@color/black"
+                    android:textColor="#333333"
                     android:textSize="@dimen/_13sdp" />
 
             </RelativeLayout>

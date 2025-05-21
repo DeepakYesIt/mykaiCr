@@ -38,8 +38,7 @@
                     android:textColor="#171D1B"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Stats"
-                    android:textSize="@dimen/_17sdp" />
-
+                    android:textSize="@dimen/_16sdp" />
 
             </RelativeLayout>
 

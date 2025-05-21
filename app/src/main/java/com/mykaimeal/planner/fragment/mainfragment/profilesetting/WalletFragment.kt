@@ -122,7 +122,6 @@ class WalletFragment : Fragment() {
 
     private fun setupUI() {
 
-
         binding.imgWallet.setOnClickListener {
             findNavController().navigateUp()
         }

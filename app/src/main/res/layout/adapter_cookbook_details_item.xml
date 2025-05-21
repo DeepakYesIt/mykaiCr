@@ -53,6 +53,7 @@
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_toEndOf="@+id/imgWatch"
                     android:text="0 min"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp" />
 
@@ -91,6 +92,8 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="Remove Recipe"
+                        android:textColor="#0D0D0D"
+                        android:fontFamily="@font/poppins"
                         android:textSize="@dimen/_10sdp"
                         android:layout_margin="@dimen/_5sdp"
                         app:drawableStartCompat="@drawable/remove_recipe_icon" />
@@ -102,7 +105,9 @@
                         android:layout_below="@+id/tvRemoveRecipe"
                         android:drawablePadding="@dimen/_5sdp"
                         android:layout_margin="@dimen/_5sdp"
+                        android:textColor="#0D0D0D"
                         android:text="Move Recipe"
+                        android:fontFamily="@font/poppins"
                         android:textSize="@dimen/_10sdp"
                         app:drawableStartCompat="@drawable/move_icon" />
 
@@ -115,7 +120,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_5sdp"
-
             android:layout_below="@+id/relBreakfast">
             <RelativeLayout
                 android:id="@+id/relNameReview"

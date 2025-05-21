@@ -21,19 +21,21 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:layout_marginEnd="@dimen/_10sdp"
-             android:layout_toLeftOf="@id/imageThreeDots"
+             android:layout_toStartOf="@id/imageThreeDots"
              android:orientation="vertical">
              <TextView
                  android:id="@+id/textName"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_marginStart="@dimen/_8sdp"
-                 android:fontFamily="@font/poppins_semibold"
+                 android:fontFamily="@font/poppins_medium"
                  android:singleLine="true"
+                 android:textSize="@dimen/_12sdp"
                  android:text="Card Number"
                  android:textColor="@color/black" />
 
@@ -58,10 +60,10 @@
             android:layout_alignParentEnd="true"
             android:padding="@dimen/_3sdp"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:layout_width="@dimen/_4sdp"
                 android:layout_height="@dimen/_12sdp"
-
                 android:src="@drawable/three_dot_icon" />
         </LinearLayout>
 

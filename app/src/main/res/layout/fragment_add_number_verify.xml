@@ -42,9 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Add number"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="#000000"
+                    android:textColor="#171D1B"
                     android:textSize="@dimen/_15sdp" />
             </RelativeLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layTitle"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="Phone number"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18sdp" />
@@ -128,7 +128,7 @@
                     android:layout_toStartOf="@+id/tvVerify"
                     android:layout_toEndOf="@+id/relPhoneNumber"
                     android:background="@null"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:gravity="center_vertical"
                     android:hint="Enter your phone number"
                     android:inputType="number"
@@ -150,9 +150,9 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:clickable="false"
                     android:enabled="false"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Verify"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/grey5"
                     android:textSize="@dimen/_14sdp" />
             </RelativeLayout>
 
@@ -173,8 +173,9 @@
                         android:id="@+id/textPleaseCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
+                        android:fontFamily="@font/montserrat_semibold"
                         android:text="Please check your"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp" />
 
                     <TextView
@@ -212,13 +213,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_centerHorizontal="true"
                         android:foregroundGravity="center"
                         android:textColor="@color/light_black"
                         app:length="6"
                         app:otp_box_background="@drawable/otp_edit"
                         app:otp_text_size="@dimen/_13sdp"
                         app:width="@dimen/_35sdp" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -233,6 +234,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
+                        android:textColor="@color/light_black"
                         android:text="Didn’t get a code ?"
                         android:textSize="@dimen/_13sdp" />
 
@@ -242,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_toEndOf="@+id/textDidNotCode"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Resend"
                         android:textColor="@color/light_green"
                         android:textSize="@dimen/_13sdp" />
@@ -254,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relDidNotResend"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/textResendVerification"
@@ -262,6 +264,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:text="Resend verification code in"
+                        android:textColor="@color/light_black"
                         android:textSize="@dimen/_13sdp" />
 
                     <TextView
@@ -269,7 +272,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/textResendVerification"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:text=" 01:59 sec"
                         android:textColor="@color/light_green"
                         android:textSize="@dimen/_13sdp" />
@@ -282,6 +285,7 @@
                     android:layout_below="@+id/relResendVerificationTimer"
                     android:text="The verification code is invalid. Please try again"
                     android:textColor="#FF3232"
+                    android:fontFamily="@font/poppins"
                     android:textSize="@dimen/_13sdp"
                     android:visibility="gone" />
             </RelativeLayout>
@@ -302,8 +306,10 @@
                     android:layout_centerInParent="true"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Update"
+                    android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
+
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

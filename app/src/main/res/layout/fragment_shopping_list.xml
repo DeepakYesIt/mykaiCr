@@ -39,12 +39,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Shopping List"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold" />
-
+                    android:textSize="@dimen/_14sdp" />
 
             </RelativeLayout>
 
@@ -59,12 +57,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Your Recipes"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
-
+                    android:textSize="@dimen/_13sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvYourRecipes"
@@ -88,11 +84,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="Ingredients"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_13sdp"/>
 
                 <TextView
                     android:id="@+id/textSeeAll3"
@@ -100,12 +95,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:text="See All"
                     android:visibility="gone"
                     android:textColor="#06C169"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvIngredients"
@@ -144,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:layout_toEndOf="@+id/imageAddPlan"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Add more"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -161,7 +155,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/gray_btn_unselect_background"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:paddingVertical="@dimen/_9sdp"
                 android:text="Save"
                 android:textAlignment="center"
