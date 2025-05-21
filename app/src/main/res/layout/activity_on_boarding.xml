@@ -116,7 +116,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_50sdp"
-                    android:paddingVertical="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_5sdp"
                     android:text="Next"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_5sdp"
                     android:text="Lets Get Started"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp" />
