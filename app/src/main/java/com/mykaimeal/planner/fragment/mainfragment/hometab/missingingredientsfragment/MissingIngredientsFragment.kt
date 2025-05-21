@@ -40,6 +40,7 @@ class MissingIngredientsFragment : Fragment(), OnItemSelectListener {
     private val availableIngredientList = mutableListOf<MissingIngredientModelData>()
     private var shcId:String?=""
     private var recipeUri:String?=""
+    private var mealType:String?=""
     private var foodIds = mutableListOf<String>()
     private var foodName = mutableListOf<String>()
     private var statusType = mutableListOf<String>()
@@ -60,6 +61,7 @@ class MissingIngredientsFragment : Fragment(), OnItemSelectListener {
 
         shcId = arguments?.getString("schId", "")?:""
         recipeUri = arguments?.getString("uri", "")?:""
+        mealType = arguments?.getString("mealType", "")?:""
 
         backButton()
 
@@ -292,7 +294,7 @@ class MissingIngredientsFragment : Fragment(), OnItemSelectListener {
             missingIngredientViewModel.addToCartUrlApi({
                 BaseApplication.dismissMe()
                 handleCartApiResponse(it)
-            }, foodIds, "1",foodName,statusType)
+            }, foodIds, "1",foodName,statusType,recipeUri.toString(),mealType.toString())
         }
     }
 

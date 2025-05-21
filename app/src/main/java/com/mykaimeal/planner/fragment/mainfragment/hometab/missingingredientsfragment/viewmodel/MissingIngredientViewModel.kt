@@ -14,9 +14,12 @@ class MissingIngredientViewModel @Inject constructor(private val repository: Mai
         repository.getMissingIngredientsApi ({ successCallback(it) },uri, schId)
     }
 
-    suspend fun addToCartUrlApi(successCallback: (response: NetworkResult<String>) -> Unit,foodIds: MutableList<String>?, schId:String?,
-                                foodName:MutableList<String>?,status:MutableList<String>?){
-        repository.addToCartUrlApi ({ successCallback(it) },foodIds,schId,foodName,status)
+    suspend fun addToCartUrlApi(successCallback: (response: NetworkResult<String>) -> Unit,foodIds: MutableList<String>?,
+                                schId:String?,
+                                foodName:MutableList<String>?,
+                                status:MutableList<String>?,
+                                recipeUri:String,mealType:String){
+        repository.addToCartUrlApi ({ successCallback(it) },foodIds,schId,foodName,status,recipeUri,mealType)
     }
 
 }

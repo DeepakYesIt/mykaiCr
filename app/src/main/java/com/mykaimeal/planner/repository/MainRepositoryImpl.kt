@@ -1485,10 +1485,11 @@ class MainRepositoryImpl @Inject constructor(private val api: ApiInterface) : Ma
         foodIds: MutableList<String>?,
         schId: String?,
         foodName: MutableList<String>?,
-        status: MutableList<String>?
+        status: MutableList<String>?,
+        recipeUri:String,mealType:String
     ) {
         try {
-            api.addToCartUrlApi(foodIds, schId, foodName, status).apply {
+            api.addToCartUrlApi(foodIds, schId, foodName, status,recipeUri,mealType).apply {
                 if (isSuccessful) {
                     body()?.let {
                         successCallback(NetworkResult.Success(it.toString()))

@@ -95,8 +95,33 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relLunch"
+                android:id="@+id/relBrunch"
                 android:layout_below="@+id/relBreakFast"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/gray_box_border_bg">
+                <TextView
+                    android:id="@+id/tvTeatime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_9sdp"
+                    android:singleLine="true"
+                    android:text="Brunch"
+                    android:textColor="@color/light_black"
+                    android:textColorHint="@color/light_black"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableEnd="@drawable/radio_unselect_icon"
+                    android:textSize="@dimen/_14sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relLunch"
+                android:layout_below="@+id/relBrunch"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/gray_box_border_bg">
 
@@ -120,39 +145,12 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/relDinner"
-                android:layout_below="@+id/relLunch"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/gray_box_border_bg">
-
-                <TextView
-                    android:id="@+id/tvDinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:paddingVertical="@dimen/_9sdp"
-                    android:singleLine="true"
-                    android:text="Dinner"
-                    android:textColor="@color/light_black"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:drawableEnd="@drawable/radio_unselect_icon"
-                    android:textColorHint="@color/light_black"
-                    android:textSize="@dimen/_14sdp" />
-
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/relSnacks"
-                android:layout_below="@+id/relDinner"
+                android:layout_below="@+id/relLunch"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/gray_box_border_bg">
 
@@ -180,12 +178,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relBrunch"
+                android:id="@+id/relDinner"
                 android:layout_below="@+id/relSnacks"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/gray_box_border_bg">
+
                 <TextView
-                    android:id="@+id/tvTeatime"
+                    android:id="@+id/tvDinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -194,20 +193,21 @@
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:paddingVertical="@dimen/_9sdp"
                     android:singleLine="true"
-                    android:text="Brunch"
+                    android:text="Dinner"
                     android:textColor="@color/light_black"
-                    android:textColorHint="@color/light_black"
                     android:drawablePadding="@dimen/_10sdp"
                     android:drawableEnd="@drawable/radio_unselect_icon"
+                    android:textColorHint="@color/light_black"
                     android:textSize="@dimen/_14sdp" />
-            </RelativeLayout>
 
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlDoneBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relBrunch"
+                android:layout_below="@+id/relDinner"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -226,7 +226,6 @@
                     android:textSize="@dimen/_12sdp" />
 
             </RelativeLayout>
-
 
         </RelativeLayout>
 

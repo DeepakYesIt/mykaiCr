@@ -64,7 +64,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
     val dataList = ArrayList<DataModel>()
     private var tvWeekRange: TextView? = null
     private var rcyChooseDaySch: RecyclerView? = null
-    private var selectAll: Boolean = true
+    private var selectAll: Boolean = false
     private lateinit var viewModel: RecipeDetailsViewModel
     private var uri: String = ""
     private var mealType: String = ""
@@ -253,9 +253,18 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients != null && viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients!!.size > 0) {
+            selectAll = !selectAll // Toggle the selectAll value
+            // Update the drawable based on the selectAll state
+            val drawableRes = if (selectAll) R.drawable.orange_checkbox_images else R.drawable.orange_uncheck_box_images
+            binding.tvSelectAllBtn.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableRes, 0)
+            // Update the status of each ingredient dynamically
+            viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients?.forEach { ingredient ->
+                ingredient.status = selectAll
+            }
             ingredientsRecipeAdapter = IngredientsRecipeAdapter(viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients, requireActivity(), this)
             binding.rcyIngCookWareRecipe.adapter = ingredientsRecipeAdapter
             binding.layBottom.visibility = View.VISIBLE
+
         } else {
             binding.layBottom.visibility = View.GONE
         }
@@ -441,6 +450,8 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
                             // Create a JsonObject for the main JSON structure
                             val jsonObject = JsonObject()
                             jsonObject.addProperty("serving", binding.tvValues.text.toString())
+                            jsonObject.addProperty("uri", uri)
+                            jsonObject.addProperty("type", mealType)
                             // Add the ingredients array to the main JSON object
                             jsonObject.add("ingredients", jsonArray)
                             // Log the final JSON data

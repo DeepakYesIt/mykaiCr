@@ -108,7 +108,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:fontFamily="@font/montserrat_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text=""
                         android:maxLines="2"
                         android:textColor="#0A2533"

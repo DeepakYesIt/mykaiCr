@@ -76,6 +76,7 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.basketscreen.mod
 import com.mykaimeal.planner.fragment.mainfragment.commonscreen.basketscreen.model.Recipes
 import com.mykaimeal.planner.fragment.mainfragment.commonscreen.basketscreen.model.Store
 import com.mykaimeal.planner.fragment.mainfragment.commonscreen.basketscreen.viewmodel.BasketScreenViewModel
+import com.mykaimeal.planner.fragment.mainfragment.commonscreen.basketyourrecipe.viewmodel.BasketYourRecipeViewModel
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.walletviewmodel.apiresponse.SuccessResponseModel
 import com.mykaimeal.planner.listener.OnPlacesDetailsListener
 import com.mykaimeal.planner.messageclass.ErrorMessage
@@ -282,6 +283,7 @@ class BasketScreenFragment : Fragment(), OnItemLongClickListener, OnItemSelectLi
         }
 
         binding.textSeeAll2.setOnClickListener {
+            ViewModelProvider(requireActivity())[BasketYourRecipeViewModel::class.java].setBasketData(null)
             findNavController().navigate(R.id.basketYourRecipeFragment)
         }
 

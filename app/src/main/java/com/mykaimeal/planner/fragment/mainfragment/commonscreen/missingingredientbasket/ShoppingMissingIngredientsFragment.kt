@@ -57,8 +57,7 @@ class ShoppingMissingIngredientsFragment : Fragment(), OnItemSelectListener {
                 }
             })
 
-        missingIngBasketViewModel =
-            ViewModelProvider(requireActivity())[MissingIngredientBasketViewModel::class.java]
+        missingIngBasketViewModel = ViewModelProvider(requireActivity())[MissingIngredientBasketViewModel::class.java]
 
         initialize()
 
@@ -161,6 +160,7 @@ class ShoppingMissingIngredientsFragment : Fragment(), OnItemSelectListener {
         } else {
             BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
         }
+
     }
 
     private fun addToCartApi() {

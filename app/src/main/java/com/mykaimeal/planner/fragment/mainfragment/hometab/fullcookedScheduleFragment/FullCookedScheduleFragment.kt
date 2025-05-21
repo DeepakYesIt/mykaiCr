@@ -957,6 +957,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             val bundle = Bundle().apply {
                         putString("uri", item?.recipe?.uri)
                         putString("schId", item?.id.toString())
+                        val data= item?.recipe?.mealType?.get(0)?.split("/")
+                        val formattedFoodName = data?.get(0)!!.replaceFirstChar { it.uppercase() }
+                        putString("mealType", formattedFoodName)
                     }
             findNavController().navigate(R.id.missingIngredientsFragment, bundle)
         }

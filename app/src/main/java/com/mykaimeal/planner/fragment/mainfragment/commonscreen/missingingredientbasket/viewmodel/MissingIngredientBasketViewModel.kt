@@ -20,7 +20,7 @@ class MissingIngredientBasketViewModel @Inject constructor(private val repositor
         foodName: MutableList<String>?,
         status: MutableList<String>?
     ) {
-        repository.addToCartUrlApi({ successCallback(it) }, foodIds, schId, foodName, status)
+        repository.addToCartUrlApi({ successCallback(it) }, foodIds, schId, foodName, status,"","")
     }
 
 }
