@@ -971,6 +971,25 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             findNavController().navigate(R.id.recipeDetailsFragment, bundle)
         }
 
+        if (status.equals("heart",true)){
+            if ((activity as? MainActivity)?.Subscription_status==1){
+                if ((activity as? MainActivity)?.favorite!! <= 2){
+                    if (BaseApplication.isOnline(requireActivity())) {
+                        toggleIsLike(item,adapter, position,mealList, type)
+                    } else {
+                        BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+                    }
+                }else{
+                    (activity as? MainActivity)?.subscriptionAlertError(requireContext())
+                }
+            }else{
+                if (BaseApplication.isOnline(requireActivity())) {
+                    toggleIsLike(item,adapter, position,mealList, type)
+                } else {
+                    BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+                }
+            }
+        }
 
 //        if (status == "heart") {
 //            if ((activity as? MainActivity)?.Subscription_status==1){
@@ -1038,26 +1057,14 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 //        }
     }
 
-    private fun toggleIsLike(type: String, position: Int?) {
-        // Map the type to the corresponding list and adapter
-        val (mealList) = when (type) {
-            ErrorMessage.Breakfast -> recipesDateModel!!.Breakfast to ingredientBreakFastAdapter
-            ErrorMessage.Lunch -> recipesDateModel!!.Lunch to ingredientLunchAdapter
-            ErrorMessage.Dinner -> recipesDateModel?.Dinner to ingredientDinnerAdapter
-            ErrorMessage.Snacks -> recipesDateModel!!.Snacks to ingredientSnacksAdapter
-            ErrorMessage.Brunch -> recipesDateModel!!.Teatime to ingredientTeaTimeAdapter
-            else -> null to null
-        }
-
-        // Safely get the item and position
-        val item = mealList?.get(position!!)
+    private fun toggleIsLike(item: Breakfast?, adapter: IngredientsBreakFastAdapter?, position: Int?, mealList: MutableList<Breakfast>?, type: String?) {
         if (item != null) {
             if (item.recipe?.uri != null) {
                 val newLikeStatus = if (item.is_like == 0) "1" else "0"
                 if (newLikeStatus.equals("0", true)) {
-                    recipeLikeAndUnlikeData(item, type, mealList, position, newLikeStatus, "", null)
+                    recipeLikeAndUnlikeData(item,adapter, type, mealList, position, newLikeStatus, "", null)
                 } else {
-                    addFavTypeDialog(item, type, mealList, position, newLikeStatus)
+                    addFavTypeDialog(item, adapter,type, mealList, position, newLikeStatus)
                 }
             }
         }
@@ -1065,8 +1072,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
     private fun recipeLikeAndUnlikeData(
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         likeType: String,
         cookBookType: String,
@@ -1076,7 +1084,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         lifecycleScope.launch {
             fUllCookingScheduleViewModel.likeUnlikeRequest({
                 BaseApplication.dismissMe()
-                handleLikeAndUnlikeApiResponse(it, item, type, mealList, position, dialogAddRecipe)
+                handleLikeAndUnlikeApiResponse(it, item,adapter, type, mealList, position, dialogAddRecipe)
             }, item.recipe?.uri.toString(), likeType, cookBookType)
 
         }
@@ -1085,8 +1093,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     private fun handleLikeAndUnlikeApiResponse(
         result: NetworkResult<String>,
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         dialogAddRecipe: Dialog?
     ) {
@@ -1094,6 +1103,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             is NetworkResult.Success -> handleLikeAndUnlikeSuccessResponse(
                 result.data.toString(),
                 item,
+                adapter,
                 type,
                 mealList,
                 position,
@@ -1109,8 +1119,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     private fun handleLikeAndUnlikeSuccessResponse(
         data: String,
         item: Breakfast,
-        type: String,
-        mealList: MutableList<Breakfast>,
+        adapter: IngredientsBreakFastAdapter?,
+        type: String?,
+        mealList: MutableList<Breakfast>?,
         position: Int?,
         dialogAddRecipe: Dialog?
     ) {
@@ -1121,16 +1132,11 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 dialogAddRecipe?.dismiss()
                 // Toggle the is_like value
                 item.is_like = if (item.is_like == 0) 1 else 0
-                mealList[position!!] = item
-
-//                when (type) {
-//                    ErrorMessage.Breakfast -> ingredientBreakFastAdapter?.updateList(mealList)
-//                    ErrorMessage.Lunch -> ingredientLunchAdapter?.updateList(mealList)
-//                    ErrorMessage.Dinner -> ingredientDinnerAdapter?.updateList(mealList)
-//                    ErrorMessage.Snacks -> ingredientSnacksAdapter?.updateList(mealList)
-//                    ErrorMessage.Brunch -> ingredientTeaTimeAdapter?.updateList(mealList)
-//                }
-
+                mealList?.set(position!!, item)
+                // Update the adapter
+                adapter?.updateList(mealList, type)
+                (activity as MainActivity?)?.upDateHomeData()
+                (activity as MainActivity?)?.upDatePlan()
             } else {
                 if (apiModel.code == ErrorMessage.code) {
                     showAlert(apiModel.message, true)
@@ -1144,8 +1150,8 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
     }
 
     private fun addFavTypeDialog(
-        item: Breakfast, type: String,
-        mealList: MutableList<Breakfast>, position: Int?, likeType: String
+        item: Breakfast,adapter: IngredientsBreakFastAdapter?, type: String?,
+        mealList: MutableList<Breakfast>?, position: Int?, likeType: String
     ) {
         val dialogAddRecipe: Dialog = context?.let { Dialog(it) }!!
         dialogAddRecipe.setContentView(R.layout.alert_dialog_add_recipe)
@@ -1182,7 +1188,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                 BaseApplication.alertError(requireContext(), ErrorMessage.selectCookBookError, false)
             } else {
                 val cookBookType = cookbookList[spinnerActivityLevel.selectedIndex].id
-                recipeLikeAndUnlikeData(item, type, mealList, position, likeType, cookBookType.toString(), dialogAddRecipe)
+                recipeLikeAndUnlikeData(item, adapter,type, mealList, position, likeType, cookBookType.toString(), dialogAddRecipe)
             }
         }
     }

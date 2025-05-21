@@ -64,8 +64,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
     val dataList = ArrayList<DataModel>()
     private var tvWeekRange: TextView? = null
     private var rcyChooseDaySch: RecyclerView? = null
-    private var selectAll: Boolean = false
-    private var quantity: Int = 1
+    private var selectAll: Boolean = true
     private lateinit var viewModel: RecipeDetailsViewModel
     private var uri: String = ""
     private var mealType: String = ""
@@ -339,8 +338,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
 
             if (viewModel.getRecipeData()?.size!! > 0) {
                 // Update the drawable based on the selectAll state
-                val drawableRes =
-                    if (selectAll) R.drawable.orange_checkbox_images else R.drawable.orange_uncheck_box_images
+                val drawableRes = if (selectAll) R.drawable.orange_checkbox_images else R.drawable.orange_uncheck_box_images
                 binding.tvSelectAllBtn.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableRes, 0)
                 // Notify adapter with updated data
                 ingredientsRecipeAdapter?.updateList(viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients!!)

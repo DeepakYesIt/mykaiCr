@@ -98,7 +98,6 @@
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:fontFamily="@font/poppins_medium"
                                 android:text=""
-                                android:singleLine="true"
                                 android:textColor="#FFFFFF"
                                 android:textSize="@dimen/_13sdp" />
 
