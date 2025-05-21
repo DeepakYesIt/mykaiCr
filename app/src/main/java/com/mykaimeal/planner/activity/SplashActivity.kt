@@ -35,7 +35,6 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var sessionManagement: SessionManagement
     private lateinit var viewModel: SubscriptionPlanViewModel
 
-
     companion object {
         public const val SPLASH_DELAY = 3000L // 3 seconds delay
     }

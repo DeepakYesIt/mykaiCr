@@ -262,10 +262,10 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         } else if (edtStreetNumber.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.streetNumberError, false)
             return false
-        } else /*if (edtApartNumber.text.toString().trim().isEmpty()) {
+        } else if (edtApartNumber.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.apartNumberError, false)
             return false
-        } else*/ if (edtCity.text.toString().trim().isEmpty()) {
+        } else if (edtCity.text.toString().trim().isEmpty()) {
             commonWorkUtils.alertDialog(requireActivity(), ErrorMessage.cityEnterError, false)
             return false
         } else if (edtStates.text.toString().trim().isEmpty()) {
