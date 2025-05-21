@@ -11,32 +11,35 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.gson.Gson
 import com.mykaimeal.planner.OnItemClickListener
 import com.mykaimeal.planner.R
-import com.mykaimeal.planner.databinding.AdapterSearchRecipeBinding
+import com.mykaimeal.planner.databinding.AdapterMealItemBinding
+import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Recipe
+import com.mykaimeal.planner.listener.RecipeDetailListener
 
-class SearchRecipeAdapter(
-    private var ingredientsList: MutableList<com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Ingredient>,
-    private var requireActivity: FragmentActivity,
-    private var onItemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<SearchRecipeAdapter.ViewHolder>() {
+
+class SearchMealRecipeAdapter(var datalist: MutableList<Recipe>?,
+                              private var requireActivity: FragmentActivity,
+                              private var onItemClickListener: RecipeDetailListener
+): RecyclerView.Adapter<SearchMealRecipeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: AdapterSearchRecipeBinding =
-            AdapterSearchRecipeBinding.inflate(inflater, parent, false);
+        val binding: AdapterMealItemBinding = AdapterMealItemBinding.inflate(inflater, parent,false);
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+         val data= datalist?.get(position)
 
-        if (ingredientsList[position].name!=null){
-            holder.binding.tvRecipeName.text = ingredientsList[position].name
+        if (data?.recipe?.label!=null){
+            holder.binding.tvRecipeName.text= data.recipe.label
         }
 
-        if (ingredientsList[position].image !=null){
+        if (data?.recipe?.images?.SMALL?.url!=null){
             Glide.with(requireActivity)
-                .load(ingredientsList[position].image)
+                .load(data.recipe.images.SMALL.url)
                 .error(R.drawable.no_image)
                 .placeholder(R.drawable.no_image)
                 .listener(object : RequestListener<Drawable> {
@@ -66,32 +69,19 @@ class SearchRecipeAdapter(
             holder.binding.layProgess.root.visibility= View.GONE
         }
 
-
-
-        holder.itemView.setOnClickListener {
-            onItemClickListener.itemClick(position,ingredientsList[position].name,"ingredient")
+        holder.binding.relativeBreakFast.setOnClickListener{
+            val dataLocal= data?.recipe?.mealType?.get(0)?.split("/")
+            val formattedFoodName = dataLocal?.get(0)!!.replaceFirstChar { it.uppercase() }
+            onItemClickListener.itemRecipeSelect(data.recipe.uri,formattedFoodName,"details")
         }
 
     }
 
     override fun getItemCount(): Int {
-        return ingredientsList.size
+        return datalist!!.size
     }
 
-    fun filterList(filteredList: MutableList<com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Ingredient>) {
-        this.ingredientsList=filteredList
-        notifyDataSetChanged()
-
-    }
-
-    fun submitList(ingredient: MutableList<com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.Ingredient>) {
-        this.ingredientsList=ingredient
-        notifyDataSetChanged()
-    }
-
-
-    class ViewHolder(var binding: AdapterSearchRecipeBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(var binding: AdapterMealItemBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 

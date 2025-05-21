@@ -59,6 +59,7 @@ object ApiEndPoint {
 
     const val  updateUserPreferences="update-user-prefrence"
     const val recipeSearch="recipe"
+    const val recipeSearchFromSearch="ingredient-recipe-search"
 
     const val createRecipeUrl="recipes"
 

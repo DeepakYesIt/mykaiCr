@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:gravity="center|top"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:id="@+id/llCookBookItems"
                     android:layout_width="match_parent"
@@ -78,9 +78,10 @@
                 <RelativeLayout
                     android:id="@+id/relRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
+                    android:layout_height="@dimen/_300sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:visibility="gone"
+                    android:layout_centerInParent="true"
                     android:layout_marginHorizontal="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/tvnoData"

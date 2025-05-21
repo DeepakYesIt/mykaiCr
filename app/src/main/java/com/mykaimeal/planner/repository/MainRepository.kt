@@ -213,6 +213,7 @@ interface MainRepository {
     suspend fun updatePostCodeApi(successCallback: (response: NetworkResult<String>) -> Unit, postCode:String?,longitude:String?, latitude:String?)
 
     suspend fun recipeSearchApi(successCallback: (response: NetworkResult<String>) -> Unit, itemSearch:JsonObject?)
+    suspend fun recipeSearchFromSearchApi(successCallback: (response: NetworkResult<String>) -> Unit, itemSearch:JsonObject?)
     suspend fun recipeFilterSearchApi(successCallback: (response: NetworkResult<String>) -> Unit, mealType: MutableList<String>?,health: MutableList<String>?,time: MutableList<String>?)
     suspend fun getMissingIngredientsApi(successCallback: (response: NetworkResult<String>) -> Unit, uri:String?,schId:String?)
 

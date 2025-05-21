@@ -16,7 +16,9 @@ import com.mykaimeal.planner.R
 import com.mykaimeal.planner.databinding.AdapterMealItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.apiresponse.MealType
 
-class SearchMealAdapter(var datalist: MutableList<MealType>?, private var requireActivity: FragmentActivity,private var onItemClickListener: OnItemClickListener): RecyclerView.Adapter<SearchMealAdapter.ViewHolder>() {
+class SearchMealAdapter(var datalist: MutableList<MealType>?,
+                        private var requireActivity: FragmentActivity,
+                        private var onItemClickListener: OnItemClickListener): RecyclerView.Adapter<SearchMealAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

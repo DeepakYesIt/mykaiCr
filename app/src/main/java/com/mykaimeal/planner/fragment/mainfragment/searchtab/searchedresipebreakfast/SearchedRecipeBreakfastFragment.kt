@@ -169,7 +169,7 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
                         jsonObject.addProperty("q", recipeType)
                     }else{
                         val type = arguments?.getString("type", "MealCat") ?: ""
-                        if (type.equals("",true)){
+                        if (type.equals("MealCat",true)){
                             jsonObject.addProperty("dishType", recipeType)
                         }else{
                             jsonObject.addProperty("mealType", recipeType)
