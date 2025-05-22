@@ -495,6 +495,23 @@ class CookedFragment : Fragment(), OnItemClickListener {
                     BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
                 }
             }
+            "5" -> {
+                // Map the type to the corresponding list and adapter
+                val (mealList, adapter) = when (type) {
+                    ErrorMessage.Breakfast -> recipesModel?.Breakfast to foodListBreakFastAdapter
+                    ErrorMessage.Lunch -> recipesModel?.Lunch to foodListLunchAdapter
+                    ErrorMessage.Dinner -> recipesModel?.Dinner to foodListDinnerAdapter
+                    ErrorMessage.Snacks -> recipesModel?.Snacks to foodListSnacksAdapter
+                    ErrorMessage.Brunch -> recipesModel?.Teatime to foodListTeaTimeAdapter
+                    else -> null to null
+                }
+                val list= position?.let { mealList?.get(it) }
+                val bundle = Bundle().apply {
+                    putString("uri", list?.uri)
+                    putString("mealType", type)
+                }
+                findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+            }
         }
     }
 

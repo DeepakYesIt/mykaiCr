@@ -468,10 +468,28 @@ class ReasonsForTakeAwayFragment : Fragment(), OnItemClickListener {
         }
 
         tvDialogSkipBtn.setOnClickListener {
-            sessionManagement.setReasonTakeAway("")
+            if (isOnline(requireContext())) {
+                if (status.equals("2")) {
+                    if (sessionManagement.getPreferences()){
+                        updatePreferencesApi()
+                    }else{
+                        reasonTakeAwayViewModel.setReasonTakeData(reasonTakeModelData!!.toMutableList())
+                        sessionManagement.setReasonTakeAway(reasonSelect.toString())
+                        sessionManagement.setReasonTakeAwayDesc(reasonTakeAway.toString())
+                        if (sessionManagement.getFirstTime()){
+                            navigateToAuthActivity("login")
+                        }else{
+                            navigateToAuthActivity("signup")
+                        }
+                    }
+                }
+            } else {
+                alertError(requireContext(), ErrorMessage.networkError, false)
+            }
+            /*sessionManagement.setReasonTakeAway("")
             sessionManagement.setReasonTakeAwayDesc("")
             dialogStillSkip.dismiss()
-            navigateToAuthActivity("login")
+            navigateToAuthActivity("login")*/
         }
     }
 

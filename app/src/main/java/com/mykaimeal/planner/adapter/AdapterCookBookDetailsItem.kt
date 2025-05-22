@@ -2,9 +2,11 @@ package com.mykaimeal.planner.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,8 +16,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.mykaimeal.planner.OnItemClickListener
 import com.mykaimeal.planner.R
+import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.databinding.AdapterCookbookDetailsItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.cookbookviewmodel.apiresponse.CookBookDataModel
+import com.mykaimeal.planner.messageclass.ErrorMessage
 
 class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, var requireActivity: FragmentActivity, private var onItemClickListener: OnItemClickListener)
     : RecyclerView.Adapter<AdapterCookBookDetailsItem.ViewHolder>() {
@@ -76,7 +80,6 @@ class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, 
                         holder.binding.layProgess.root.visibility= View.GONE
                         return false
                     }
-
                     override fun onResourceReady(
                         resource: Drawable?,
                         model: Any?,
@@ -94,20 +97,29 @@ class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, 
         }
 
         holder.binding.tvAddToPlan.setOnClickListener {
-            onItemClickListener.itemClick(position,"1","")
+            data?.data?.let {
+                onItemClickListener.itemClick(position,"1","")
+            }?: run {
+                BaseApplication.alertError(requireActivity, ErrorMessage.recipeTimeError, false)
+            }
         }
 
         holder.binding.imgBasket.setOnClickListener {
-            var mealType = ""
-            if (datalist!![position].data?.recipe?.mealType != null && datalist!![position].data?.recipe?.mealType?.isNotEmpty() == true) {
-                mealType = datalist!![position].data?.recipe?.mealType!![0]
-                mealType = if (mealType.contains("/")) {
-                    mealType.split("/")[0] // Get the first part before the slash
-                } else {
-                    mealType // Return as is if no slash is present
+            data?.data?.let {
+                var mealType = ""
+                if (datalist!![position].data?.recipe?.mealType != null && datalist!![position].data?.recipe?.mealType?.isNotEmpty() == true) {
+                    mealType = datalist!![position].data?.recipe?.mealType!![0]
+                    mealType = if (mealType.contains("/")) {
+                        mealType.split("/")[0] // Get the first part before the slash
+                    } else {
+                        mealType // Return as is if no slash is present
+                    }
                 }
+                onItemClickListener.itemClick(position,"2",mealType)
+            }?: run {
+                BaseApplication.alertError(requireActivity, ErrorMessage.recipeTimeError, false)
             }
-            onItemClickListener.itemClick(position,"2",mealType)
+
         }
 
         holder.binding.tvMoveRecipe.setOnClickListener{
@@ -124,26 +136,35 @@ class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, 
         }
 
         holder.itemView.setOnClickListener {
-            onItemClickListener.itemClick(position,"4","")
+            data?.data?.let {
+                onItemClickListener.itemClick(position,"4","")
+            }?:run {
+                BaseApplication.alertError(requireActivity, ErrorMessage.recipeTimeError, false)
+            }
+
         }
 
         holder.binding.imgThreeDot.setOnClickListener{
-            // Update lastIndex to the current position
-            lastIndex = if (lastIndex == position) {
-                -1  // Close the view if the same position is clicked again
-            } else {
-                position  // Open the view for the new position
+            data?.data?.let {
+                // Update lastIndex to the current position
+                lastIndex = if (lastIndex == position) {
+                    -1  // Close the view if the same position is clicked again
+                } else {
+                    position  // Open the view for the new position
+                }
+                // Notify the adapter to refresh the views
+                notifyDataSetChanged()
+            }?: run {
+                BaseApplication.alertError(requireActivity, ErrorMessage.recipeTimeError, false)
             }
-
-            // Notify the adapter to refresh the views
-            notifyDataSetChanged()
         }
+
+
     }
 
     override fun getItemCount(): Int {
         return datalist!!.size
     }
-
 
     class ViewHolder(var binding: AdapterCookbookDetailsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

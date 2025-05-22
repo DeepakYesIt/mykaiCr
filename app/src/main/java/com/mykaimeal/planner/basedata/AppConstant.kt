@@ -6,6 +6,7 @@ class AppConstant {
         const val COMPLAINT: String="Complaint"
         const val OTHERS: String="Others"
         const val loginSession: String="session"
+        const val recipeDetailSession: String="recipeDetail"
         const val Premium_Monthly: String="monthly_plan"
         const val Premium_Annual: String="annual_plan"
         const val Premium_Weekly: String="weekly_plan"

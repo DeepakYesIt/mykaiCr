@@ -1,10 +1,16 @@
 package com.mykaimeal.planner.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.graphics.drawable.Drawable
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,6 +22,7 @@ import com.mykaimeal.planner.OnItemClickedListener
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.databinding.AdapterOrderHistoryGraphBinding
 import com.mykaimeal.planner.fragment.mainfragment.profilesetting.orderhistoryscreen.model.OrderHistoryModelData
+import java.util.Calendar
 
 class AdapterOrderHistoryGraph(private var datalist: MutableList<OrderHistoryModelData>,
                                private var requireActivity: FragmentActivity,
@@ -82,6 +89,18 @@ class AdapterOrderHistoryGraph(private var datalist: MutableList<OrderHistoryMod
 
         }
 
+        holder.binding.imgInfo.setOnClickListener {
+            val inflater = requireActivity.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+            val popupView: View? = inflater?.inflate(R.layout.item_select_layout_order, null)
+            val popupWindow = PopupWindow(popupView, 550, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
+            popupWindow.showAsDropDown(holder.binding.imgInfo,  0, 0, Gravity.END)
+            // Access views inside the inflated layout using findViewById
+            val rcyData = popupView?.findViewById<TextView>(R.id.reldelete)
+            rcyData?.text="Total includes all fees"
+            rcyData?.setOnClickListener {
+                popupWindow.dismiss()
+            }
+        }
 
         holder.binding.tvCount.setOnClickListener{
             onItemClickedListener.itemClicked(position,null,"","View")

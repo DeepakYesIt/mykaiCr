@@ -73,6 +73,8 @@ class VerificationFragment : Fragment() {
     private var reasonTakeAway: String? = ""
     private var reasonTakeAwayDesc: String? = ""
     private var token: String = ""
+    private var countDownTimer: CountDownTimer? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -86,6 +88,7 @@ class VerificationFragment : Fragment() {
         /// handle on back pressed
         requireActivity().onBackPressedDispatcher.addCallback(requireActivity(),
             object : OnBackPressedCallback(true) { override fun handleOnBackPressed() {
+                    countDownTimer?.cancel()
                     findNavController().navigateUp()
                 }
             })
@@ -135,6 +138,7 @@ class VerificationFragment : Fragment() {
 
         //// handle on back pressed
         binding.imgBackVerification.setOnClickListener {
+            countDownTimer?.cancel()
             findNavController().navigateUp()
         }
 
@@ -464,7 +468,7 @@ class VerificationFragment : Fragment() {
 
     /// start timer for counting 2 minutes
     private fun startTime() {
-        object : CountDownTimer(mTimeLeftInMillis, 1000) {
+        countDownTimer = object : CountDownTimer(mTimeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 mTimeLeftInMillis = millisUntilFinished
                 binding.textResend.setTextColor(Color.parseColor("#828282"))
@@ -540,6 +544,7 @@ class VerificationFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        countDownTimer?.cancel()
         super.onDestroyView()
         _binding = null
     }

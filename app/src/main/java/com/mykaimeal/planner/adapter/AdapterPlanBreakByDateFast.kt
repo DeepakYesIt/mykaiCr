@@ -106,6 +106,10 @@ class AdapterPlanBreakByDateFast(var datalist: MutableList<BreakfastModelPlanByD
                 onItemClickListener.itemSelectPlayByDate(position,"2",type)
             }
         }
+
+        holder.binding.imageData.setOnClickListener {
+            onItemClickListener.itemSelectPlayByDate(position,"4",type)
+        }
     }
 
     override fun getItemCount(): Int {

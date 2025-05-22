@@ -619,6 +619,7 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener, Rec
                 putString("screenType","Search")
                 putString("type",type)
             }
+
             findNavController().navigate(R.id.searchedRecipeBreakfastFragment,bundle)
         }
         if (type.equals("ingredient",true)){

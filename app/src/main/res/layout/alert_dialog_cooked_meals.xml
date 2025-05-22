@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="@string/do_you_want_to_add_this_dish_to_your_cooked_meals"
                     android:textSize="@dimen/_13sdp" />

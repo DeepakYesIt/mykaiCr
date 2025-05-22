@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.Target
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.adapter.AdapterPrepareCookItem
+import com.mykaimeal.planner.basedata.SessionManagement
 import com.mykaimeal.planner.databinding.FragmentDirectionStepsRecipeDetailsBinding
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.recipedetails.RecipeDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,8 @@ class DirectionSteps1RecipeDetailsFragment : Fragment() {
     private lateinit var viewModel: RecipeDetailsViewModel
     private var mealType: String = ""
     private var uri: String = ""
+    private lateinit var sessionManagement: SessionManagement
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +42,7 @@ class DirectionSteps1RecipeDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding=FragmentDirectionStepsRecipeDetailsBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[RecipeDetailsViewModel::class.java]
-
+        sessionManagement = SessionManagement(requireContext())
         mealType = arguments?.getString("mealType", "")?:""
         uri = arguments?.getString("uri", "")?:""
 
@@ -48,11 +51,17 @@ class DirectionSteps1RecipeDetailsFragment : Fragment() {
             llBottomNavigation.visibility = View.GONE
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigateUp()
-            }
-        })
+        if (sessionManagement.getMoveScreen()){
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigateUp()
+                }
+            })
+        }else{
+            findNavController().navigateUp()
+        }
+
+
 
         binding.progressBar.max=2
         totalProgressValue=2
