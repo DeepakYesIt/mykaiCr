@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_120sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bread_breakfast_image">
+            android:background="@drawable/no_image">
 
             <RelativeLayout
                 android:id="@+id/relWatchTimer"

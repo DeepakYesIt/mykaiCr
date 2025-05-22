@@ -265,7 +265,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 override fun onSuccess(token: Token) {
                     lifecycleScope.launch {
                         Log.d("tdhsfsf","ff:--"+token)
-//                        addCard(token)
+                        addCard(token)
                     }
                 }
 
@@ -1412,9 +1412,8 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
 
     @SuppressLint("SetTextI18n")
     private fun showWithdrawAmountDialog(position: Int?) {
-
         val dialog = Dialog(requireContext(), R.style.BottomSheetDialog).apply {}
-        dialog.setCancelable(false)
+//        dialog.setCancelable(false)
         dialog.setContentView(R.layout.alert_dialog_withdraw_amount)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes = WindowManager.LayoutParams().apply {
@@ -1423,9 +1422,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
             height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
-
         val etWithdrawalAmount = dialog.findViewById<EditText>(R.id.etWithdrawalAmount)
-
         dialog.findViewById<ImageView>(R.id.imageCross).setOnClickListener {
             dialog.dismiss()
         }
@@ -1463,8 +1460,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                         )
                     }
                 }
-
-
             } else {
                 BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
             }

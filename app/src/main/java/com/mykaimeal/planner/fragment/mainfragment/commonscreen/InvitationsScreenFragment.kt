@@ -18,6 +18,9 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.appsflyer.AppsFlyerLib
+import com.appsflyer.CreateOneLinkHttpTask
+import com.appsflyer.share.ShareInviteHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.google.gson.Gson
@@ -193,6 +196,28 @@ class InvitationsScreenFragment : Fragment() {
                 }
             })
     }
+
+
+/*    private fun generateShortDynamicLink() {
+        val params = HashMap<String, String>()
+        params["af_user_id"] = sessionManagement.getId()?.toString().orEmpty()
+        params["Referrer"] = sessionManagement.getReferralCode()?.toString().orEmpty()
+        params["providerName"] = sessionManagement.getUserName()?.toString().orEmpty()
+        params["providerImage"] = sessionManagement.getImage()?.toString().orEmpty()
+
+        AppsFlyerLib.getInstance().generateInviteUrl(requireActivity(), object : CreateOneLinkHttpTask.ResponseListener {
+            override fun onResponse(link: String) {
+                referLink = link
+                Log.d("ShortLink", "Generated Short OneLink URL: $link")
+            }
+
+            override fun onResponseError(error: String) {
+                Log.e("ShortLink", "Error generating short OneLink: $error")
+            }
+        }, params)
+    }*/
+
+
 
     private fun deepLink(){
         val afUserId = sessionManagement.getId()?.toString().orEmpty()

@@ -48,8 +48,17 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewm
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -180,6 +189,9 @@ class StatisticsGraphFragment : Fragment() {
 
 
         deepLink()
+
+//        generateShortLink()
+
 //        generateDeepLink()
 
 
@@ -457,6 +469,49 @@ class StatisticsGraphFragment : Fragment() {
             })
     }
 
+/*    private fun generateShortLink() {
+        val afUserId = sessionManagement.getId()?.toString().orEmpty()
+        val referrerCode = sessionManagement.getReferralCode()?.toString().orEmpty()
+        val providerName = sessionManagement.getUserName()?.toString().orEmpty()
+        val providerImage = sessionManagement.getImage()?.toString().orEmpty()
+
+        val client = OkHttpClient()
+        // Use OneLink template ID here (not full domain)
+        val oneLinkId = "mPqu" // From your OneLink URL
+        val appPackage = "com.mykaimeal.planner" // Your app's package name
+
+        val jsonBody = JSONObject().apply {
+            put("app_id", appPackage)
+            put("af_dp", "mykai://property?af_user_id=$afUserId&Referrer=$referrerCode&providerName=$providerName&providerImage=$providerImage")
+            put("af_web_dp", "https://www.mykaimealplanner.com")
+        }
+
+        val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url("https://onelink.appsflyer.com/$oneLinkId") // API endpoint
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("ShortLink", "Failed: ${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body.string()
+                    val shortLink = JSONObject(responseBody ?: "").optString("shortlink")
+                    Log.d("ShortLink", "Generated short link: $shortLink")
+                    referLink = shortLink
+                } else {
+                    Log.e("ShortLink", "Error response: ${response.body}")
+                }
+            }
+        })
+    }*/
+
+
 
     private fun deepLink(){
         val afUserId = sessionManagement.getId()?.toString().orEmpty()
@@ -495,6 +550,9 @@ class StatisticsGraphFragment : Fragment() {
         Log.d("link ", "Generated OneLink URL: $fullURL")
 
     }
+
+
+
 
 //    private fun generateDeepLink() {
 //
