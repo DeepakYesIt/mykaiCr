@@ -540,6 +540,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                         addFavTypeDialog(item, adapter, type, mealList, position, newLikeStatus)
                     }
                 }
+
                 if (apiType.equals("remove",true)){
                     removeMealDialog(item, adapter, type, mealList, position)
                 }
@@ -888,9 +889,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                                 }else{
                                     binding.textFreezer.text = "Freezer ($count)"
                                 }
-
                                 updateFridgeVisibility(count == 0)
-
                                 (activity as MainActivity?)?.upDateHomeData()
                             }catch (e:Exception){
                                 Log.d("@@@@@@","Error response "+e.message)

@@ -111,6 +111,7 @@ class SplashActivity : AppCompatActivity() {
                 val cookbooksId = data.getQueryParameter("CookbooksID")
                 val itemName = data.getQueryParameter("ItemName")
                 val referrer = data.getQueryParameter("Referrer")
+                val userId = data.getQueryParameter("af_user_id")
                 val providerName = data.getQueryParameter("providerName")
                 val providerImage = data.getQueryParameter("providerImage")
                 Log.d("***********MY kai", "$screenName  & $cookbooksId")
@@ -123,11 +124,13 @@ class SplashActivity : AppCompatActivity() {
 
                     Log.d("***********MY kai", "******:----$referrer----$providerName-------$providerImage")
                 }
-                providerName?.let {
-                    sessionManagement.setProviderName(it)
-                }
-                providerImage?.let {
-                    sessionManagement.setProviderImage(BaseUrl.imageBaseUrl+it)
+                if (!userId.equals(sessionManagement.getId())){
+                    providerName?.let {
+                        sessionManagement.setProviderName(it)
+                    }
+                    providerImage?.let {
+                        sessionManagement.setProviderImage(BaseUrl.imageBaseUrl+it)
+                    }
                 }
                 sessionManagement.setReferralCode(referrer.toString())
             }
