@@ -11,6 +11,8 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.os.Build
@@ -140,7 +142,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
     private var adapterUrlIngredients: AdapterUrlIngredientItem? = null
     private var loadDataStatus: Boolean = false
     private var uri: String = ""
-    private var openScreen: String = "Home"
     var Subscription_status: Int?=1
     var addmeal: Int?=0
     var favorite: Int?=0
@@ -150,7 +151,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
     private var status:String?="RecipeSearch"
     private var dialogAddRecipe:Dialog ?=null
     lateinit var navController : NavController
-    var isFlashlightOn = false
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraId: String
     private lateinit var sessionManagement: SessionManagement
@@ -207,10 +207,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
 
     }
 
-     fun toggleFlashlight() {
-        isFlashlightOn = !isFlashlightOn
-        cameraManager.setTorchMode(cameraId, isFlashlightOn)
-    }
 
     private fun startRepeatingApiCall() {
         apiCallJob = lifecycleScope.launch {
@@ -248,10 +244,9 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
                 addFavTypeDialogUrl(uri)
             }
         }
-
         searchMealUrlApi(submittedResult)
-
     }
+
 
     private fun addFavTypeDialogUrl(submittedResult: String?) {
         val dialogAddRecipe = Dialog(this)

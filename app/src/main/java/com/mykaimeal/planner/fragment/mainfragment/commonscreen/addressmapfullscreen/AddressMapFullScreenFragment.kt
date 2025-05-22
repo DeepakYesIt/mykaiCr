@@ -102,6 +102,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         sessionManagement = SessionManagement(requireContext())
 
         screenType = arguments?.getString("type", "") ?: ""
+        screenType = arguments?.getString("type", "") ?: ""
         userAddress = arguments?.getString("address", "") ?: ""
         latitude = arguments?.getString("latitude", "") ?: ""
         longitude = arguments?.getString("longitude", "") ?: ""

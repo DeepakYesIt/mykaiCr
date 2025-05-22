@@ -76,7 +76,6 @@ import com.google.gson.Gson
 import com.mykaimeal.planner.OnItemLongClickListener
 import com.mykaimeal.planner.OnItemSelectListener
 import com.mykaimeal.planner.R
-import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.adapter.AdapterCardPreferredItem
 import com.mykaimeal.planner.adapter.AdapterCheckoutIngredientsItem
 import com.mykaimeal.planner.adapter.AdapterGetAddressItem
@@ -129,6 +128,8 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
     private var cardMealMe: MutableList<GetCardMealMeModelData> = mutableListOf()
     private var latitude: String? = ""
     private var longitude: String? = ""
+    private var Apilatitude: String? = ""
+    private var Apilongitude: String? = ""
     private var totalPrices: String? = ""
     private var cardId: String? = ""
     private var statusTypes: String? = "Home"
@@ -141,6 +142,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
     private lateinit var edtAddress: EditText
     private lateinit var tvAddress: AutoCompleteTextView
     private var userAddress: String? = ""
+    private var ApiuserAddress: String? = ""
     private var workType: String? = "Home"
     private var streetName: String? = ""
     private var streetNum: String? = ""
@@ -210,9 +212,9 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
 
         binding.layEdit.setOnClickListener {
             val bundle = Bundle().apply {
-                putString("latitude", latitude.toString())
-                putString("longitude", longitude.toString())
-                putString("address", userAddress.toString())
+                putString("latitude", Apilatitude.toString())
+                putString("longitude", Apilongitude.toString())
+                putString("address", ApiuserAddress.toString())
                 putString("selectType", workType)
                 putString("addressId", "")
                 putString("type", "Checkout")
@@ -408,7 +410,6 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
     private fun showDataInUI(data: CheckoutScreenModelData?) {
         checkoutScreenViewModel.setCheckOutData(data)
         data?.let {
-
             if (it.phone != null && it.country_code != null) {
                 val rawNumber = it.phone.toString().filter { it.isDigit() }
                 val formattedNumber = if (rawNumber.length >= 10) {
@@ -439,6 +440,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                     // Build full address string
                     val fullAddress = listOf(
                         it.address.apart_num,
+                        it.address.street_num,
                         it.address.street_name,
                         it.address.city,
                         it.address.state,
@@ -446,15 +448,14 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                         it.address.zipcode
                     ).joinToString(" ")
                     // Store in variable if needed
-                    userAddress = fullAddress
+                    ApiuserAddress = fullAddress
                     // Set full address to TextView
                     binding.tvAddressNames.text = fullAddress
                     if (it.address.latitude != null && it.address.longitude != null) {
-                        latitude = it.address.latitude
-                        longitude = it.address.longitude
-                        val lat = latitude?.toDoubleOrNull()
-                            ?: 0.0  // Convert String to Double, default to 0.0 if null
-                        val lng = longitude?.toDoubleOrNull() ?: 0.0
+                        Apilatitude = it.address.latitude
+                        Apilongitude = it.address.longitude
+                        val lat = Apilatitude?.toDoubleOrNull() ?: 0.0  // Convert String to Double, default to 0.0 if null
+                        val lng = Apilongitude?.toDoubleOrNull() ?: 0.0
                         updateMarker(lat, lng)
                     }
 
@@ -464,7 +465,6 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                         binding.tvSetType.text= "Set "+it.address.type.toString()
                         binding.imageHome.setImageResource(R.drawable.work_icon)
                         binding.imageHome.setColorFilter(ContextCompat.getColor(requireContext(), R.color.light_orange), PorterDuff.Mode.SRC_IN)
-
                     }else{
                         binding.tvSetType.text= "Set "+it.address.type.toString()
                         binding.imageHome.setImageResource(R.drawable.home_icon)
@@ -1016,12 +1016,11 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                     states = edtStates.text.toString().trim()
                     userAddress = edtAddress.text.toString().trim()
                     zipcode = edtPostalCode.text.toString().trim()
-                    addFullAddressApi()
+                    addFullAddressApi(dialogMiles)
                 }
             } else {
                 BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
             }
-            dialogMiles.dismiss()
         }
 
         imageCross.setOnClickListener {
@@ -1029,13 +1028,13 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
         }
     }
 
-    private fun addFullAddressApi() {
+    private fun addFullAddressApi(dialogMiles: Dialog) {
         BaseApplication.showMe(requireContext())
         lifecycleScope.launch {
             checkoutScreenViewModel.addAddressUrl(
                 {
                     BaseApplication.dismissMe()
-                    handleApiAddAddressResponse(it)
+                    handleApiAddAddressResponse(it,dialogMiles)
                 },
                 latitude,
                 longitude,
@@ -1053,20 +1052,22 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
         }
     }
 
-    private fun handleApiAddAddressResponse(result: NetworkResult<String>) {
+    private fun handleApiAddAddressResponse(result: NetworkResult<String>, dialogMiles: Dialog) {
         when (result) {
-            is NetworkResult.Success -> handleSuccessAddAddressResponse(result.data.toString())
+            is NetworkResult.Success -> handleSuccessAddAddressResponse(result.data.toString(),dialogMiles)
             is NetworkResult.Error -> showAlert(result.message, false)
             else -> showAlert(result.message, false)
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleSuccessAddAddressResponse(data: String) {
+    private fun handleSuccessAddAddressResponse(data: String, dialogMilesMap: Dialog) {
         try {
             val apiModel = Gson().fromJson(data, AddAddressModel::class.java)
             Log.d("@@@ addMea List ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success == true) {
+                dialogMilesMap.dismiss()
+                dialogMiles?.dismiss()
                 loadApi()
             } else {
                  handleError(apiModel.code,apiModel.message)

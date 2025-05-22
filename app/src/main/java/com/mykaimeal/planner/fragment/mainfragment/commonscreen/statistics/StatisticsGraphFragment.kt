@@ -32,6 +32,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.firebase.Firebase
 import com.google.gson.Gson
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.MainActivity
@@ -48,12 +49,17 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewm
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import java.io.IOException
 
 @AndroidEntryPoint
 class StatisticsGraphFragment : Fragment() {
@@ -68,6 +74,8 @@ class StatisticsGraphFragment : Fragment() {
     private var year: String = ""
     private  var clickCount=0
     private var currentDate = Date() // Current date
+    private val client = OkHttpClient()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -463,17 +471,14 @@ class StatisticsGraphFragment : Fragment() {
         val referrerCode = sessionManagement.getReferralCode()?.toString().orEmpty()
         val providerName = sessionManagement.getUserName()?.toString().orEmpty()
         val providerImage = sessionManagement.getImage()?.toString().orEmpty()
-
         // Base URL for the OneLink template
         val baseURL = "https://mykaimealplanner.onelink.me/mPqu/" // Replace with your OneLink template
-
         // Deep link URL for when the app is installed
         val deepLink = "mykai://property?" +
                 "af_user_id=$afUserId" +
                 "&Referrer=$referrerCode" +
                 "&providerName=$providerName" +
                 "&providerImage=$providerImage"
-
         // Web fallback URL (e.g., if app is not installed)
         val webLink = "https://www.mykaimealplanner.com" // Replace with your fallback web URL
 
@@ -482,7 +487,6 @@ class StatisticsGraphFragment : Fragment() {
             "af_dp" to deepLink, // App deep link
             "af_web_dp" to webLink // Web fallback URL
         )
-
 
         // Use Uri.Builder to construct the URL with query parameters
         val uriBuilder = Uri.parse(baseURL).buildUpon()
@@ -494,6 +498,72 @@ class StatisticsGraphFragment : Fragment() {
         referLink = fullURL
         Log.d("link ", "Generated OneLink URL: $fullURL")
 
+//        generateShortOneLink(afUserId, referrerCode, providerName, providerImage) { shortLink ->
+//            activity?.runOnUiThread {
+//                if (shortLink != null) {
+//                    Log.d("link", "Short OneLink URL: $shortLink")
+//                    referLink = shortLink
+//                    // Now you can use referLink as needed in your fragment
+//                } else {
+//                    Log.e("link", "Failed to generate short link")
+//                }
+//            }
+//        }
+
+    }
+
+    private fun generateShortOneLink(
+        afUserId: String,
+        referrerCode: String,
+        providerName: String,
+        providerImage: String,
+        onResult: (String?) -> Unit
+    ) {
+        val brandDomain = "mykaimealplanner.onelink.me"
+        val apiKey = "M57zyjkFgb7nSQwHWN6isW" // get this from AppsFlyer dashboard
+
+        val deepLink = "mykai://property?" +
+                "af_user_id=$afUserId" +
+                "&Referrer=$referrerCode" +
+                "&providerName=$providerName" +
+                "&providerImage=$providerImage"
+
+        val jsonBody = JSONObject().apply {
+            put("brand_domain", brandDomain)
+            put("af_dp", deepLink)
+            put("af_web_dp", "https://www.mykaimealplanner.com")
+        }
+
+        val body = RequestBody.create(
+            "application/json; charset=utf-8".toMediaTypeOrNull(),
+            jsonBody.toString()
+        )
+
+        val request = Request.Builder()
+            .url("https://onelink.appsflyer.com/shortlink-sdk/v1")
+            .addHeader("authentication", apiKey)
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                onResult(null)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) {
+                        onResult(null)
+                        return
+                    }
+                    val responseString = response.body?.string()
+                    val jsonResponse = JSONObject(responseString ?: "{}")
+                    val shortLink = jsonResponse.optString("link", null)
+                    onResult(shortLink)
+                }
+            }
+        })
     }
 
 //    private fun generateDeepLink() {

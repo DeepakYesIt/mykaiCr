@@ -62,7 +62,7 @@
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:drawablePadding="@dimen/_2sdp"
-                    android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+                    android:drawableEnd="@drawable/baseline_keyboard_arrow_up_24"
                     android:textColor="@color/black" />
             </RelativeLayout>
 
@@ -75,7 +75,7 @@
                 android:background="@drawable/calendar_events_bg"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingHorizontal="@dimen/_6sdp"
                 android:paddingVertical="@dimen/_10sdp">
                 <LinearLayout

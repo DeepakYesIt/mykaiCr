@@ -663,6 +663,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                 if (mealList != null) {
                     adapter?.updateList(mealList, type)
                 }
+                (activity as MainActivity?)?.upDateHomeData()
             } else {
                 handleError(apiModel.code,apiModel.message)
             }
@@ -886,7 +887,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                                 }else{
                                     binding.textFreezer.text = "Freezer ($count)"
                                 }
-
+                                (activity as MainActivity?)?.upDateHomeData()
                             }catch (e:Exception){
                                 Log.d("@@@@@@","Error response "+e.message)
                             }

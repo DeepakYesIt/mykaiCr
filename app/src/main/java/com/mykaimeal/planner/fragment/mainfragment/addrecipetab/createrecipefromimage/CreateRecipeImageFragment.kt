@@ -17,10 +17,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
+import androidx.camera.core.TorchState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -50,8 +52,9 @@ class CreateRecipeImageFragment : Fragment() {
     private lateinit var binding: FragmentCreateRecipeImageBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
-    private var isFlashOn = false
+    private var isFlashOn = true
     private var capturedImageUri: Uri? = null
+    private lateinit var camera: Camera
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,16 +91,10 @@ class CreateRecipeImageFragment : Fragment() {
         } else {
             requestPermissions()
         }
-
-
-
         clickListener()
-
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
-
-
 
     private fun convertImageToBase64(uri: Uri): String {
         val inputStream: InputStream? = requireContext().contentResolver.openInputStream(uri)
@@ -107,18 +104,48 @@ class CreateRecipeImageFragment : Fragment() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
+
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(binding.previewView.surfaceProvider)
+            }
+
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            imageCapture = ImageCapture.Builder()
+//                .setFlashMode(if (isFlashOn) ImageCapture.FLASH_MODE_ON else ImageCapture.FLASH_MODE_OFF)
+                .setFlashMode(ImageCapture.FLASH_MODE_OFF)
+                .build()
+
+            try {
+                cameraProvider.unbindAll()
+
+                // Bind camera and save the instance
+                camera = cameraProvider.bindToLifecycle(
+                    viewLifecycleOwner,
+                    cameraSelector,
+                    preview,
+                    imageCapture
+                )
+
+            } catch (exc: Exception) {
+                Log.e(TAG, "Use case binding failed", exc)
+            }
+        }, ContextCompat.getMainExecutor(requireActivity()))
+    }
+
+
+    /*private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             val preview = Preview.Builder().build().also {
                 it.surfaceProvider = binding.previewView.surfaceProvider
             }
-
-
-
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
             imageCapture = ImageCapture.Builder().setFlashMode(if (isFlashOn) ImageCapture.FLASH_MODE_ON else ImageCapture.FLASH_MODE_OFF).build()
-
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
@@ -126,7 +153,7 @@ class CreateRecipeImageFragment : Fragment() {
                 Log.e(TAG, "Use case binding failed", exc)
             }
         }, ContextCompat.getMainExecutor(requireActivity()))
-    }
+    }*/
 
     private fun requestPermissions() {
         requestPermissions(REQUIRED_PERMISSIONS, PERMISSION_REQUEST_CODE)
@@ -248,15 +275,47 @@ class CreateRecipeImageFragment : Fragment() {
 
 
     private fun flashWorking() {
-        isFlashOn = !isFlashOn
-        imageCapture?.flashMode = if (isFlashOn) ImageCapture.FLASH_MODE_ON else ImageCapture.FLASH_MODE_OFF
+//        isFlashOn = !isFlashOn
+//        imageCapture?.flashMode = if (isFlashOn) ImageCapture.FLASH_MODE_ON else ImageCapture.FLASH_MODE_OFF
+        if (::camera.isInitialized) {
+            val torchEnabled = camera.cameraInfo.torchState.value == TorchState.ON
+            camera.cameraControl.enableTorch(!torchEnabled)
+        }
     }
 
 
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
 
+        /*if (::camera.isInitialized) {
+            camera.cameraControl.enableTorch(false)
+        }
+
+        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/MY-KAI-Image")
+            }
+        }
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(requireActivity().contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues).build()
+        imageCapture?.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(requireActivity()),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exc: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                }
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    capturedImageUri = output.savedUri
+                    showCapturedPreview()
+                }
+            }
+        )*/
+
+
+
+        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
@@ -265,23 +324,31 @@ class CreateRecipeImageFragment : Fragment() {
             }
         }
 
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(requireActivity().contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(
+            requireActivity().contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
         ).build()
 
-        imageCapture.takePicture(
+        imageCapture?.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(requireActivity()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
-
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     capturedImageUri = output.savedUri
+                    if (::camera.isInitialized) {
+                        camera.cameraControl.enableTorch(false)
+                    }
+                    imageCapture?.flashMode = ImageCapture.FLASH_MODE_OFF  // Disable flash on capture
                     showCapturedPreview()
                 }
             }
         )
+
+
     }
 
     @SuppressLint("IntentReset")

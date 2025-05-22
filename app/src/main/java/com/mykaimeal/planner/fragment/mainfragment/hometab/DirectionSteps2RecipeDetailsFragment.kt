@@ -329,6 +329,7 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
             Log.d("@@@ addMea List ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success) {
                 dialogCookedMeals.dismiss()
+                (activity as MainActivity?)?.upDateHomeData()
                 Toast.makeText(requireContext(),apiModel.message,Toast.LENGTH_LONG).show()
                 val intent=Intent(requireActivity(),MealRatingActivity::class.java)
                 intent.putExtra("uri",uri)

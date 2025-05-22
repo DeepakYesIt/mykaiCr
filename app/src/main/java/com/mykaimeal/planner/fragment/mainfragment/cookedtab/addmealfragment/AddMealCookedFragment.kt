@@ -322,7 +322,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
             Log.d("@@@ addMeal List ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success) {
                 binding.imageLogo.setImageResource(R.drawable.add_meal_icon_success)
-
+                (activity as MainActivity?)?.upDateHomeData()
                 lifecycleScope.launch {
                     delay(SplashActivity.SPLASH_DELAY)
                     findNavController().navigate(R.id.cookedFragment)
@@ -546,8 +546,9 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
                 }
             }
         }
+        val formattedName = type.toString().replaceFirstChar { it.uppercaseChar() }.lowercase().replaceFirstChar { it.uppercaseChar() }
 
-        binding.tvTitleName.text = type.toString()
+        binding.tvTitleName.text = formattedName
         binding.tvName.visibility = View.VISIBLE
         binding.tvName.text = recipes!![position].recipe?.label
 
@@ -567,6 +568,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
 
     override fun itemMealTypeSelect(position: Int?, status: String?, type: String?) {
         popupWindow?.dismiss()
-        binding.tvTitleName.text = mealRoutineList[position!!].name
+        val formattedName = mealRoutineList[position!!].name.toString().replaceFirstChar { it.uppercaseChar() }.lowercase().replaceFirstChar { it.uppercaseChar() }
+        binding.tvTitleName.text = formattedName
     }
 }
