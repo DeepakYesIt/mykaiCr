@@ -76,7 +76,7 @@ class WebViewByUrlFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("ClickedUrl",url)
             }
-            findNavController().navigate(R.id.searchFragmentDummy,bundle)
+//            findNavController().navigate(R.id.searchFragmentDummy,bundle)
         }
 
     }

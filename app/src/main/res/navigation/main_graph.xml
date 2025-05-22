@@ -404,10 +404,7 @@
         android:name="com.mykaimeal.planner.fragment.mainfragment.commonscreen.trackorderwebviewscreen.TrackOrderScreenFragment"
         android:label="fragment_track_order_screen"
         tools:layout="@layout/fragment_track_order_screen" />
-    <fragment
-        android:id="@+id/searchFragmentDummy"
-        android:name="com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.SearchFragmentDummy"
-        android:label="SearchFragmentDummy" />
+
 
 
 </navigation>

@@ -429,7 +429,7 @@ class BasketScreenFragment : Fragment(), OnItemLongClickListener, OnItemSelectLi
     private fun showDataInAddressUI(data: MutableList<GetAddressListModelData>?) {
         addressList = data
         adapterGetAddressItem = AdapterGetAddressItem(addressList, requireActivity(), this)
-        rcySavedAddress!!.adapter = adapterGetAddressItem
+        rcySavedAddress?.adapter = adapterGetAddressItem
 
     }
 
@@ -1321,6 +1321,7 @@ class BasketScreenFragment : Fragment(), OnItemLongClickListener, OnItemSelectLi
                 putString("latitude", addressList?.get(position!!)?.latitude)
                 putString("longitude", addressList?.get(position!!)?.longitude)
                 putString("address", type)
+                putString("apiApartmentNumber", position?.let { addressList?.get(it)?.apart_num })
                 putString("selectType", addressList?.get(position!!)?.type?:"Home")
                 putString("addressId", addressList?.get(position!!)?.id.toString())
                 putString("type", "Checkout")

@@ -143,6 +143,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
     private lateinit var tvAddress: AutoCompleteTextView
     private var userAddress: String? = ""
     private var ApiuserAddress: String? = ""
+    private var apiApertmentNumber: String? = ""
     private var workType: String? = "Home"
     private var streetName: String? = ""
     private var streetNum: String? = ""
@@ -215,6 +216,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                 putString("latitude", Apilatitude.toString())
                 putString("longitude", Apilongitude.toString())
                 putString("address", ApiuserAddress.toString())
+                putString("apiApartmentNumber", apiApertmentNumber)
                 putString("selectType", workType)
                 putString("addressId", "")
                 putString("type", "Checkout")
@@ -449,6 +451,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                     ).joinToString(" ")
                     // Store in variable if needed
                     ApiuserAddress = fullAddress
+                    apiApertmentNumber=it.address.apart_num
                     // Set full address to TextView
                     binding.tvAddressNames.text = fullAddress
                     if (it.address.latitude != null && it.address.longitude != null) {
@@ -1276,6 +1279,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
                 putString("latitude", addressList[position!!].latitude)
                 putString("longitude", addressList[position].longitude)
                 putString("address", fullAddress)
+                putString("apiApartmentNumber", addressList[position].apart_num)
                 putString("selectType", addressList[position].type)
                 putString("addressId", addressList[position].id.toString())
                 putString("type", "Checkout")

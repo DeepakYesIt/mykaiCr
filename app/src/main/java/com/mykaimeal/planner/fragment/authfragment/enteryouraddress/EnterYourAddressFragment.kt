@@ -160,6 +160,7 @@ class EnterYourAddressFragment : Fragment(), OnMapReadyCallback {
                     putString("longitude", longitude.toString())
                     putString("address", address.toString())
                     putString("selectType", setStatus)
+                    putString("apiApartmentNumber", "")
                     putString("addressId", "")
                     putString("type", "EnterYourAddress")
                 }
