@@ -59,6 +59,7 @@
             android:layout_centerInParent="true"
             android:paddingVertical="@dimen/_10sdp"
             android:text="Import To ReciMe"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp" />
 

@@ -16,11 +16,12 @@ import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.databinding.FragmentWebViewByUrlBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class WebViewByUrlFragment : Fragment() {
+
     private lateinit var binding: FragmentWebViewByUrlBinding
     private var url: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

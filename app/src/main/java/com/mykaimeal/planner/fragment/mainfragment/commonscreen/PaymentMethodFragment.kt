@@ -264,6 +264,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
             object : ApiResultCallback<Token> {
                 override fun onSuccess(token: Token) {
                     lifecycleScope.launch {
+                        Log.d("tdhsfsf","ff:--"+token)
                         addCard(token)
                     }
                 }
@@ -273,8 +274,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                     showAlert(e.message, false)
                 }
             })
-
-
     }
 
     private suspend fun addCard(token: Token) {
@@ -941,7 +940,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
     }
 
     private fun paymentApi() {
-   /*     BaseApplication.showMe(requireContext())
+        BaseApplication.showMe(requireContext())
         val cardNumber: String = Objects.requireNonNull(binding.etCardNumber.text.toString()).toString()
         val cvvNumber: String = Objects.requireNonNull(binding.etCVVNumber.text.toString()).toString()
         val name: String = binding.etName.text.toString()
@@ -958,9 +957,9 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 Log.d("@@@Token:-", "data$id")
                 saveCardApi(id)
             }
-        })*/
+        })
 
-        BaseApplication.showMe(requireContext())
+ /*       BaseApplication.showMe(requireContext())
         val cardNumber: String = Objects.requireNonNull(binding.etCardNumber.text.toString()).toString()
         val cvvNumber: String = Objects.requireNonNull(binding.etCVVNumber.text.toString()).toString()
         val name: String = binding.etName.text.toString()
@@ -999,7 +998,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 Log.d("PaymentActivity1", "data$e")
                 Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
             }
-        })
+        })*/
 
 
     }
@@ -1364,9 +1363,9 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 } else {
                     BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
                 }
-            }/*else{
+            }else{
                  showWithdrawAmountDialog(position)
-             }*/
+             }
 
         }
 
@@ -1413,9 +1412,8 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
 
     @SuppressLint("SetTextI18n")
     private fun showWithdrawAmountDialog(position: Int?) {
-
         val dialog = Dialog(requireContext(), R.style.BottomSheetDialog).apply {}
-        dialog.setCancelable(false)
+//        dialog.setCancelable(false)
         dialog.setContentView(R.layout.alert_dialog_withdraw_amount)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes = WindowManager.LayoutParams().apply {
@@ -1424,9 +1422,7 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
             height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
-
         val etWithdrawalAmount = dialog.findViewById<EditText>(R.id.etWithdrawalAmount)
-
         dialog.findViewById<ImageView>(R.id.imageCross).setOnClickListener {
             dialog.dismiss()
         }
@@ -1443,33 +1439,17 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                 val userEnteredAmount = etWithdrawalAmount.text.toString()
 
                 if (userEnteredAmount.trim().isEmpty()) {
-                    BaseApplication.alertError(
-                        requireContext(),
-                        ErrorMessage.amountEmptyError,
-                        false
-                    )
+                    BaseApplication.alertError(requireContext(), ErrorMessage.amountEmptyError, false)
                 } else {
                     if (localAmount != null) {
                         if (localAmount <= userEnteredAmount.toDouble()) {
-                            BaseApplication.alertError(
-                                requireContext(),
-                                ErrorMessage.amounthightError,
-                                false
-                            )
+                            BaseApplication.alertError(requireContext(), ErrorMessage.amounthightError, false)
                         } else if (userEnteredAmount.toDouble() == 0.0) {
                             // Handle the case where the local amount is lower than the entered amount
-                            BaseApplication.alertError(
-                                requireContext(),
-                                ErrorMessage.amountlowError,
-                                false
-                            )
+                            BaseApplication.alertError(requireContext(), ErrorMessage.amountlowError, false)
                         } else {
                             // Amounts are equal; proceed with the transfer
-                            transferAmount(
-                                dialog,
-                                bankDataLocal[position!!].customer_id,
-                                localAmount.toString()
-                            )
+                            transferAmount(dialog, bankDataLocal[position!!].customer_id, userEnteredAmount.toString())
                         }
                     } else {
                         // Handle the case where localAmount is null
@@ -1480,8 +1460,6 @@ class PaymentMethodFragment : Fragment(), CardBankListener {
                         )
                     }
                 }
-
-
             } else {
                 BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
             }
