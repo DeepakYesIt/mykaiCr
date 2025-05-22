@@ -603,6 +603,7 @@ class CheckoutScreenFragment : Fragment(), OnMapReadyCallback, OnItemLongClickLi
             }
         }
     }
+    
 
     private fun updateMarker(lat: Double, longi: Double) {
         Log.d("Location", "****** $lat, $longi")
