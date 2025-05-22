@@ -20,10 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.appsflyer.AppsFlyerLib
-import com.appsflyer.deeplink.DeepLinkResult
-import com.appsflyer.share.LinkGenerator
-import com.appsflyer.share.ShareInviteHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.github.mikephil.charting.components.Legend
@@ -32,7 +28,6 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.google.firebase.Firebase
 import com.google.gson.Gson
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.MainActivity
@@ -49,26 +44,13 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewm
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
-import okhttp3.RequestBody
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
-
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import java.io.IOException
 
 @AndroidEntryPoint
 class StatisticsGraphFragment : Fragment() {
@@ -185,6 +167,7 @@ class StatisticsGraphFragment : Fragment() {
                         " and even helps with meal planning without having to step into a supermarket." +
                         " See for yourself with a free gift from me. \nClick on link below:\n\n",
                 referLink
+//                "https://cleanuri.com/DgvE2e"
             )
         }
 
@@ -198,9 +181,6 @@ class StatisticsGraphFragment : Fragment() {
 
         deepLink()
 
-//        generateShortLink()
-
-//        generateDeepLink()
 
 
 
@@ -219,10 +199,7 @@ class StatisticsGraphFragment : Fragment() {
         dialog.setOnShowListener {
             calendarView?.date = lastSelectedDate ?: Calendar.getInstance().timeInMillis
         }
-//        // Get today's date
-//        val today = Calendar.getInstance()
-////        // Set the minimum date to today
-////        calendarView?.minDate = today.timeInMillis
+
 
         calendarView?.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
@@ -477,49 +454,6 @@ class StatisticsGraphFragment : Fragment() {
             })
     }
 
-/*    private fun generateShortLink() {
-        val afUserId = sessionManagement.getId()?.toString().orEmpty()
-        val referrerCode = sessionManagement.getReferralCode()?.toString().orEmpty()
-        val providerName = sessionManagement.getUserName()?.toString().orEmpty()
-        val providerImage = sessionManagement.getImage()?.toString().orEmpty()
-
-        val client = OkHttpClient()
-        // Use OneLink template ID here (not full domain)
-        val oneLinkId = "mPqu" // From your OneLink URL
-        val appPackage = "com.mykaimeal.planner" // Your app's package name
-
-        val jsonBody = JSONObject().apply {
-            put("app_id", appPackage)
-            put("af_dp", "mykai://property?af_user_id=$afUserId&Referrer=$referrerCode&providerName=$providerName&providerImage=$providerImage")
-            put("af_web_dp", "https://www.mykaimealplanner.com")
-        }
-
-        val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
-
-        val request = Request.Builder()
-            .url("https://onelink.appsflyer.com/$oneLinkId") // API endpoint
-            .post(requestBody)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("ShortLink", "Failed: ${e.message}")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body.string()
-                    val shortLink = JSONObject(responseBody ?: "").optString("shortlink")
-                    Log.d("ShortLink", "Generated short link: $shortLink")
-                    referLink = shortLink
-                } else {
-                    Log.e("ShortLink", "Error response: ${response.body}")
-                }
-            }
-        })
-    }*/
-
-
 
     private fun deepLink(){
         val afUserId = sessionManagement.getId()?.toString().orEmpty()
@@ -553,62 +487,9 @@ class StatisticsGraphFragment : Fragment() {
         referLink = fullURL
         Log.d("link ", "Generated OneLink URL: $fullURL")
 
-//        generateShortOneLink(afUserId, referrerCode, providerName, providerImage) { shortLink ->
-//            activity?.runOnUiThread {
-//                if (shortLink != null) {
-//                    Log.d("link", "Short OneLink URL: $shortLink")
-//                    referLink = shortLink
-//                    // Now you can use referLink as needed in your fragment
-//                } else {
-//                    Log.e("link", "Failed to generate short link")
-//                }
-//            }
-//        }
+
 
     }
 
 
-//    private fun generateDeepLink() {
-//
-//        val afUserId = sessionManagement.getId()?.toString().orEmpty()
-//        val referrerCode = sessionManagement.getReferralCode()?.toString().orEmpty()
-//        val providerName = sessionManagement.getUserName()?.toString().orEmpty()
-//        val providerImage = sessionManagement.getImage()?.toString().orEmpty()
-//
-//        // Your OneLink base URL and campaign details
-//        val currentCampaign = "property_share"
-//        val oneLinkId = "mPqu" // Replace with your OneLink ID
-//        val brandDomain = "mykaimealplanner.onelink.me" // Your OneLink domain
-//
-//        // Prepare the deep link values
-//        val deepLink = "mykai://property?af_user_id=$afUserId&Referrer=$referrerCode&providerName=$providerName&providerImage=$providerImage"
-//
-//        //  val deepLink = "https://property?propertyId=$propertyId&propertyType=$propertyType&city=$city"
-//        val webLink = "https://https://admin.getmykai.com/" // Web fallback link
-//        // Create the link generator
-//        val linkGenerator = ShareInviteHelper.generateInviteUrl(requireActivity())
-//            .setBaseDeeplink("https://$brandDomain/$oneLinkId")
-//            .setCampaign(currentCampaign)
-//            .addParameter("af_dp", deepLink) // App deep link
-//            .addParameter("Referrer", referrerCode)
-//            .addParameter("providerName", providerName)
-//            .addParameter("providerImage", providerImage)
-//            .addParameter("af_web_dp", webLink) // Web fallback URL
-//
-//        // Generate the link
-//        linkGenerator.generateLink(requireActivity(), object : LinkGenerator.ResponseListener {
-//            override fun onResponse(s: String) {
-//                // Successfully generated the link
-//                Log.d("TAG", s)
-//                // Example share message with the generated link
-//                val message = "Check out this property: $s"
-//                referLink = s
-//                Log.d("***********", s)
-//            }
-//            override fun onResponseError(s: String) {
-//                // Handle error if link generation fails
-//                Log.e("***********", "Error Generating Link: $s")
-//            }
-//        })
-//    }
 }
