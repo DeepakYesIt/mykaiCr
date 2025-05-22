@@ -113,6 +113,11 @@ class AdapterFoodListItem(var itemList: MutableList<Breakfast>,var type:String?,
         holder.binding.imgAppleRemove.setOnClickListener {
             onItemSelectListener.itemClick(position, "3", type)
         }
+
+
+        holder.itemView.setOnClickListener {
+            onItemSelectListener.itemClick(position, "5", type)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -83,6 +83,10 @@ class SessionManagement(var context: Context) {
         return pref!!.getBoolean(AppConstant.loginSession, false)
     }
 
+    fun getMoveScreen(): Boolean {
+        return pref!!.getBoolean(AppConstant.recipeDetailSession, false)
+    }
+
 
     fun setFirstTime(status: Boolean) {
         editorFirstTime!!.putBoolean(AppConstant.SessionFirstTime, status)
@@ -114,6 +118,11 @@ class SessionManagement(var context: Context) {
 
     fun setLoginSession(session: Boolean?) {
         editor!!.putBoolean(AppConstant.loginSession, session!!)
+        editor!!.commit()
+    }
+
+    fun setMoveScreen(session: Boolean?) {
+        editor!!.putBoolean(AppConstant.recipeDetailSession, session!!)
         editor!!.commit()
     }
 

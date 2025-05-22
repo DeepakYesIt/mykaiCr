@@ -1575,6 +1575,25 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
                     BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
                 }
             }
+
+            "3" -> {
+                // Map the type to the corresponding list and adapter
+                val (mealList, adapter) = when (type) {
+                    ErrorMessage.Breakfast -> recipesDateModel?.Breakfast to adapterPlanBreakByDateFast
+                    ErrorMessage.Lunch -> recipesDateModel?.Lunch to adapterLunchByDateFast
+                    ErrorMessage.Dinner -> recipesDateModel?.Dinner to adapterDinnerByDateFast
+                    ErrorMessage.Snacks -> recipesDateModel?.Dinner to adapterSnacksByDateFast
+                    ErrorMessage.Brunch -> recipesDateModel?.Dinner to AdapterteaTimeByDateFast
+                    else -> null to null
+                }
+                
+                val list= position?.let { mealList?.get(it) }
+                val bundle = Bundle().apply {
+                    putString("uri", list?.recipe?.uri)
+                    putString("mealType", type)
+                }
+                findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+            }
         }
     }
 

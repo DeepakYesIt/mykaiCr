@@ -40,6 +40,7 @@ import com.mykaimeal.planner.adapter.ChooseDayAdapter
 import com.mykaimeal.planner.adapter.IngredientsRecipeAdapter
 import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.basedata.NetworkResult
+import com.mykaimeal.planner.basedata.SessionManagement
 import com.mykaimeal.planner.databinding.FragmentRecipeDetailsBinding
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.recipedetails.RecipeDetailsViewModel
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.recipedetails.apiresponse.Data
@@ -69,7 +70,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
     private var uri: String = ""
     private var mealType: String = ""
     private var currentDate = Date() // Current date
-
+    private lateinit var sessionManagement: SessionManagement
     // Define global variables
     private lateinit var startDate: Date
     private lateinit var endDate: Date
@@ -81,7 +82,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
         // Inflate the layout for this fragment
         binding = FragmentRecipeDetailsBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[RecipeDetailsViewModel::class.java]
-
+        sessionManagement = SessionManagement(requireContext())
         uri = arguments?.getString("uri", "")?:""
         mealType = arguments?.getString("mealType", "")?:""
 
@@ -397,6 +398,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
                     val bundle=Bundle()
                     bundle.putString("uri",uri)
                     bundle.putString("mealType",mealType)
+                    sessionManagement.setMoveScreen(true)
                     findNavController().navigate(R.id.directionSteps1RecipeDetailsFragment,bundle)
                 }
             }

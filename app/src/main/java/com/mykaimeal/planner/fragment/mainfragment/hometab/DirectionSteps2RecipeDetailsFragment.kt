@@ -34,6 +34,7 @@ import com.mykaimeal.planner.activity.MainActivity
 import com.mykaimeal.planner.activity.MealRatingActivity
 import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.basedata.NetworkResult
+import com.mykaimeal.planner.basedata.SessionManagement
 import com.mykaimeal.planner.databinding.FragmentDirectionSteps2RecipeDetailsFragmentBinding
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.recipedetails.RecipeDetailsViewModel
 import com.mykaimeal.planner.fragment.mainfragment.viewmodel.walletviewmodel.apiresponse.SuccessResponseModel
@@ -53,6 +54,7 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
     private var mealType: String = ""
     private var uri: String = ""
     var count =1
+    private lateinit var sessionManagement: SessionManagement
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -62,7 +64,7 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding=FragmentDirectionSteps2RecipeDetailsFragmentBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[RecipeDetailsViewModel::class.java]
-
+        sessionManagement = SessionManagement(requireContext())
         mealType = arguments?.getString("mealType", "").toString()
         uri = arguments?.getString("uri", "").toString()
 
@@ -112,11 +114,12 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
 
 
     private fun backButton(){
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigateUp()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) { override fun handleOnBackPressed() {
+                    findNavController().navigateUp()
+                }
+            })
+
+
     }
 
     private fun convertTimeToMillis(time: String): Long {
@@ -398,9 +401,13 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
             binding.tvPreviousBtn.visibility=View.VISIBLE
         }
 
+    }
 
-
-
+    override fun onStart() {
+        super.onStart()
+        if (!sessionManagement.getMoveScreen()) {
+            findNavController().navigateUp()
+        }
     }
 
 }
