@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +32,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -57,6 +61,7 @@ import com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apire
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -128,13 +133,57 @@ class CreateRecipeFragment : Fragment(), AdapterCreateIngredientsItem.UploadImag
                 // Now you can send the image URI to Vision API for processing
                 // Convert image to Base64
                 binding.addImageIcon.visibility = View.GONE
-                checkBase64Url=true
+               /* checkBase64Url=true
                 recipeMainImageUri = UriToBase64(requireActivity(), uri)
                 Glide.with(this)
                     .load(uri)
                     .placeholder(R.drawable.no_image)
                     .error(R.drawable.no_image)
-                    .into(binding.addImages)
+                    .into(binding.addImages)*/
+
+                Glide.with(requireActivity())
+                    .asBitmap() // Important: get Bitmap instead of Drawable
+                    .load(uri)
+                    .error(R.drawable.no_image)
+                    .placeholder(R.drawable.no_image)
+                    .listener(object : RequestListener<Bitmap> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            binding.layProgess.root.visibility = View.GONE
+                            binding.addImageIcon.visibility = View.VISIBLE
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Bitmap?,
+                            model: Any?,
+                            target: Target<Bitmap>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            binding.layProgess.root.visibility = View.GONE
+                            binding.addImageIcon.visibility = View.GONE
+                            // Convert bitmap to base64
+                            resource?.let {
+                                recipeMainImageUri = bitmapToBase64(it)
+                                Log.d("Base64", recipeMainImageUri!!)
+                            }
+                            return false
+                        }
+                    })
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            binding.addImages.setImageBitmap(resource) // Set the image
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+                            // Handle cleanup
+                        }
+                    })
             }
         }
     }
@@ -326,29 +375,32 @@ class CreateRecipeFragment : Fragment(), AdapterCreateIngredientsItem.UploadImag
     private fun createRecipeApi() {
         lifecycleScope.launch {
             try {
-                if (!checkBase64Url!!) {
-                    checkBase64Url=true
-                    recipeMainImageUri = imageUrlToBase64(recipeMainImageUri!!)
-                }
-
 
                 val jsonObject = JsonObject()
                 Log.d("fdfdf", "ffd:--0" + ingredientList.size)
                 // Create a JsonArray for ingredients
                 val ingArray = JsonArray()
                 val prepArray = JsonArray()
-                // Extract required fields dynamically
                 ingredientList.forEach { item ->
-                    /* val ingredientString = "${item.ingredientName},${item.quantity},${item.measurement}"*/
-                    ingArray.add(item.ingredientName)
+                    val quantity = item.quantity
+                    val unit = item.measurement ?: "null"
+                    val name = item.ingredientName
+                    val ingredientString = if (unit.equals("<unit>", true) || unit.equals("null", true) || unit.isBlank()) {
+                        "$quantity $name"
+                    } else {
+                        "$quantity $unit $name"
+                    }
+                    ingArray.add(ingredientString)
                 }
                 // Prepare prep steps
                 cookList.forEach { items ->
                     prepArray.add(items.description)
                 }
                 var cookBookID = ""
-                if (binding.spinnerCookBook.text.toString().isNotEmpty()) {
-                    cookBookID = cookbookList[binding.spinnerCookBook.selectedIndex].id.toString()
+                cookBookID = if (binding.spinnerCookBook.text.toString().equals("Favorites",true)) {
+                    cookbookList[0].id.toString()
+                }else{
+                    cookbookList[binding.spinnerCookBook.selectedIndex].id.toString()
                 }
                 // Add data to JSON object
                 jsonObject.addProperty("recipe_key", recipeStatus.toString())
@@ -437,9 +489,9 @@ class CreateRecipeFragment : Fragment(), AdapterCreateIngredientsItem.UploadImag
                     }
                     if (recipe.images?.SMALL?.url!=null){
                         val imageUrl = recipe.images.SMALL.url
-                        recipeMainImageUri = recipe.images.SMALL.url
+//                        recipeMainImageUri = recipe.images.SMALL.url
                         checkBase64Url=false
-                        Glide.with(requireActivity())
+                        /*Glide.with(requireActivity())
                             .load(imageUrl)
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.no_image)
@@ -467,7 +519,52 @@ class CreateRecipeFragment : Fragment(), AdapterCreateIngredientsItem.UploadImag
                                     return false
                                 }
                             })
-                            .into(binding.addImages)
+                            .into(binding.addImages)*/
+
+                        Glide.with(requireActivity())
+                            .asBitmap() // Important: get Bitmap instead of Drawable
+                            .load(imageUrl)
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.no_image)
+                            .listener(object : RequestListener<Bitmap> {
+                                override fun onLoadFailed(
+                                    e: GlideException?,
+                                    model: Any?,
+                                    target: Target<Bitmap>?,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    binding.layProgess.root.visibility = View.GONE
+                                    binding.addImageIcon.visibility = View.VISIBLE
+                                    return false
+                                }
+
+                                override fun onResourceReady(
+                                    resource: Bitmap?,
+                                    model: Any?,
+                                    target: Target<Bitmap>?,
+                                    dataSource: DataSource?,
+                                    isFirstResource: Boolean
+                                ): Boolean {
+                                    binding.layProgess.root.visibility = View.GONE
+                                    binding.addImageIcon.visibility = View.GONE
+                                    // Convert bitmap to base64
+                                    resource?.let {
+                                        recipeMainImageUri = bitmapToBase64(it)
+                                        Log.d("Base64", recipeMainImageUri!!)
+                                    }
+                                    return false
+                                }
+                            })
+                            .into(object : CustomTarget<Bitmap>() {
+                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                    binding.addImages.setImageBitmap(resource) // Set the image
+                                }
+
+                                override fun onLoadCleared(placeholder: Drawable?) {
+                                    // Handle cleanup
+                                }
+                            })
+
                     }else{
                         binding.layProgess.root.visibility= View.GONE
                         binding.addImageIcon.visibility= View.VISIBLE
@@ -505,6 +602,14 @@ class CreateRecipeFragment : Fragment(), AdapterCreateIngredientsItem.UploadImag
         }catch (e:Exception){
             Log.d("CreateRecipe:","Message:--"+e.message)
         }
+    }
+
+
+    private fun bitmapToBase64(bitmap: Bitmap): String {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        val byteArray = outputStream.toByteArray()
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }
 
     private fun handleApiCookBookResponse(result: NetworkResult<String>) {

@@ -73,14 +73,14 @@
                     android:nestedScrollingEnabled="false"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2"
-                    tools:listitem="@layout/adapter_cookbook_details_item" />
+                    app:spanCount="2" />
                 <RelativeLayout
                     android:id="@+id/relRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_300sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:visibility="gone"
+                    android:layout_below="@id/llCookBookItems"
                     android:layout_centerInParent="true"
                     android:layout_marginHorizontal="@dimen/_5sdp">
                     <TextView

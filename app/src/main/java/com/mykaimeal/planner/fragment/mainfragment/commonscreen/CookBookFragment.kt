@@ -116,6 +116,7 @@ class CookBookFragment : Fragment(), OnItemClickListener, OnItemSelectListener {
 
         binding.pullToRefresh.setOnRefreshListener {
             addCookBookDefault()
+            viewModel.setDataCookBookList(null)
             loadApi()
         }
 

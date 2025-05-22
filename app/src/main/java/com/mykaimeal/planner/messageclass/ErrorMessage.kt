@@ -4,6 +4,7 @@ object ErrorMessage {
 
 
      const val networkError:String="Please check your internet connection"
+     const val recipeTimeError:String="You can view this recipe after 45 minutes."
      const val subscriptionError:String="Get full access to easier grocery\nordering, smarter meals, and\nless stress."
      const val responseError:String="Request timed out. The server is taking too long to respond. Please check your internet connection or try again later."
      const val planError:String="Please select subscription plan"
