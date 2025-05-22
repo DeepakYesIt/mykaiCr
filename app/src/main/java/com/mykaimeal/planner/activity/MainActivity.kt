@@ -190,7 +190,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
             if (result.resultCode == Activity.RESULT_OK) {
                 val data = result.data
                 val submittedResult = data?.getStringExtra("submitted_result")
-                binding.cardViewAddRecipe.visibility = View.VISIBLE
                 if (!submittedResult.equals("close")){
                     searchBottomDialog(submittedResult)
                 }
@@ -244,10 +243,9 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
         imageData = bottomSheetDialog?.findViewById(R.id.imageData)
         lay_progess = bottomSheetDialog?.findViewById(R.id.lay_progess)
         bottomSheetDialog?.show()
-
         imgRecipeLike!!.setOnClickListener{
             if (loadDataStatus){
-                addFavTypeDialogUrl(submittedResult)
+                addFavTypeDialogUrl(uri)
             }
         }
 
@@ -289,7 +287,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
                 BaseApplication.alertError(this, ErrorMessage.selectCookBookError, false)
             } else {
                 val cookbooktype = cookbookList[spinnerActivityLevel.selectedIndex].id
-                recipeLikeAndUnlikeDataUrl(submittedResult.toString(), "0",cookbooktype.toString(),dialogAddRecipe)
+                recipeLikeAndUnlikeDataUrl(submittedResult.toString(), "1",cookbooktype.toString(),dialogAddRecipe)
             }
         }
 
@@ -334,9 +332,8 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
                 }else{
                     Toast.makeText(this,apiModel.message,Toast.LENGTH_LONG).show()
                 }
-
             } else {
-                apiModel.code?.let { apiModel.message?.let { it1 -> handleError(it, it1) } }
+                handleError(apiModel.code,apiModel.message.toString())
             }
         } catch (e: Exception) {
             showAlert(e.message, false)
@@ -1506,6 +1503,8 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
             if (apiModel.code == 200 && apiModel.success) {
                 dialogAddRecipe?.dismiss()
                 bottomSheetDialog?.dismiss()
+                uri=""
+                Toast.makeText(this,apiModel.message,Toast.LENGTH_LONG).show()
             } else {
                 handleError(apiModel.code,apiModel.message)
             }
