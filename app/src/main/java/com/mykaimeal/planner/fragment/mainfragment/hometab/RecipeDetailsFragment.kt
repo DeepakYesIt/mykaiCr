@@ -254,6 +254,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients != null && viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients!!.size > 0) {
+            selectAll=false
             selectAll = !selectAll // Toggle the selectAll value
             // Update the drawable based on the selectAll state
             val drawableRes = if (selectAll) R.drawable.orange_checkbox_images else R.drawable.orange_uncheck_box_images

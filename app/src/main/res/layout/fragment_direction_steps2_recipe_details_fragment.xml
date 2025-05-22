@@ -132,6 +132,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:text="By Cotter Crunch"
                                 android:textColor="#FFFFFF"
+                                android:visibility="gone"
                                 android:textSize="@dimen/_10sdp" />
                         </LinearLayout>
 

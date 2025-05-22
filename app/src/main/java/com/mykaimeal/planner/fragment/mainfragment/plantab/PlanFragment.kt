@@ -1576,7 +1576,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
                 }
             }
 
-            "3" -> {
+            "4" -> {
                 // Map the type to the corresponding list and adapter
                 val (mealList, adapter) = when (type) {
                     ErrorMessage.Breakfast -> recipesDateModel?.Breakfast to adapterPlanBreakByDateFast
@@ -1586,7 +1586,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
                     ErrorMessage.Brunch -> recipesDateModel?.Dinner to AdapterteaTimeByDateFast
                     else -> null to null
                 }
-                
+
                 val list= position?.let { mealList?.get(it) }
                 val bundle = Bundle().apply {
                     putString("uri", list?.recipe?.uri)

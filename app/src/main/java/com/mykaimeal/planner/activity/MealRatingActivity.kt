@@ -97,7 +97,7 @@ class MealRatingActivity : AppCompatActivity() {
             Log.d("@@@ Health profile", "message :- $data")
             if (apiModel.code == 200 && apiModel.success) {
                 Toast.makeText(this@MealRatingActivity,apiModel.message,Toast.LENGTH_LONG).show()
-                sessionManagement.setMoveScreen(true)
+                sessionManagement.setMoveScreen(false)
                 finish()
             } else {
                 if (apiModel.code == ErrorMessage.code) {
