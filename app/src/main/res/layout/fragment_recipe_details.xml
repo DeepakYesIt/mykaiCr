@@ -10,7 +10,7 @@
         android:id="@+id/lay_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="start|center">
 
@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
                 android:src="@drawable/back_icon" />
+
         </RelativeLayout>
 
         <TextView

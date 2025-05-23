@@ -34,7 +34,6 @@ class DirectionSteps1RecipeDetailsFragment : Fragment() {
     private var uri: String = ""
     private lateinit var sessionManagement: SessionManagement
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
