@@ -401,101 +401,101 @@ class StatisticsGraphFragment : Fragment() {
 
     private fun shareImageWithText(description: String, link: String) {
         // Download image using Glide
-//        Glide.with(requireContext())
-//            .asBitmap() // Request a Bitmap image
-//            .load(R.drawable.shareicon) // Provide the URL to load the image from
-//            .into(object : CustomTarget<Bitmap>() {
-//                override fun onResourceReady(
-//                    resource: Bitmap,
-//                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-//                ) {
-//                    try {
-//                        // Save the image to a file in the app's external storage
-//                        val file = File(
-//                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-//                            "shared_image.png"
-//                        )
-//                        val fos = FileOutputStream(file)
-//                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
-//                        fos.close()
-//
-//                        // Create URI for the file using FileProvider
-//                        val uri: Uri = FileProvider.getUriForFile(
-//                            requireContext(),
-//                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
-//                            file
-//                        )
-//
-//                        // Format the message with line breaks
-//                        val formattedText = """$description$link""".trimIndent()
-//
-//                        // Create an intent to share the image and text
-//                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-//                            type = "image/png"
-//                            putExtra(Intent.EXTRA_STREAM, uri)
-//                            putExtra(Intent.EXTRA_TEXT, formattedText)
-//                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                        }
-//
-//                        // Launch the share dialog
-//                        requireContext().startActivity(
-//                            Intent.createChooser(
-//                                shareIntent,
-//                                "Share Image"
-//                            )
-//                        )
-//
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
-//                    }
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    // Optional: Handle if the image load is cleared or cancelled
-//                }
-//            })
-
-        val rating = 4.5f // Example rating
-
         Glide.with(requireContext())
-            .asBitmap()
-            .load(R.drawable.shareicon)
+            .asBitmap() // Request a Bitmap image
+            .load(R.drawable.shareicon) // Provide the URL to load the image from
             .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
+                ) {
                     try {
-                        // Add rating on image
-//                        val ratedImage = addRatingToImage(resource, rating)
-                        val ratedImage = addRatingToImage(resource, rating)
-
-                        // Save image
-                        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "rated_image.png")
+                        // Save the image to a file in the app's external storage
+                        val file = File(
+                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                            "shared_image.png"
+                        )
                         val fos = FileOutputStream(file)
-                        ratedImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
                         fos.close()
 
-                        val uri = FileProvider.getUriForFile(
+                        // Create URI for the file using FileProvider
+                        val uri: Uri = FileProvider.getUriForFile(
                             requireContext(),
-                            requireActivity().packageName + ".provider",
+                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
                             file
                         )
 
+                        // Format the message with line breaks
+                        val formattedText = """$description$link""".trimIndent()
+
+                        // Create an intent to share the image and text
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "image/png"
                             putExtra(Intent.EXTRA_STREAM, uri)
-                            putExtra(Intent.EXTRA_TEXT, "$description\n$link")
+                            putExtra(Intent.EXTRA_TEXT, formattedText)
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
 
-                        startActivity(Intent.createChooser(shareIntent, "Share Image with Rating"))
+                        // Launch the share dialog
+                        requireContext().startActivity(
+                            Intent.createChooser(
+                                shareIntent,
+                                "Share Image"
+                            )
+                        )
 
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
                     }
                 }
 
-                override fun onLoadCleared(placeholder: Drawable?) {}
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    // Optional: Handle if the image load is cleared or cancelled
+                }
             })
+
+//        val rating = 4.5f // Example rating
+//
+//        Glide.with(requireContext())
+//            .asBitmap()
+//            .load(R.drawable.shareicon)
+//            .into(object : CustomTarget<Bitmap>() {
+//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                    try {
+//                        // Add rating on image
+////                        val ratedImage = addRatingToImage(resource, rating)
+//                        val ratedImage = addRatingToImage(resource, rating)
+//
+//                        // Save image
+//                        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "rated_image.png")
+//                        val fos = FileOutputStream(file)
+//                        ratedImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+//                        fos.close()
+//
+//                        val uri = FileProvider.getUriForFile(
+//                            requireContext(),
+//                            requireActivity().packageName + ".provider",
+//                            file
+//                        )
+//
+//                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+//                            type = "image/png"
+//                            putExtra(Intent.EXTRA_STREAM, uri)
+//                            putExtra(Intent.EXTRA_TEXT, "$description\n$link")
+//                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//                        }
+//
+//                        startActivity(Intent.createChooser(shareIntent, "Share Image with Rating"))
+//
+//                    } catch (e: Exception) {
+//                        e.printStackTrace()
+//                    }
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {}
+//            })
 
     }
 
@@ -567,8 +567,6 @@ class StatisticsGraphFragment : Fragment() {
         val fullURL = uriBuilder.toString()
         referLink = fullURL
         Log.d("link ", "Generated OneLink URL: $fullURL")
-
-
 
     }
 
