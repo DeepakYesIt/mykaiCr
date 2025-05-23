@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/rlToolbar"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_height="wrap_content">
@@ -28,7 +28,7 @@
             android:textColor="#171D1B"
             android:fontFamily="@font/montserrat_semibold"
             android:text="Full Cooking Schedule"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_14sdp" />
 
     </RelativeLayout>
 
@@ -67,9 +67,10 @@
                     android:layout_below="@+id/tvName"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/poppins"
-                    android:textColor="#3C4541"
+                    android:textColor="@color/light_black"
                     android:text="Next meal to be cook."
                     android:textSize="@dimen/_12sdp" />
+
                 <RelativeLayout
                     android:id="@+id/relCalendarView"
                     android:layout_width="wrap_content"
@@ -86,7 +87,7 @@
                         android:padding="@dimen/_7sdp"
                         android:text="12-18 Sept"
                         android:textSize="@dimen/_9sdp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:textColor="#000000"
                         app:drawableEndCompat="@drawable/drop_down_icon" />
                 </RelativeLayout>
@@ -124,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_12sdp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="12 Sept - 18 Sept"
                         android:textColor="#000000"
                         android:textSize="@dimen/_10sdp" />
@@ -163,10 +164,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/_20sdp"
                     android:paddingVertical="@dimen/_10sdp"
                     android:text="Change cooking Schedule"
-                    android:fontFamily="@font/poppins"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
 
@@ -185,8 +186,8 @@
                     android:text="Breakfast "
                     android:textColor="#0A2533"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/_13sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchBreakFast"
@@ -211,8 +212,8 @@
                     android:text="Brunch"
                     android:textColor="#0A2533"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/_13sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchTeaTime"
@@ -237,8 +238,8 @@
                     android:text="Lunch "
                     android:textColor="#0A2533"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/_13sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchLunch"
@@ -261,8 +262,9 @@
                     android:text="Snacks"
                     android:textColor="#0A2533"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/_13sdp"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchSnacks"
                     android:layout_width="match_parent"
@@ -284,8 +286,9 @@
                     android:text="Dinner "
                     android:textColor="#0A2533"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_14sdp"/>
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="@dimen/_13sdp"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcySearchDinner"
                     android:layout_width="match_parent"

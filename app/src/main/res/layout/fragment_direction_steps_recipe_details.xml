@@ -30,7 +30,7 @@
             android:layout_toEndOf="@+id/imgStep1RecipeDetails"
             android:fontFamily="@font/montserrat_semibold"
             android:text="Recipe Details"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_14sdp" />
 
     </RelativeLayout>
 
@@ -172,7 +172,7 @@
                     android:id="@+id/textDirections"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Ingredients"
                     android:textColor="#999999"
@@ -183,10 +183,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-
-
 
             </LinearLayout>
 
@@ -208,9 +206,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/poppins_medium"
             android:paddingVertical="@dimen/_10sdp"
             android:text="Next Step"
-            android:fontFamily="@font/poppins"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 

@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.AuthActivity
@@ -74,7 +75,6 @@ class LoginFragment : Fragment() {
     private var token: String = ""
     private var backType: String = ""
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -121,9 +121,20 @@ class LoginFragment : Fragment() {
     }
 
     private fun getFcmToken() {
-        lifecycleScope.launch {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    token=task.result
+                    Log.d("FCM", "FCM Token: ${task.result}")
+                } else {
+                    token="Fetching FCM token failed"
+                    Log.e("FCM", "Fetching FCM token failed", task.exception)
+                }
+            }
+        /*lifecycleScope.launch {
             token = BaseApplication.fetchFcmToken()
-        }
+            Log.d("Login token", "****$token")
+        }*/
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

@@ -123,9 +123,11 @@ class CreateCookBookFragment : Fragment() {
         if (checkType == "New") {
             binding.tvToolbar.text = "Create Cookbook"
             binding.textDone.text = "Done"
+            binding.tvAddImage.text="Add Image"
         } else {
             binding.tvToolbar.text = "Edit Cookbook"
             binding.textDone.text = "Update"
+            binding.tvAddImage.text="Add Cookbook Cover"
         }
 
         if (!name.equals("",true)){

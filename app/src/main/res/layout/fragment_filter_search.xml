@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <RelativeLayout
                 android:id="@+id/layTittle"
                 android:layout_width="match_parent"
@@ -46,7 +42,6 @@
 
 
             </RelativeLayout>
-
             <RelativeLayout
                 android:id="@+id/relIngRecSearchBar"
                 android:layout_width="match_parent"
@@ -84,7 +79,6 @@
                     android:src="@drawable/filter_icon" />
 
             </RelativeLayout>
-
             <LinearLayout
                 android:id="@+id/llMealType"
                 android:layout_width="match_parent"
@@ -121,7 +115,6 @@
                     android:layout_marginStart="@dimen/_10sdp" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/llDiet"
                 android:layout_width="match_parent"
@@ -157,7 +150,6 @@
                     android:layout_marginStart="@dimen/_10sdp" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/llCookTime"
                 android:layout_width="match_parent"
@@ -193,12 +185,83 @@
                     android:layout_marginStart="@dimen/_10sdp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llCuisine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llCookTime"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
+                android:background="@drawable/search_recipients_bg"
+                android:orientation="vertical">
 
+                <RelativeLayout
+                    android:id="@+id/relCuisine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Cuisine"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp" />
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyCuisine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llNutrition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llCuisine"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
+                android:background="@drawable/search_recipients_bg"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relNutrition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Nutrition"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp" />
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyNutrition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp" />
+
+            </LinearLayout>
             <RelativeLayout
                 android:id="@+id/relApplyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/llCookTime"
+                android:layout_below="@+id/llNutrition"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -219,11 +282,6 @@
                     android:textSize="@dimen/_12sdp" />
 
             </RelativeLayout>
-
-
         </RelativeLayout>
-
     </ScrollView>
-
-
 </RelativeLayout>

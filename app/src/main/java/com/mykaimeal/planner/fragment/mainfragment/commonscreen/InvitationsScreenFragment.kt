@@ -112,7 +112,6 @@ class InvitationsScreenFragment : Fragment() {
 
 
         binding.textInviteFriends.setOnClickListener {
-
             shareImageWithText(
                 "Hey, My kai an all-in-one app that’s completely changed the way I shop. It saves me time, money," +
                         " and even helps with meal planning without having to step into a supermarket." +

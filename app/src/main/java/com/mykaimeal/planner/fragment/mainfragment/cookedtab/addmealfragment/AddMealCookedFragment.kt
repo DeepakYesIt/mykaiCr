@@ -341,7 +341,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
 
     @SuppressLint("DefaultLocale", "SetTextI18n")
     private fun updateValue() {
-        binding.tvServing.text = "serves $quantity"
+        binding.tvServing.text = "Serves $quantity"
     }
 
     private fun openDialog() {

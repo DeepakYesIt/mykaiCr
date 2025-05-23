@@ -8,8 +8,10 @@ import android.net.ConnectivityManager
 import android.util.Log
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
-import com.appsflyer.deeplink.DeepLinkResult
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
 import com.mykaimeal.planner.commonworkutils.AppsFlyerConstants
 import dagger.hilt.android.HiltAndroidApp
 import java.io.File
@@ -32,7 +34,15 @@ class MykaBaseApplication : Application() {
         super.onCreate()
         instance = this
         FirebaseApp.initializeApp(this)
-
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        FirebaseInstallations.getInstance().id
+            .addOnCompleteListener { task: Task<String> ->
+                if (!task.isSuccessful) {
+                    Log.w("FIS", "getId failed", task.exception)
+                    return@addOnCompleteListener
+                }
+                Log.d("FIS", "Installation ID: " + task.result)
+            }
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
 //        registerReceiver(NetworkChangeReceiver(), filter)
         val dexOutputDir: File = codeCacheDir

@@ -99,9 +99,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
-                        android:textColor="#3C4541"
+                        android:textColor="@color/light_black"
                         android:text="Your cooking schedule is empty! Tap the button below to add a meal and get started."
                         android:textSize="@dimen/_12sdp" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -178,7 +179,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:text="See all"
-                                android:fontFamily="@font/montserrat_semibold"
+                                android:fontFamily="@font/poppins_medium"
                                 android:textColor="#06C169" />
                         </RelativeLayout>
 
@@ -217,13 +218,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_toStartOf="@+id/rlSeeAllBtn"
-                                android:layout_toEndOf="@+id/imgCookedMeal"
-                                android:fontFamily="@font/poppins_medium"
+                                android:fontFamily="@font/poppins_semibold"
                                 android:text="Cooked Meals"
                                 android:drawablePadding="@dimen/_10sdp"
-                                android:drawableStart="@drawable/cooked_meal_image"
                                 android:textSize="@dimen/_13sdp"
-                                android:textColor="#111111" />
+                                android:textColor="#111111"
+                                app:drawableStartCompat="@drawable/cooked_meal_image" />
 
                             <ImageView
                                 android:id="@+id/imageCookedMeals"
@@ -250,7 +250,7 @@
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_2sdp"
                                     android:text="See All"
-                                    android:fontFamily="@font/poppins"
+                                    android:fontFamily="@font/poppins_medium"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_12sdp" />
 
@@ -279,7 +279,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:fontFamily="@font/poppins_medium"
+                                        android:fontFamily="@font/poppins_semibold"
                                         android:text="Breakfast"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_13sdp"
@@ -294,14 +294,12 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
                                             android:drawablePadding="@dimen/_10sdp"
-                                            android:drawableStart="@drawable/fridge_image"
-                                            android:layout_toEndOf="@+id/imgFridgeMeal"
                                             android:fontFamily="@font/poppins_medium"
                                             android:text="Fridge "
                                             android:textSize="@dimen/_13sdp"
-                                            android:textColor="#111111" />
+                                            android:textColor="#111111"
+                                            app:drawableStartCompat="@drawable/fridge_image" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -315,14 +313,12 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:layout_toEndOf="@+id/imgFreezer"
                                             android:fontFamily="@font/poppins_medium"
                                             android:text="Freezer"
                                             android:drawablePadding="@dimen/_10sdp"
-                                            android:drawableStart="@drawable/freezer_image"
                                             android:textSize="@dimen/_13sdp"
-                                            android:textColor="#111111" />
+                                            android:textColor="#111111"
+                                            app:drawableStartCompat="@drawable/freezer_image" />
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -347,7 +343,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/poppins_medium"
+                                            android:fontFamily="@font/poppins_semibold"
                                             android:text="Breakfast"
                                             android:textColor="#111111"
                                             android:textSize="@dimen/_13sdp" />
@@ -373,6 +369,7 @@
                                             android:textSize="@dimen/_13sdp" />
 
                                     </LinearLayout>
+
                                     <LinearLayout
                                         android:id="@+id/lay_teatime"
                                         android:layout_width="wrap_content"
@@ -383,7 +380,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/poppins_medium"
+                                            android:fontFamily="@font/poppins_semibold"
                                             android:text="Brunch"
                                             android:textColor="#111111"
                                             android:textSize="@dimen/_13sdp" />
@@ -417,7 +414,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/poppins_medium"
+                                            android:fontFamily="@font/poppins_semibold"
                                             android:text="Lunch"
                                             android:textColor="#111111"
                                             android:textSize="@dimen/_13sdp" />
@@ -453,7 +450,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/poppins_medium"
+                                            android:fontFamily="@font/poppins_semibold"
                                             android:text="Snacks"
                                             android:textColor="#111111"
                                             android:textSize="@dimen/_13sdp" />
@@ -465,6 +462,7 @@
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center_vertical"
                                             android:text="-"
+                                            android:fontFamily="@font/poppins_medium"
                                             android:textColor="#111111"
                                             android:textSize="@dimen/_13sdp" />
 
@@ -476,7 +474,7 @@
                                             android:gravity="center_vertical"
                                             android:text="-"
                                             android:textColor="#111111"
-
+                                            android:fontFamily="@font/poppins_medium"
                                             android:textSize="@dimen/_13sdp" />
 
 
@@ -490,7 +488,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:fontFamily="@font/poppins_medium"
+                                            android:fontFamily="@font/poppins_semibold"
                                             android:text="Dinner"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_13sdp" />
@@ -501,6 +499,7 @@
                                             android:layout_height="@dimen/_40sdp"
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center_vertical"
+                                            android:fontFamily="@font/poppins_medium"
                                             android:text="-"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_13sdp" />
@@ -511,6 +510,7 @@
                                             android:layout_height="@dimen/_40sdp"
                                             android:layout_gravity="center_horizontal"
                                             android:gravity="center_vertical"
+                                            android:fontFamily="@font/poppins_medium"
                                             android:text="-"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_13sdp" />
@@ -580,9 +580,10 @@
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:paddingVertical="@dimen/_6sdp"
                                     android:text="Plan a meal"
-                                    android:fontFamily="@font/poppins"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_12sdp" />
+
                             </RelativeLayout>
 
                         </RelativeLayout>
@@ -641,12 +642,11 @@
                                     android:paddingHorizontal="@dimen/_8sdp"
                                     android:paddingVertical="@dimen/_6sdp"
                                     android:text="Check savings"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_12sdp" />
                             </RelativeLayout>
-
                         </RelativeLayout>
-
                     </RelativeLayout>
 
                     <ImageView

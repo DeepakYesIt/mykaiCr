@@ -33,7 +33,7 @@
                 android:id="@+id/recySuperMarket"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_250sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"

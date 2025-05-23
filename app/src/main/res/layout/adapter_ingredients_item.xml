@@ -79,6 +79,7 @@
                             android:layout_marginStart="@dimen/_4sdp"
                             android:layout_toEndOf="@+id/imgWatch"
                             android:text="0 min"
+                            android:fontFamily="@font/sarabun"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp" />
 
@@ -136,27 +137,33 @@
                             android:layout_toEndOf="@+id/imgDiyas"
                             android:fontFamily="@font/poppins"
                             android:text="Ingredients"
-                            android:textColor="#3C4541"
+                            android:layout_toStartOf="@+id/relCheckMissing"
+                            android:textColor="@color/light_black"
                             android:textSize="@dimen/_10sdp" />
+
+                        <RelativeLayout
+                            android:id="@+id/relCheckMissing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:layout_alignParentEnd="true">
 
                         <ImageView
                             android:id="@+id/checkBoxImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:layout_toEndOf="@+id/tvIngredients"
                             android:src="@drawable/orange_checkbox_images" />
 
                         <ImageView
                             android:id="@+id/missingIngredientsImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:layout_toEndOf="@+id/tvIngredients"
                             android:src="@drawable/missing_ingredients_icon"
                             android:visibility="gone" />
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
                 </RelativeLayout>

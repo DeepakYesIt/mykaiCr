@@ -72,7 +72,7 @@ class AdapterPlanBreakByDateFast(var datalist: MutableList<BreakfastModelPlanByD
         }
 
         if (data?.servings != null) {
-            holder.binding.tvServing.text = "" + data.servings +" servings"
+            holder.binding.tvServing.text = "" + data.servings +" Servings"
         }
 
         if (data?.recipe?.totalNutrients?.FAT?.quantity != null) {

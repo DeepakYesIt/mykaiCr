@@ -74,7 +74,6 @@ class DirectionSteps2RecipeDetailsFragment : Fragment() {
             llBottomNavigation.visibility = View.GONE
         }
 
-
         backButton()
 
         totalProgressValue= viewModel.getRecipeData()?.get(0)!!.recipe?.instructionLines?.size!!

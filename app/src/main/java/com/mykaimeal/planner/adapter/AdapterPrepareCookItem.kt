@@ -65,13 +65,23 @@ class AdapterPrepareCookItem(private var datalist: MutableList<IngredientsModel>
             holder.binding.layProgess.root.visibility= View.GONE
         }
 
-        if (data.food!=null){
+      /*  if (data.food!=null){
             val foodName = data.food
             val formattedFoodName = foodName.let {
                 // Capitalize the first letter and make the rest lowercase
                 it.replaceFirstChar { char -> char.uppercase() } + it.drop(1).lowercase()
             }
             holder.binding.tvTitleName.text =formattedFoodName
+        }*/
+
+        if (data.food!=null){
+            val foodName = data.food
+            val result = foodName.mapIndexed { index, c ->
+                if (index == 0 || c.isUpperCase()) c.uppercaseChar() else c
+            }.joinToString("")
+
+            holder.binding.tvTitleName.text = result
+
         }
 
         if (data.quantity!=null){

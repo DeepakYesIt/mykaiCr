@@ -39,7 +39,7 @@
                     android:layout_toEndOf="@+id/imgStep2RecipeDetails"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Recipe Details"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_14sdp" />
 
             </RelativeLayout>
 
@@ -71,7 +71,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/light_black"
                     android:text=""
-                    android:fontFamily="@font/poppins_medium"/>
+                    android:fontFamily="@font/sarabun_medium"/>
 
             </RelativeLayout>
 
@@ -177,7 +177,7 @@
                             android:id="@+id/textPrepare"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_semibold"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Prepare The Eggs:"
                             android:textColor="#FE9F45"
                             android:textSize="@dimen/_13sdp" />
@@ -217,11 +217,11 @@
                             android:id="@+id/tvTiming"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/sarabun"
+                            android:fontFamily="@font/poppins_medium"
                             android:paddingHorizontal="@dimen/_15sdp"
                             android:paddingVertical="@dimen/_7sdp"
                             android:text="00 : 00 : 00"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/light_black" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -235,11 +235,10 @@
                         android:background="@drawable/start_timer_bg"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_8sdp"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="Start Timer"
                         android:textColor="#FFFFFF"
                         android:textSize="@dimen/_12sdp" />
-
 
                 </RelativeLayout>
 
@@ -268,9 +267,10 @@
             android:background="@drawable/outline_green_border_bg"
             android:padding="@dimen/_10sdp"
             android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:textColor="@color/light_green"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/tvNextStepBtn"
@@ -281,6 +281,7 @@
             android:padding="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:textSize="@dimen/_13sdp"
             android:textColor="@color/white" />

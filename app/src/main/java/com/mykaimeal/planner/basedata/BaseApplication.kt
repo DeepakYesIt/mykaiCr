@@ -126,7 +126,7 @@ object BaseApplication {
                 "Token is null or empty"
             }
         } catch (e: Exception) {
-            Log.e("FCMToken", "Exception while fetching token", e)
+            Log.e("FCMToken", "Exception while fetching token"+e.message.toString())
             "Fetching FCM registration token failed"
         }
     }

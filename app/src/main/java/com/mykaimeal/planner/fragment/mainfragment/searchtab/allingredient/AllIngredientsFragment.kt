@@ -13,6 +13,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.mykaimeal.planner.OnItemClickListener
 import com.mykaimeal.planner.R
@@ -48,6 +49,10 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
     private var lastSelected="Fruit"
     private lateinit var textListener: TextWatcher
     private var textChangedJob: Job? = null
+    private var number:Int=10
+    var isUserScrolling = false
+    var isLoading = false
+    private var hasMoreData = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +98,13 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
 
             override fun afterTextChanged(s: Editable?) {}
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                if (s != null) {
+                    if (s.isEmpty()){
+                        ingredients.clear()
+                    }
+                }
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val searchText = s.toString()
@@ -110,14 +121,24 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                             }
                         }
                     }else{
+                        number = 10
                         lastSelected="Fruit"
+                        ingredients.clear()
                     }
                 }else{
+                    number = 10
                     lastSelected="Fruit"
+                    ingredients.clear()
                 }
             }
+
         }
 
+        allIngredientsModelData.number?.let {
+            number=it
+        }?: kotlin.run {
+            number=10
+        }
 
         if (allIngredientsModelData.dataIngredients!=null && allIngredientsModelData.dataCategories!=null){
             ingredients = allIngredientsModelData.dataIngredients!!
@@ -127,6 +148,28 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
             searchRecipeApi("")
         }
 
+
+        // Scroll listener for pagination
+        binding.rcyAllIngredients.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    isUserScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!isUserScrolling || isLoading || !hasMoreData) return
+                if (!recyclerView.canScrollVertically(1)) {
+                    isUserScrolling = false
+                    isLoading = true
+                    number += 10
+                    searchRecipeApi(binding.etIngRecipes.text.toString())
+                }
+            }
+        })
 
         binding.relApplyBtn.setOnClickListener {
             if (binding.relApplyBtn.isClickable){
@@ -143,6 +186,17 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                 }
             }
         }
+
+    }
+
+    private fun pageReset(){
+        if (number!=10){
+            number-10
+        }
+        isLoading = false
+        hasMoreData = true
+        isUserScrolling = true
+
     }
 
     private fun searchRecipeApi(type:String){
@@ -153,10 +207,13 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                     BaseApplication.dismissMe()
                     when (it) {
                         is NetworkResult.Success -> handleSuccessResponse(it.data.toString())
-                        is NetworkResult.Error -> showAlert(it.message, false)
+                        is NetworkResult.Error -> {
+                            pageReset()
+                            showAlert(it.message, false)
+                        }
                         else -> showAlert(it.message, false)
                     }
-                },lastSelected,type,"")
+                },lastSelected,type,number.toString())
             }
         } else {
             BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
@@ -176,8 +233,11 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
             if (apiModel.code == 200 && apiModel.success) {
                 if (apiModel.data != null) {
                     showDataInUi(apiModel.data)
+                }else{
+                    pageReset()
                 }
             } else {
+                pageReset()
                 if (apiModel.code == ErrorMessage.code) {
                     showAlert(apiModel.message, true)
                 } else {
@@ -185,6 +245,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                 }
             }
         } catch (e: Exception) {
+            pageReset()
             showAlert(e.message, false)
         }
     }
@@ -194,7 +255,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
         try {
 
             categoryModel.clear()
-            ingredients.clear()
+//            ingredients.clear()
 
             data.ingredients?.let {
                 ingredients.addAll(it)
@@ -204,13 +265,14 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                 categoryModel.add(CategoryModel(it, it.equals(lastSelected,true)))
             }
 
-
             allIngredientsModelData.setIngredients(ingredients)
-            allIngredientsModelData.setCategories(categoryModel)
+            allIngredientsModelData.setCategories(categoryModel,number)
 
             upDateUI()
         } catch (e: Exception) {
             showAlert(e.message, false)
+        }finally {
+            isLoading = false
         }
     }
 
@@ -259,6 +321,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
     override fun itemClick(position: Int?, status: String?, type: String?) {
         if (type.equals("filter",true)){
             lastSelected=status.toString()
+            ingredients.clear()
             // This Api call when the screen in loaded
             searchRecipeApi("")
         }else{
@@ -283,6 +346,6 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
     override fun onDestroy() {
         super.onDestroy()
         allIngredientsModelData.setIngredients(null)
-        allIngredientsModelData.setCategories(null)
+        allIngredientsModelData.setCategories(null,10)
     }
 }

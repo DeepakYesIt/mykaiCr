@@ -22,9 +22,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.appsflyer.AppsFlyerLib
+import com.appsflyer.share.LinkGenerator
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -46,14 +47,26 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.model
 import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewmodel.StatisticsViewModel
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okio.IOException
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class StatisticsGraphFragment : Fragment() {
@@ -69,7 +82,6 @@ class StatisticsGraphFragment : Fragment() {
     private  var clickCount=0
     private var currentDate = Date() // Current date
     private val client = OkHttpClient()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -112,10 +124,8 @@ class StatisticsGraphFragment : Fragment() {
     private fun initialize() {
 
         sessionManagement.getUserName()?.let {
-            binding.tvStatsNames.text=
-                "Good job $it you're on track to big savings! Stick with your plan and watch the results add up."
+            binding.tvStatsNames.text= "Good job $it you're on track to big savings! Stick with your plan and watch the results add up."
         }
-
 
         sessionManagement.getImage()?.let {
             Glide.with(requireContext())
@@ -141,7 +151,6 @@ class StatisticsGraphFragment : Fragment() {
         }
 
         binding.tvDateCalendar.text = formatMonthYear(currentMonth.toInt(),year.toInt())
-
 
         // Enable pinch zoom and double tap zoom
         binding.barChart.setPinchZoom(false)
@@ -401,101 +410,101 @@ class StatisticsGraphFragment : Fragment() {
 
     private fun shareImageWithText(description: String, link: String) {
         // Download image using Glide
-//        Glide.with(requireContext())
-//            .asBitmap() // Request a Bitmap image
-//            .load(R.drawable.shareicon) // Provide the URL to load the image from
-//            .into(object : CustomTarget<Bitmap>() {
-//                override fun onResourceReady(
-//                    resource: Bitmap,
-//                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-//                ) {
-//                    try {
-//                        // Save the image to a file in the app's external storage
-//                        val file = File(
-//                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-//                            "shared_image.png"
-//                        )
-//                        val fos = FileOutputStream(file)
-//                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
-//                        fos.close()
-//
-//                        // Create URI for the file using FileProvider
-//                        val uri: Uri = FileProvider.getUriForFile(
-//                            requireContext(),
-//                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
-//                            file
-//                        )
-//
-//                        // Format the message with line breaks
-//                        val formattedText = """$description$link""".trimIndent()
-//
-//                        // Create an intent to share the image and text
-//                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-//                            type = "image/png"
-//                            putExtra(Intent.EXTRA_STREAM, uri)
-//                            putExtra(Intent.EXTRA_TEXT, formattedText)
-//                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                        }
-//
-//                        // Launch the share dialog
-//                        requireContext().startActivity(
-//                            Intent.createChooser(
-//                                shareIntent,
-//                                "Share Image"
-//                            )
-//                        )
-//
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
-//                    }
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    // Optional: Handle if the image load is cleared or cancelled
-//                }
-//            })
-
-        val rating = 4.5f // Example rating
-
         Glide.with(requireContext())
-            .asBitmap()
-            .load(R.drawable.shareicon)
+            .asBitmap() // Request a Bitmap image
+            .load(R.drawable.shareicon) // Provide the URL to load the image from
             .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
+                ) {
                     try {
-                        // Add rating on image
-//                        val ratedImage = addRatingToImage(resource, rating)
-                        val ratedImage = addRatingToImage(resource, rating)
-
-                        // Save image
-                        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "rated_image.png")
+                        // Save the image to a file in the app's external storage
+                        val file = File(
+                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                            "shared_image.png"
+                        )
                         val fos = FileOutputStream(file)
-                        ratedImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
                         fos.close()
 
-                        val uri = FileProvider.getUriForFile(
+                        // Create URI for the file using FileProvider
+                        val uri: Uri = FileProvider.getUriForFile(
                             requireContext(),
-                            requireActivity().packageName + ".provider",
+                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
                             file
                         )
 
+                        // Format the message with line breaks
+                        val formattedText = """$description$link""".trimIndent()
+
+                        // Create an intent to share the image and text
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "image/png"
                             putExtra(Intent.EXTRA_STREAM, uri)
-                            putExtra(Intent.EXTRA_TEXT, "$description\n$link")
+                            putExtra(Intent.EXTRA_TEXT, formattedText)
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
 
-                        startActivity(Intent.createChooser(shareIntent, "Share Image with Rating"))
+                        // Launch the share dialog
+                        requireContext().startActivity(
+                            Intent.createChooser(
+                                shareIntent,
+                                "Share Image"
+                            )
+                        )
 
                     } catch (e: Exception) {
                         e.printStackTrace()
+                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
                     }
                 }
 
-                override fun onLoadCleared(placeholder: Drawable?) {}
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    // Optional: Handle if the image load is cleared or cancelled
+                }
             })
+
+//        val rating = 4.5f // Example rating
+//
+//        Glide.with(requireContext())
+//            .asBitmap()
+//            .load(R.drawable.shareicon)
+//            .into(object : CustomTarget<Bitmap>() {
+//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                    try {
+//                        // Add rating on image
+////                        val ratedImage = addRatingToImage(resource, rating)
+//                        val ratedImage = addRatingToImage(resource, rating)
+//
+//                        // Save image
+//                        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "rated_image.png")
+//                        val fos = FileOutputStream(file)
+//                        ratedImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+//                        fos.close()
+//
+//                        val uri = FileProvider.getUriForFile(
+//                            requireContext(),
+//                            requireActivity().packageName + ".provider",
+//                            file
+//                        )
+//
+//                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+//                            type = "image/png"
+//                            putExtra(Intent.EXTRA_STREAM, uri)
+//                            putExtra(Intent.EXTRA_TEXT, "$description\n$link")
+//                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//                        }
+//
+//                        startActivity(Intent.createChooser(shareIntent, "Share Image with Rating"))
+//
+//                    } catch (e: Exception) {
+//                        e.printStackTrace()
+//                    }
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {}
+//            })
 
     }
 
@@ -570,8 +579,94 @@ class StatisticsGraphFragment : Fragment() {
         Log.d("link ", "Generated OneLink URL: $fullURL")
 
 
+       /* shortenWithTinyUrl(fullURL) { shortLink ->
+            Log.d("TinyURL", "Short link: $shortLink")
+        }*/
+
+
+//        lifecycleScope.launch {
+//            val value = generateShortAppsFlyerLink("mPqu", "M57zyjkFgb7nSQwHWN6isW", deepLink, webLink)
+//            Log.d("short link", "created by user :- $value")
+//        }
 
     }
+
+
+
+
+    suspend fun generateShortAppsFlyerLink(
+        oneLinkId: String,
+        apiToken: String,
+        deepLink: String,
+        webLink: String
+    ): String? = withContext(Dispatchers.IO) {
+        try {
+            val url = URL("https://onelink.appsflyer.com/shortlink-sdk/v1/$oneLinkId")
+            val connection = url.openConnection() as HttpURLConnection
+
+            connection.requestMethod = "POST"
+            connection.setRequestProperty("Content-Type", "application/json")
+            connection.setRequestProperty("authentication", apiToken)
+            connection.doOutput = true
+
+            val body = JSONObject().apply {
+                put("ttl", 3600)
+                put("campaign", "promo_may")
+                put("channel", "whatsapp")
+                put("data", JSONObject().apply {
+                    put("af_dp", deepLink)
+                    put("af_web_dp", webLink)
+                })
+            }
+
+            OutputStreamWriter(connection.outputStream).use { writer ->
+                writer.write(body.toString())
+                writer.flush()
+            }
+
+            val responseCode = connection.responseCode
+            println("Response Code: $responseCode")
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val response = connection.inputStream.bufferedReader().use { it.readText() }
+                println("Response: $response")
+                val jsonResponse = JSONObject(response)
+                jsonResponse.getString("shortlink")
+            } else {
+                val errorResponse = connection.errorStream?.bufferedReader()?.use { it.readText() }
+                println("Error Response: $errorResponse")
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+
+    fun shortenWithTinyUrl(longUrl: String, callback: (String?) -> Unit) {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://tinyurl.com/api-create.php?url=$longUrl")
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(null)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val shortUrl = response.body.string()
+                    callback(shortUrl)
+                } else {
+                    callback(null)
+                }
+            }
+        })
+    }
+
 
 
 }

@@ -15,10 +15,12 @@ class AllIngredientsViewModel @Inject constructor(private val repository: MainRe
 
 
     private var _data: MutableList<CategoryModel>? = null
+    private var _number: Int? = 10
 
     private var _dataingredients: MutableList<IngredientList>? = null
 
     val dataCategories: MutableList<CategoryModel>? get() = _data
+    val number: Int? get() = _number
 
     val dataIngredients: MutableList<IngredientList>? get() = _dataingredients
 
@@ -27,8 +29,9 @@ class AllIngredientsViewModel @Inject constructor(private val repository: MainRe
         _dataingredients=data
     }
 
-    fun setCategories(data: MutableList<CategoryModel>?){
+    fun setCategories(data: MutableList<CategoryModel>?,numberCount:Int){
         _data=data
+        _number=numberCount
     }
 
 
