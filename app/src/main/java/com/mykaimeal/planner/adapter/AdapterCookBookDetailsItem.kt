@@ -50,8 +50,6 @@ class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, 
             holder.binding.cardViewItems.visibility=View.GONE
         }
 
-
-        
         if (data?.shared==0){
             holder.binding.imgThreeDot.visibility=View.VISIBLE
         }else{
