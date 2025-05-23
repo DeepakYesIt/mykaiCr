@@ -75,7 +75,6 @@ class LoginFragment : Fragment() {
     private var token: String = ""
     private var backType: String = ""
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

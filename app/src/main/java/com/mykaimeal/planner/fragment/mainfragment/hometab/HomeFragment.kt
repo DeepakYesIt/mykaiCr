@@ -407,7 +407,6 @@ class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnIt
             viewModel.setData(data!!)
             userDataLocal = data
 
-
             subscriptionHeader()
 
             if (userDataLocal.userData != null && userDataLocal.userData!!.size > 0) {

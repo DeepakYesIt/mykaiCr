@@ -60,6 +60,7 @@
                         android:paddingVertical="@dimen/_10sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:singleLine="true"
+                        android:maxLines="1"
                         android:textColor="#8B8B8B"
                         android:textSize="@dimen/_13sdp"
                         tools:ignore="RtlSymmetry" />
