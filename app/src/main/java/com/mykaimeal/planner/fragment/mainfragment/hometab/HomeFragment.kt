@@ -72,8 +72,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnItemSelectListener {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentHomeBinding
+
     private var recipeCookedAdapter: RecipeCookedAdapter? = null
     private var adapterSuperMarket: HomeSuperMarketList? = null
     private var recySuperMarket: RecyclerView? = null
@@ -105,7 +105,7 @@ class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnIt
     ): View {
 
         // Inflate the layout for this fragment
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         sessionManagement = SessionManagement(requireContext())
 
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
@@ -524,7 +524,6 @@ class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnIt
                         "Good job ${sessionManagement.getUserName()}, you are on track to save ${it} this month"
                 }
             }
-
 
             userDataLocal.address?.let {
                 if (it==1){
@@ -989,7 +988,6 @@ class HomeFragment : Fragment(), View.OnClickListener, OnItemClickListener, OnIt
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
-    }
 
+    }
 }

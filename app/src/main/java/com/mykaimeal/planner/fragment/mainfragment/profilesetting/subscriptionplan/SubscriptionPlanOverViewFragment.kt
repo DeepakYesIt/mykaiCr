@@ -372,7 +372,6 @@ class SubscriptionPlanOverViewFragment : Fragment() {
         }
     }
 
-    
     private fun planPurchases() {
         billingClient?.startConnection(object : BillingClientStateListener {
             override fun onBillingServiceDisconnected() {

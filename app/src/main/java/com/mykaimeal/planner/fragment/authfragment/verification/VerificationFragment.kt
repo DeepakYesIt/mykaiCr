@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.mykaimeal.planner.R
 import com.mykaimeal.planner.activity.EnterYourNameActivity
@@ -538,9 +539,19 @@ class VerificationFragment : Fragment() {
     }
 
     private fun getFcmToken() {
-        lifecycleScope.launch {
+       /* lifecycleScope.launch {
             token = BaseApplication.fetchFcmToken()
-        }
+        }*/
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    token=task.result
+                    Log.d("FCM", "FCM Token: ${task.result}")
+                } else {
+                    token="Fetching FCM token failed"
+                    Log.e("FCM", "Fetching FCM token failed", task.exception)
+                }
+            }
     }
 
     override fun onDestroyView() {
