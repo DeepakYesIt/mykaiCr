@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -398,60 +401,138 @@ class StatisticsGraphFragment : Fragment() {
 
     private fun shareImageWithText(description: String, link: String) {
         // Download image using Glide
+//        Glide.with(requireContext())
+//            .asBitmap() // Request a Bitmap image
+//            .load(R.drawable.shareicon) // Provide the URL to load the image from
+//            .into(object : CustomTarget<Bitmap>() {
+//                override fun onResourceReady(
+//                    resource: Bitmap,
+//                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
+//                ) {
+//                    try {
+//                        // Save the image to a file in the app's external storage
+//                        val file = File(
+//                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+//                            "shared_image.png"
+//                        )
+//                        val fos = FileOutputStream(file)
+//                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
+//                        fos.close()
+//
+//                        // Create URI for the file using FileProvider
+//                        val uri: Uri = FileProvider.getUriForFile(
+//                            requireContext(),
+//                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
+//                            file
+//                        )
+//
+//                        // Format the message with line breaks
+//                        val formattedText = """$description$link""".trimIndent()
+//
+//                        // Create an intent to share the image and text
+//                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+//                            type = "image/png"
+//                            putExtra(Intent.EXTRA_STREAM, uri)
+//                            putExtra(Intent.EXTRA_TEXT, formattedText)
+//                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//                        }
+//
+//                        // Launch the share dialog
+//                        requireContext().startActivity(
+//                            Intent.createChooser(
+//                                shareIntent,
+//                                "Share Image"
+//                            )
+//                        )
+//
+//                    } catch (e: Exception) {
+//                        e.printStackTrace()
+//                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
+//                    }
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                    // Optional: Handle if the image load is cleared or cancelled
+//                }
+//            })
+
+        val rating = 4.5f // Example rating
+
         Glide.with(requireContext())
-            .asBitmap() // Request a Bitmap image
-            .load(R.drawable.shareicon) // Provide the URL to load the image from
+            .asBitmap()
+            .load(R.drawable.shareicon)
             .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
-                ) {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     try {
-                        // Save the image to a file in the app's external storage
-                        val file = File(
-                            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            "shared_image.png"
-                        )
+                        // Add rating on image
+//                        val ratedImage = addRatingToImage(resource, rating)
+                        val ratedImage = addRatingToImage(resource, rating)
+
+                        // Save image
+                        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "rated_image.png")
                         val fos = FileOutputStream(file)
-                        resource.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                        ratedImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
                         fos.close()
 
-                        // Create URI for the file using FileProvider
-                        val uri: Uri = FileProvider.getUriForFile(
+                        val uri = FileProvider.getUriForFile(
                             requireContext(),
-                            requireActivity().packageName + ".provider", // Make sure this matches your manifest provider
+                            requireActivity().packageName + ".provider",
                             file
                         )
 
-                        // Format the message with line breaks
-                        val formattedText = """$description$link""".trimIndent()
-
-                        // Create an intent to share the image and text
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "image/png"
                             putExtra(Intent.EXTRA_STREAM, uri)
-                            putExtra(Intent.EXTRA_TEXT, formattedText)
+                            putExtra(Intent.EXTRA_TEXT, "$description\n$link")
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
 
-                        // Launch the share dialog
-                        requireContext().startActivity(
-                            Intent.createChooser(
-                                shareIntent,
-                                "Share Image"
-                            )
-                        )
+                        startActivity(Intent.createChooser(shareIntent, "Share Image with Rating"))
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        Log.d("ImageShareError", "onResourceReady: ${e.message}")
                     }
                 }
 
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    // Optional: Handle if the image load is cleared or cancelled
-                }
+                override fun onLoadCleared(placeholder: Drawable?) {}
             })
+
+    }
+
+    fun addRatingToImage(baseImage: Bitmap, rating: Float): Bitmap {
+        val result = baseImage.copy(Bitmap.Config.ARGB_8888, true)
+        val canvas = Canvas(result)
+
+        val starPaint = Paint().apply {
+            color = Color.YELLOW
+            textSize = 70f
+            isAntiAlias = true
+        }
+
+        val ratingPaint = Paint().apply {
+            color = Color.BLACK  // Change this to your desired color
+            textSize = 70f
+            isAntiAlias = true
+        }
+
+        // Stars string, e.g. "⭐⭐⭐⭐"
+        val stars = "⭐".repeat(rating.toInt())
+        // Rating text, e.g. " (4/5)"
+        val ratingText = " $rating"
+
+        val startX = 20f
+        val startY = baseImage.height - 50f
+
+        // Draw stars first
+        canvas.drawText(stars, startX, startY, starPaint)
+
+        // Measure stars width to position rating text
+        val starsWidth = starPaint.measureText(stars)
+
+        // Draw rating text right after stars
+        canvas.drawText(ratingText, startX + starsWidth, startY, ratingPaint)
+
+        return result
     }
 
 
