@@ -43,8 +43,9 @@ class HealthDataFragment : Fragment() {
     private lateinit var viewModel: SettingViewModel
     private var genderType: String = ""
     private lateinit var textListener: TextWatcher
-
     private var textChangedJob: Job? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -144,6 +145,7 @@ class HealthDataFragment : Fragment() {
         binding.layBottom.setOnClickListener {
             if (BaseApplication.isOnline(requireActivity())) {
                 if (isValidation()) {
+                    (activity as MainActivity?)?.upDatePlan()
                     upDateProfile()
                 }
             } else {

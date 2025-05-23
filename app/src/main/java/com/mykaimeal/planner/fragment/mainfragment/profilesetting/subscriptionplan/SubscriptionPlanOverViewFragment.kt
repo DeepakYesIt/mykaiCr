@@ -81,7 +81,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
                 llBottomNavigation.visibility = View.GONE
             }
         }
-        viewModel = ViewModelProvider(requireActivity())[SubscriptionPlanViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SubscriptionPlanViewModel::class.java]
         sessionManagement = SessionManagement(requireContext())
 
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -100,7 +100,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
             binding.crossImages.visibility = View.VISIBLE // Show the ImageView after 5 seconds
         }, 3000)
 
-        startBillingApi()
+
 
         initialize()
 
@@ -117,7 +117,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
     }
 
     private fun getPrices() {
-        billingClient!!.startConnection(object : BillingClientStateListener {
+        billingClient?.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     val executorService = Executors.newSingleThreadExecutor()
@@ -148,7 +148,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
                 }
             }
             override fun onBillingServiceDisconnected() {
-                billingClient!!.startConnection(this)
+                billingClient?.startConnection(this)
             }
         })
     }
@@ -213,11 +213,9 @@ class SubscriptionPlanOverViewFragment : Fragment() {
                             AppConstant.Premium_Annual -> sessionManagement.setPlanType("Best")
                             AppConstant.Premium_Weekly -> sessionManagement.setPlanType("Starter")
                         }
-
                         Log.d("****", "subscription_id ${purchase.orderId}")
                         Log.d("****", "subscription_PurchaseToken ${purchase.purchaseToken}")
                         Log.d("****", "planType $lastPlan")
-
                         activity?.runOnUiThread {
                             callingPurchaseSubscriptionApi(purchase.orderId, purchase.purchaseToken)
                         }
@@ -353,6 +351,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
         }
 
         binding.tvRestorePurchase.isEnabled=false
+
         binding.tvRestorePurchase.setOnClickListener {
             if (isOnline(requireContext())) {
                 binding.tvRestorePurchase.isEnabled=false
@@ -364,6 +363,8 @@ class SubscriptionPlanOverViewFragment : Fragment() {
     }
 
     private fun movToScreen(){
+        billingClient?.endConnection()
+        billingClient = null
         if (screen.equals("login",true)){
             findNavController().navigate(R.id.homeSubscriptionAllPlanFragment)
         }else{
@@ -480,6 +481,7 @@ class SubscriptionPlanOverViewFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         apiStatus()
+        startBillingApi()
     }
 
     private fun apiStatus() {
