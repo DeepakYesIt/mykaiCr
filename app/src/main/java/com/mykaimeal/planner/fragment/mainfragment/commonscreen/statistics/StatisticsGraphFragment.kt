@@ -70,7 +70,6 @@ class StatisticsGraphFragment : Fragment() {
     private var currentDate = Date() // Current date
     private val client = OkHttpClient()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentStatisticsGraphBinding.inflate(layoutInflater, container, false)
@@ -112,10 +111,8 @@ class StatisticsGraphFragment : Fragment() {
     private fun initialize() {
 
         sessionManagement.getUserName()?.let {
-            binding.tvStatsNames.text=
-                "Good job $it you're on track to big savings! Stick with your plan and watch the results add up."
+            binding.tvStatsNames.text= "Good job $it you're on track to big savings! Stick with your plan and watch the results add up."
         }
-
 
         sessionManagement.getImage()?.let {
             Glide.with(requireContext())
@@ -141,7 +138,6 @@ class StatisticsGraphFragment : Fragment() {
         }
 
         binding.tvDateCalendar.text = formatMonthYear(currentMonth.toInt(),year.toInt())
-
 
         // Enable pinch zoom and double tap zoom
         binding.barChart.setPinchZoom(false)

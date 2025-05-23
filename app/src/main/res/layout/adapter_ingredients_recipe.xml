@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_5sdp">
+
         <RelativeLayout
             android:id="@+id/imgIngRecipe"
             android:layout_width="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_height="@dimen/_50sdp">
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageData"
                 android:layout_width="match_parent"
@@ -50,6 +52,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text=""
+
                      android:textSize="@dimen/_12sdp"
                      android:textColor="@color/black"
                      android:fontFamily="@font/poppins_semibold"/>
