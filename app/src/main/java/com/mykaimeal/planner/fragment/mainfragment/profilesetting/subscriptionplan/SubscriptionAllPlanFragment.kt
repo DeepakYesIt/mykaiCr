@@ -85,7 +85,7 @@ class SubscriptionAllPlanFragment : Fragment() {
             }
         }
 
-        viewModel = ViewModelProvider(requireActivity())[SubscriptionPlanViewModel::class.java]
+        viewModel = ViewModelProvider(this)[SubscriptionPlanViewModel::class.java]
 
         binding.rlNextBtn.isClickable = false
         binding.rlNextBtn.setBackgroundResource(R.drawable.gray_btn_unselect_background)
@@ -106,6 +106,7 @@ class SubscriptionAllPlanFragment : Fragment() {
                  .error(R.drawable.mask_group_icon)
                  .into(binding.imageProfile)
         }
+
 
 
         backButton()
@@ -258,6 +259,8 @@ class SubscriptionAllPlanFragment : Fragment() {
 
 
     private fun movToPlan(){
+        billingClient?.endConnection()
+        billingClient = null
         if (screen.equals("login",true)){
             val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)
@@ -283,7 +286,6 @@ class SubscriptionAllPlanFragment : Fragment() {
         planID=planIDUser
         planType=planTypeStatus
         selectedPlan.setBackgroundResource(R.drawable.subscription_click_bg)
-
         if (tvPopular==binding.tvBest){
             tvPopular.setBackgroundResource(R.drawable.best_value_icon)
             tvPopular.setTextColor(Color.parseColor("#000000"))
@@ -333,17 +335,17 @@ class SubscriptionAllPlanFragment : Fragment() {
                         val purchaseToken1 = purchase.purchaseToken
                         Log.d("TESTING_SPARK", "$orderId orderId")
                         Log.d("TESTING_Spark", "$purchaseToken1 purchase token1")
-
+                        Log.d("TESTING_Spark planType", "$planType")
                         requireActivity().runOnUiThread {
                             binding.rlNextBtn.isClickable = false
                             binding.rlNextBtn.setBackgroundResource(R.drawable.gray_btn_unselect_background)
                         }
-
                         handlePurchase(purchase)
                     }
                 }
             } else {
                 requireActivity().runOnUiThread {
+                    Log.d("TESTING_Spark planType", "$planType")
                     binding.rlNextBtn.isClickable = true
                     binding.rlNextBtn.setBackgroundResource(R.drawable.gray_btn_select_background)
 //                    val message = when (billingResult.responseCode) {
@@ -357,7 +359,6 @@ class SubscriptionAllPlanFragment : Fragment() {
 //                        BillingClient.BillingResponseCode.SERVICE_DISCONNECTED -> "SERVICE_DISCONNECTED"
 //                        else -> "Error: ${billingResult.debugMessage}"
 //                    }
-//
 //                    Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -365,8 +366,6 @@ class SubscriptionAllPlanFragment : Fragment() {
             Log.e("BillingListenerError", "Exception in purchasesUpdatedListener", e)
         }
     }
-
-
 
     private fun handlePurchase(purchase: Purchase) {
         if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
@@ -377,15 +376,13 @@ class SubscriptionAllPlanFragment : Fragment() {
 
                 billingClient?.acknowledgePurchase(acknowledgePurchaseParams) { billingResult ->
                     if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                        activity?.runOnUiThread {
                         sessionManagement.setSubscriptionId(purchase.orderId ?: "")
                         sessionManagement.setPurchaseToken(purchase.purchaseToken)
                         sessionManagement.setPlanType(planType)
-
                         Log.d("****", "subscription_id ${purchase.orderId}")
                         Log.d("****", "subscription_PurchaseToken ${purchase.purchaseToken}")
-                        Log.d("****", "planType $planType")
-
-                        activity?.runOnUiThread {
+                        Log.d("****subscription_PurchaseToken", "$planType")
                             callingPurchaseSubscriptionApi(purchase.orderId, purchase.purchaseToken)
                         }
                     } else {
@@ -469,7 +466,6 @@ class SubscriptionAllPlanFragment : Fragment() {
                             listOf(binding.imgBasicClick, binding.imgPopularClick),
                             listOf(binding.tvNewKai, binding.tvProkaiUser),
                             listOf(binding.tvNewDollar, binding.tvNewDollarMonthly),AppConstant.Premium_Annual,"Best")
-
 
                             AppConstant.Premium_Weekly ->  selectPlan(
                             binding.relSubscriptionBasic,

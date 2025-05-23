@@ -47,7 +47,12 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewm
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okio.IOException
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -563,8 +568,35 @@ class StatisticsGraphFragment : Fragment() {
         val fullURL = uriBuilder.toString()
         referLink = fullURL
         Log.d("link ", "Generated OneLink URL: $fullURL")
-
+        shortenWithTinyUrl(fullURL) { shortLink ->
+            Log.d("TinyURL", "Short link: $shortLink")
+        }
     }
+
+
+    fun shortenWithTinyUrl(longUrl: String, callback: (String?) -> Unit) {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://tinyurl.com/api-create.php?url=$longUrl")
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(null)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    val shortUrl = response.body.string()
+                    callback(shortUrl)
+                } else {
+                    callback(null)
+                }
+            }
+        })
+    }
+
 
 
 }
