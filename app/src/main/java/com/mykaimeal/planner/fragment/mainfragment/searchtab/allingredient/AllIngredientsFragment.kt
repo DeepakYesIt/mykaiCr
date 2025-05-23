@@ -166,7 +166,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                     isUserScrolling = false
                     isLoading = true
                     number += 10
-                    searchRecipeApi(lastSelected)
+                    searchRecipeApi(binding.etIngRecipes.text.toString())
                 }
             }
         })
