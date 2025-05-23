@@ -7,7 +7,6 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
-
 android {
     namespace = "com.mykaimeal.planner"
     compileSdk = 34
@@ -78,7 +77,6 @@ android {
         jvmTarget = "1.8"
     }
 }
-
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -103,6 +101,8 @@ dependencies {
     //viewpager
     implementation("androidx.viewpager2:viewpager2:1.1.0")
 
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-messaging")
 //    implementation ("com.google.mlkit:image-labeling:17.0.7")
 
 

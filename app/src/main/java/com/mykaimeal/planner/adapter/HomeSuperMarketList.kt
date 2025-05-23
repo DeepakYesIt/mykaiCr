@@ -55,7 +55,7 @@ class HomeSuperMarketList(
                 holder.binding.tvSuperMarketItems.text = it.store_name
             }
 
-            if (it.total != null) {
+            /*if (it.total != null) {
                 val totalValue = it.total
                 val formattedTotal = if (totalValue % 1 == 0.0) {
                     totalValue.toInt().toString() // Show without decimal
@@ -63,7 +63,9 @@ class HomeSuperMarketList(
                     String.format("%.2f", totalValue) // Show two decimals
                 }
                 holder.binding.tvSuperMarketRupees.text = "$$formattedTotal"
-            }
+            }*/
+
+
             it.distance?.let { value->
                 holder.binding.tvMiles.text= "$value miles"
             }

@@ -82,12 +82,9 @@ class FilterSearchFragment : Fragment(), OnItemClickListener {
             fullListMealType = filterSearchViewModel.fullListMealType!!
             originalFullList = filterSearchViewModel.originalFullList!!
             fullListCookTime = filterSearchViewModel.fullListCookTime!!
-
-
             showFullList.clear()
             showMealType.clear()
             showListCookTime.clear()
-
             upDateUi()
         }else{
             // This Api call when the screen in loaded
@@ -97,7 +94,6 @@ class FilterSearchFragment : Fragment(), OnItemClickListener {
                 BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
             }
         }
-
 
 
         return binding.root

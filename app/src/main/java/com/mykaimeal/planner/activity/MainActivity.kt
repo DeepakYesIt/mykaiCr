@@ -4,6 +4,7 @@ import PlanApiResponse
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -49,8 +50,11 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -98,6 +102,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.installations.InstallationTokenResult
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
@@ -169,7 +176,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
 
 
 
-        getFcmToken()
+        //getFcmToken()
 
         setEvent()
 
@@ -1251,12 +1258,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
         BaseApplication.alertError(this, message, status)
     }
 
-    private fun getFcmToken() {
-        lifecycleScope.launch {
-            Log.d("Token ","******"+BaseApplication.fetchFcmToken())
-        }
-    }
-
     override fun itemClick(position: Int?, status: String?, type: String?) {
         when (status) {
             "4" -> {
@@ -1482,7 +1483,10 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
         }
     }
 
-    private fun handleLikeAndUnlikeApiResponseUrl(result: NetworkResult<String>, dialogAddRecipe: Dialog?, ) {
+    private fun handleLikeAndUnlikeApiResponseUrl(
+        result: NetworkResult<String>,
+        dialogAddRecipe: Dialog?
+    ) {
         when (result) {
             is NetworkResult.Success -> handleLikeAndUnlikeSuccessResponseUrl(result.data.toString(), dialogAddRecipe)
             is NetworkResult.Error -> showAlert(result.message, false)

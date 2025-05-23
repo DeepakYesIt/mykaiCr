@@ -22,9 +22,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.appsflyer.AppsFlyerLib
+import com.appsflyer.share.LinkGenerator
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -46,19 +47,26 @@ import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.model
 import com.mykaimeal.planner.fragment.mainfragment.commonscreen.statistics.viewmodel.StatisticsViewModel
 import com.mykaimeal.planner.messageclass.ErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okio.IOException
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class StatisticsGraphFragment : Fragment() {
@@ -568,8 +576,69 @@ class StatisticsGraphFragment : Fragment() {
         val fullURL = uriBuilder.toString()
         referLink = fullURL
         Log.d("link ", "Generated OneLink URL: $fullURL")
-        shortenWithTinyUrl(fullURL) { shortLink ->
+
+
+       /* shortenWithTinyUrl(fullURL) { shortLink ->
             Log.d("TinyURL", "Short link: $shortLink")
+        }*/
+
+
+//        lifecycleScope.launch {
+//            val value = generateShortAppsFlyerLink("mPqu", "M57zyjkFgb7nSQwHWN6isW", deepLink, webLink)
+//            Log.d("short link", "created by user :- $value")
+//        }
+
+    }
+
+
+
+
+    suspend fun generateShortAppsFlyerLink(
+        oneLinkId: String,
+        apiToken: String,
+        deepLink: String,
+        webLink: String
+    ): String? = withContext(Dispatchers.IO) {
+        try {
+            val url = URL("https://onelink.appsflyer.com/shortlink-sdk/v1/$oneLinkId")
+            val connection = url.openConnection() as HttpURLConnection
+
+            connection.requestMethod = "POST"
+            connection.setRequestProperty("Content-Type", "application/json")
+            connection.setRequestProperty("authentication", apiToken)
+            connection.doOutput = true
+
+            val body = JSONObject().apply {
+                put("ttl", 3600)
+                put("campaign", "promo_may")
+                put("channel", "whatsapp")
+                put("data", JSONObject().apply {
+                    put("af_dp", deepLink)
+                    put("af_web_dp", webLink)
+                })
+            }
+
+            OutputStreamWriter(connection.outputStream).use { writer ->
+                writer.write(body.toString())
+                writer.flush()
+            }
+
+            val responseCode = connection.responseCode
+            println("Response Code: $responseCode")
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                val response = connection.inputStream.bufferedReader().use { it.readText() }
+                println("Response: $response")
+                val jsonResponse = JSONObject(response)
+                jsonResponse.getString("shortlink")
+            } else {
+                val errorResponse = connection.errorStream?.bufferedReader()?.use { it.readText() }
+                println("Error Response: $errorResponse")
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 

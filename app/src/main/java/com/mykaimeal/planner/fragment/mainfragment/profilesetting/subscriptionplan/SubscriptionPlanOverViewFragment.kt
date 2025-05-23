@@ -372,11 +372,6 @@ class SubscriptionPlanOverViewFragment : Fragment() {
         }
     }
 
-   /* override fun onResume() {
-        super.onResume()
-        currentOnBoardingIndicator(4) // keep track of this index globally
-    }*/
-
     private fun planPurchases() {
         billingClient?.startConnection(object : BillingClientStateListener {
             override fun onBillingServiceDisconnected() {
@@ -470,7 +465,6 @@ class SubscriptionPlanOverViewFragment : Fragment() {
                             "With Kai, smart choices aren't just smart. They’re money in the bank"
                     }
                 }
-
                 currentOnBoardingIndicator(position)
             }
         })

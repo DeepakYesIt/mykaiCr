@@ -22,6 +22,46 @@
           }
         },
         {
+          "client_id": "856670496660-c3dq55tchkttujvvbkfi46f773jv8iis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mykaimeal.planner",
+            "certificate_hash": "8424917d65884bf4796fd2d13b12bc3bc5e9cd63"
+          }
+        },
+        {
+          "client_id": "856670496660-hqggsmothlne3f4jifv7mjggtrpsor96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mykaimeal.planner",
+            "certificate_hash": "625cb90b10edeed5622e9bd239bb21dde494362a"
+          }
+        },
+        {
+          "client_id": "856670496660-i2nivdip10vgc8ahf1o52k4ed99uajsl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mykaimeal.planner",
+            "certificate_hash": "fcf165e05e981387d8f0b0aae7e02d28c781d50c"
+          }
+        },
+        {
+          "client_id": "856670496660-libu66k2jdcjtgot4bb9qkedd79db2gk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mykaimeal.planner",
+            "certificate_hash": "942b4661575e9efeb5ca161329aff0eb1503f88d"
+          }
+        },
+        {
+          "client_id": "856670496660-pbjtn6a8tfotdk7qlrskiadoe4mer7lf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mykaimeal.planner",
+            "certificate_hash": "8105b1423b2f4b9b79e0c880922df0ccc7f3988f"
+          }
+        },
+        {
           "client_id": "856670496660-vtpekp5tgthm6hibflrmcbspkokk61gc.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -42,7 +82,8 @@
               "client_id": "856670496660-qsailjit03lsaeen7v1e6l769no55o93.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.MykaiApp.com"
+                "bundle_id": "com.MykaiApp.com",
+                "app_store_id": "6742851385"
               }
             }
           ]
