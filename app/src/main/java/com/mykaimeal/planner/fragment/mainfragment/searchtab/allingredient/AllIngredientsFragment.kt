@@ -174,6 +174,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
         binding.relApplyBtn.setOnClickListener {
             if (binding.relApplyBtn.isClickable){
                 if (BaseApplication.isOnline(requireActivity())) {
+                    (activity as MainActivity?)?.upDateSearchItemClick()
                     val mealType = ingredients
                         .filter { it.status == true }.joinToString(", ") { it.name.toString() }
                     val bundle = Bundle().apply {

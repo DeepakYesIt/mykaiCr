@@ -613,6 +613,7 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener, Rec
 
     override fun itemClick(position: Int?, status: String?, type: String?) {
 
+        (activity as MainActivity?)?.upDateSearchItemClick()
         if (type.equals("MealCat",true) || type.equals("Meal",true) ){
             val bundle = Bundle().apply {
                 putString("recipeName",status)

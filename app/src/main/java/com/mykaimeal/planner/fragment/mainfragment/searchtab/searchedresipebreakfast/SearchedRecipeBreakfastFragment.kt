@@ -943,10 +943,6 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
         _binding = null
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        recipes.clear()
-        searchedRecipeViewModel.setData(null)
-    }
+
 
 }

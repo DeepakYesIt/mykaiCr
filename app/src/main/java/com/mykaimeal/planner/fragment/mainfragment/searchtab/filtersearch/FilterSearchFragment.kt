@@ -301,6 +301,7 @@ class FilterSearchFragment : Fragment(), OnItemClickListener {
 
         binding.relApplyBtn.setOnClickListener {
             if (binding.relApplyBtn.isClickable){
+                (activity as MainActivity?)?.upDateSearchItemClick()
                 val mealType = showMealType.filter { it.selected == true }.map { it.name.toString() }
                 val diet = showFullList.filter { it.selected == true }.map { it.value.toString() }
                 val cookTime = showListCookTime.filter { it.selected == true }.map { it.value.toString() }
