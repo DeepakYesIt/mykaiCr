@@ -350,21 +350,23 @@ class CookedFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    private fun updateFridgeVisibility(condition: Boolean) {
+        if (condition) {
+            binding.llEmptyFridge.visibility = View.VISIBLE
+            binding.llFilledFridge.visibility = View.GONE
+        } else {
+            binding.llEmptyFridge.visibility = View.GONE
+            binding.llFilledFridge.visibility = View.VISIBLE
+        }
+    }
+
+
     @SuppressLint("SetTextI18n")
     private fun showDataInUi(cookedTabModelData: CookedTabModelData?) {
         try {
             if (cookedTabModelData != null) {
                 recipesModel = cookedTabModelData
                 if (cookedTabModelData.fridge != null && cookedTabModelData.freezer != null) {
-                    fun updateFridgeVisibility(condition: Boolean) {
-                        if (condition) {
-                            binding.llEmptyFridge.visibility = View.VISIBLE
-                            binding.llFilledFridge.visibility = View.GONE
-                        } else {
-                            binding.llEmptyFridge.visibility = View.GONE
-                            binding.llFilledFridge.visibility = View.VISIBLE
-                        }
-                    }
 
                     if (planType.equals("1", true)) {
                         updateFridgeVisibility(cookedTabModelData.fridge == 0)
@@ -538,6 +540,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                         addFavTypeDialog(item, adapter, type, mealList, position, newLikeStatus)
                     }
                 }
+
                 if (apiType.equals("remove",true)){
                     removeMealDialog(item, adapter, type, mealList, position)
                 }
@@ -878,7 +881,6 @@ class CookedFragment : Fragment(), OnItemClickListener {
                                         view.visibility = View.GONE
                                     }
                                 }
-
                                 // Dismiss the dialog
                                 dialogRemoveDay.dismiss()
 
@@ -887,6 +889,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                                 }else{
                                     binding.textFreezer.text = "Freezer ($count)"
                                 }
+                                updateFridgeVisibility(count == 0)
                                 (activity as MainActivity?)?.upDateHomeData()
                             }catch (e:Exception){
                                 Log.d("@@@@@@","Error response "+e.message)

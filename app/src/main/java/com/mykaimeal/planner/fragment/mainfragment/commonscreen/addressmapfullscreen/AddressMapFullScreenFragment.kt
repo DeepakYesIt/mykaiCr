@@ -104,6 +104,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         screenType = arguments?.getString("type", "") ?: ""
         screenType = arguments?.getString("type", "") ?: ""
         userAddress = arguments?.getString("address", "") ?: ""
+        apartNum = arguments?.getString("apiApartmentNumber", "") ?: ""
         latitude = arguments?.getString("latitude", "") ?: ""
         longitude = arguments?.getString("longitude", "") ?: ""
         addressId = arguments?.getString("addressId", "") ?: ""
@@ -117,6 +118,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
     private fun initialize() {
 
         binding.tvAddress.text =userAddress.toString()
+
 
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
@@ -352,7 +354,7 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
                 val address = addresses[0]
                 streetName = address.thoroughfare ?: "" // Street Name
                 streetNum = address.subThoroughfare ?: "" // Street Number
-                apartNum = address.premises ?: "" // Apartment Number
+//                apartNum = address.premises ?: "" // Apartment Number
                 city = address.locality ?: "" // City
                 states = address.adminArea ?: "" // State/Province
                 country = address.countryName ?: "" // Country
@@ -417,6 +419,17 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
                 getAddressFromLocation(lat, lng)
             }else{
                 getAddressFromLocation(lat, lng)
+                val addressParts = listOf(
+                    apartNum,
+                    streetNum,
+                    streetName,
+                    city,
+                    states,
+                    country,
+                    zipcode
+                )
+                val fullAddress = addressParts.filter { !it.isNullOrBlank() }.joinToString(" ")
+                address=fullAddress
                 userAddress=binding.tvAddress.text.toString()
             }
 
@@ -436,20 +449,6 @@ class AddressMapFullScreenFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
-    private fun bitmapDescriptorFromVector(
-        vectorResId: Int,
-        width: Int,
-        height: Int
-    ): BitmapDescriptor? {
-        val vectorDrawable: Drawable? =
-            ContextCompat.getDrawable(requireContext(), vectorResId) ?: return null
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        vectorDrawable?.setBounds(0, 0, canvas.width, canvas.height)
-        vectorDrawable?.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
 
     // Manage MapView Lifecycle
     override fun onResume() {
