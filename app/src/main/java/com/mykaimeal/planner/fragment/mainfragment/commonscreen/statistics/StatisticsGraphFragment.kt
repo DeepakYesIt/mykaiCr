@@ -499,6 +499,7 @@ class StatisticsGraphFragment : Fragment() {
 
     }
 
+
     fun addRatingToImage(baseImage: Bitmap, rating: Float): Bitmap {
         val result = baseImage.copy(Bitmap.Config.ARGB_8888, true)
         val canvas = Canvas(result)

@@ -541,6 +541,8 @@ class CookedFragment : Fragment(), OnItemClickListener {
                     }
                 }
 
+
+                
                 if (apiType.equals("remove",true)){
                     removeMealDialog(item, adapter, type, mealList, position)
                 }
