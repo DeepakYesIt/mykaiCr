@@ -548,6 +548,7 @@ class SearchFragment : Fragment(),View.OnClickListener, OnItemClickListener, Rec
     override fun onClick(item: View?) {
         when(item!!.id){
             R.id.relViewAll->{
+                (activity as MainActivity?)?.upDateIngredients()
                 findNavController().navigate(R.id.allIngredientsFragment)
             }
 

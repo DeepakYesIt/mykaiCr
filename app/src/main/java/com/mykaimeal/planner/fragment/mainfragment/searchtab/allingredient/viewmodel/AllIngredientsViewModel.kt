@@ -29,7 +29,7 @@ class AllIngredientsViewModel @Inject constructor(private val repository: MainRe
         _dataingredients=data
     }
 
-    fun setCategories(data: MutableList<CategoryModel>?,numberCount:Int){
+    fun setCategories(data: MutableList<CategoryModel>?,numberCount:Int?){
         _data=data
         _number=numberCount
     }
