@@ -51,6 +51,7 @@ class AdapterCookBookDetailsItem(var datalist: MutableList<CookBookDataModel>?, 
         }
 
 
+        
         if (data?.shared==0){
             holder.binding.imgThreeDot.visibility=View.VISIBLE
         }else{

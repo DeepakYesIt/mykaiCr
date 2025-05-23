@@ -171,7 +171,6 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
             }
         })
 
-
         binding.relApplyBtn.setOnClickListener {
             if (binding.relApplyBtn.isClickable){
                 if (BaseApplication.isOnline(requireActivity())) {
@@ -187,9 +186,6 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                 }
             }
         }
-
-
-
 
     }
 
