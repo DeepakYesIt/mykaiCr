@@ -221,39 +221,39 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.source!=null){
-            binding.tvSourcesName.text="By "+ viewModel.getRecipeData()?.get(0)!!.recipe?.source
+            binding.tvSourcesName.text="By "+ viewModel.getRecipeData()?.get(0)?.recipe?.source
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.review!=null){
-            binding.tvRating.text = ""+viewModel.getRecipeData()?.get(0)!!.review+"("+viewModel.getRecipeData()?.get(0)!!.review_number+")"
+            binding.tvRating.text = ""+viewModel.getRecipeData()?.get(0)!!.review+" ("+BaseApplication.formatRatingCount(viewModel.getRecipeData()?.get(0)?.review_number?:0)+")"
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.label != null) {
-            binding.tvTitle.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.label
+            binding.tvTitle.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.label
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.calories != null) {
-            binding.tvCalories.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.calories?.toInt()
+            binding.tvCalories.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.calories?.toInt()
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.FAT?.quantity != null) {
-            binding.tvFat.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.FAT?.quantity?.toInt()
+            binding.tvFat.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.totalNutrients?.FAT?.quantity?.toInt()
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.PROCNT?.quantity != null) {
-            binding.tvProtein.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.PROCNT?.quantity?.toInt()
+            binding.tvProtein.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.totalNutrients?.PROCNT?.quantity?.toInt()
         }
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.CHOCDF?.quantity != null) {
-            binding.tvCarbs.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.totalNutrients?.CHOCDF?.quantity?.toInt()
+            binding.tvCarbs.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.totalNutrients?.CHOCDF?.quantity?.toInt()
         }
 
 
         if (viewModel.getRecipeData()?.get(0)!!.recipe?.totalTime != null) {
-            binding.tvTotaltime.text = "" + viewModel.getRecipeData()?.get(0)!!.recipe?.totalTime + " min "
+            binding.tvTotaltime.text = "" + viewModel.getRecipeData()?.get(0)?.recipe?.totalTime + " min "
         }
 
-        if (viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients != null && viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients!!.size > 0) {
+        if (viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients != null && viewModel.getRecipeData()?.get(0)?.recipe?.ingredients!!.size > 0) {
             selectAll=false
             selectAll = !selectAll // Toggle the selectAll value
             // Update the drawable based on the selectAll state
@@ -263,7 +263,7 @@ class RecipeDetailsFragment : Fragment(), OnItemSelectListener {
             viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients?.forEach { ingredient ->
                 ingredient.status = selectAll
             }
-            ingredientsRecipeAdapter = IngredientsRecipeAdapter(viewModel.getRecipeData()?.get(0)!!.recipe?.ingredients, requireActivity(), this)
+            ingredientsRecipeAdapter = IngredientsRecipeAdapter(viewModel.getRecipeData()?.get(0)?.recipe?.ingredients, requireActivity(), this)
             binding.rcyIngCookWareRecipe.adapter = ingredientsRecipeAdapter
             binding.layBottom.visibility = View.VISIBLE
 

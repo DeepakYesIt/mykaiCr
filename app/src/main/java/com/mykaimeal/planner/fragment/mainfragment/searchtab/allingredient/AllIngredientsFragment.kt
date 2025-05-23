@@ -261,6 +261,10 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
                 ingredients.addAll(it)
             }
 
+            val local=ingredients.distinctBy { it.name }
+            ingredients.clear()
+            ingredients.addAll(local)
+
             data.categories?.forEach {
                 categoryModel.add(CategoryModel(it, it.equals(lastSelected,true)))
             }
@@ -277,6 +281,7 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun upDateUI(){
         if (categoryModel.size>0){
             adapterAllIngCategoryItem?.filterList(categoryModel)
@@ -284,7 +289,8 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
         if (ingredients.size>0){
             val count = ingredients.count { it.status == true }
             showCount(count)
-            adapterAllIngItem?.filterList(ingredients)
+            adapterAllIngItem?.notifyDataSetChanged()
+//            adapterAllIngItem?.filterList(ingredients)
             binding.rcyAllIngredients.visibility = View.VISIBLE
             binding.tvNodata.visibility = View.GONE
         } else {
@@ -342,6 +348,8 @@ class AllIngredientsFragment : Fragment(),View.OnClickListener,OnItemClickListen
             binding.relApplyBtn.setBackgroundResource(R.drawable.green_btn_background)
         }
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

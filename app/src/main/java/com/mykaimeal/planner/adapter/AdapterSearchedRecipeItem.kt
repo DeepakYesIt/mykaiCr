@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.mykaimeal.planner.OnItemClickListener
 import com.mykaimeal.planner.R
+import com.mykaimeal.planner.basedata.BaseApplication
 import com.mykaimeal.planner.databinding.AdapterMealTypeItemBinding
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.model.Recipe
 
@@ -54,7 +55,7 @@ class AdapterSearchedRecipeItem(var datalist: MutableList<Recipe>?, private var 
 
 
             if (item?.review!=null){
-                holder.binding.tvRatingReviews.text = ""+ item.review +"("+ item.review_number +")"
+                holder.binding.tvRatingReviews.text = ""+ item.review +" ("+ BaseApplication.formatRatingCount(item.review_number?:0) +")"
             }
 
             if (item?.recipe!=null){

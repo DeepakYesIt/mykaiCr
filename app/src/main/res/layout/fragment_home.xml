@@ -664,14 +664,17 @@
                         android:visibility="gone" />
                 </RelativeLayout>
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgFreeTrial"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="@dimen/_130sdp"
                     android:layout_below="@+id/relMonthlySavings"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
-                    android:src="@drawable/monthly_savings_free_trial" />
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/CornerCut"
+                    android:src="@drawable/subscription_icon" />
 
             </RelativeLayout>
         </ScrollView>

@@ -43,6 +43,7 @@ import com.mykaimeal.planner.basedata.NetworkResult
 import com.mykaimeal.planner.databinding.FragmentAddMealCookedBinding
 import com.mykaimeal.planner.fragment.commonfragmentscreen.mealRoutine.model.MealRoutineModelData
 import com.mykaimeal.planner.fragment.mainfragment.cookedtab.addmealfragment.viewmodel.AddMealCookedViewModel
+import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.viewmodel.CookedTabViewModel
 import com.mykaimeal.planner.fragment.mainfragment.plantab.ImagesDeserializer
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.model.Recipe
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.model.SearchModel
@@ -61,7 +62,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeListener {
     private lateinit var binding: FragmentAddMealCookedBinding
-    private lateinit var addMealCookedViewModel: AddMealCookedViewModel
+    private lateinit var addMealCookedViewModel: CookedTabViewModel
     private var searchAdapterItem: SearchAdapterItem? = null
     private var recipes: List<Recipe>? = null
     private var quantity: Int = 1
@@ -76,7 +77,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
     private lateinit var textListener: TextWatcher
     private var textChangedJob: Job? = null
     private var mealRoutineList: MutableList<MealRoutineModelData> = mutableListOf()
-
+    private var searchFor = "" // Or view.editText.text.toString()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -90,7 +91,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
             llBottomNavigation.visibility = View.GONE
         }
 
-        addMealCookedViewModel = ViewModelProvider(this)[AddMealCookedViewModel::class.java]
+        addMealCookedViewModel = ViewModelProvider(requireActivity())[CookedTabViewModel::class.java]
 
         backButton()
 
@@ -189,8 +190,6 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
 
 
         textListener = object : TextWatcher {
-            private var searchFor = "" // Or view.editText.text.toString()
-
             override fun afterTextChanged(s: Editable?) {}
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -249,6 +248,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
     }
 
 
+    @SuppressLint("DefaultLocale")
     private fun addMealsApi() {
         // Create a JsonObject for the main JSON structure
         val jsonObject = JsonObject()
@@ -260,6 +260,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
             jsonObject.addProperty("serving", String.format("%02d", quantity))
         }
 
+        addMealCookedViewModel.setData(null,null,null)
         Log.d("json object ", "******$jsonObject")
 
         BaseApplication.showMe(requireContext())
@@ -302,13 +303,9 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
 
     }
 
-    private fun handleApiAddToPlanResponse(
-        result: NetworkResult<String>
-    ) {
+    private fun handleApiAddToPlanResponse(result: NetworkResult<String>) {
         when (result) {
-            is NetworkResult.Success -> handleSuccessAddToPlanResponse(
-                result.data.toString()
-            )
+            is NetworkResult.Success -> handleSuccessAddToPlanResponse(result.data.toString())
 
             is NetworkResult.Error -> showAlertFunction(result.message, false)
             else -> showAlertFunction(result.message, false)
@@ -477,7 +474,7 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
         popupWindow?.showAsDropDown(binding.relCookedMeals, 0, 0, Gravity.CENTER)
         val rcyData = popupView?.findViewById<RecyclerView>(R.id.rcy_data)
         searchAdapterItem = recipes?.let { SearchAdapterItem(it, requireActivity(), this) }
-        rcyData!!.adapter = searchAdapterItem
+        rcyData?.adapter = searchAdapterItem
     }
 
     private fun showAlertFunction(message: String?, status: Boolean) {
@@ -500,6 +497,8 @@ class AddMealCookedFragment : Fragment(), OnItemClickListener, OnItemMealTypeLis
         mealType = type.toString()
         recipeUri = uri.toString()
         status = "2"
+        searchFor=""
+        textChangedJob?.cancel()
         binding.cardViewSearchRecipe.visibility = View.GONE
         binding.cardViewRecipe.visibility = View.VISIBLE
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.mykaimeal.planner.basedata.NetworkResult
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.allingredient.model.CategoryModel
+import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.model.Recipe
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchscreen.model.SearchModelData
 import com.mykaimeal.planner.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +16,7 @@ class SearchedRecipeViewModel @Inject constructor(private val repository: MainRe
 
 
 
-    private var _data: SearchModelData? = null
-    val data: SearchModelData? get() = _data
+
 
     suspend fun recipeSearchedApi(successCallback: (response: NetworkResult<String>) -> Unit, itemSearch: JsonObject?) {
         repository.recipeSearchApi({ successCallback(it) }, itemSearch)
@@ -54,7 +54,10 @@ class SearchedRecipeViewModel @Inject constructor(private val repository: MainRe
     }
 
 
-    fun setData(data: SearchModelData?){
+    private var _data: MutableList<Recipe>? = null
+    val data: MutableList<Recipe>? get() = _data
+
+    fun setData(data: MutableList<Recipe>?){
         _data=data
     }
 

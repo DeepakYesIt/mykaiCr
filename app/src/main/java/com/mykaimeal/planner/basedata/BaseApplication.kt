@@ -57,6 +57,15 @@ object BaseApplication {
     }
 
 
+    fun formatRatingCount(count: Int): String {
+        return when {
+            count >= 1_000_000 -> String.format("%.1fM", count / 1_000_000f)
+            count >= 1_000 -> String.format("%.1fK", count / 1_000f)
+            else -> count.toString()
+        }
+    }
+
+
     fun  alertError(context: Context?, msg:String?,status:Boolean){
         val dialog= context?.let { Dialog(it, R.style.BottomSheetDialog) }
         dialog?.setCancelable(false)

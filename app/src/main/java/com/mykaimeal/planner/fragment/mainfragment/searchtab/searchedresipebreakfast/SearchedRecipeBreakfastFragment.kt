@@ -71,7 +71,9 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
     private var fullListCookTime: MutableList<String> = mutableListOf()
     private lateinit var searchedRecipeViewModel: SearchedRecipeViewModel
     private var cookbookList: MutableList<com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data> = mutableListOf()
-
+    var isUserScrolling = false
+    var isLoading = false
+    private var hasMoreData = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,10 +89,11 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
             it.llBottomNavigation.visibility = View.VISIBLE
         }
 
-        searchedRecipeViewModel = ViewModelProvider(this)[SearchedRecipeViewModel::class.java]
+        searchedRecipeViewModel = ViewModelProvider(requireActivity())[SearchedRecipeViewModel::class.java]
 
         screenType = arguments?.getString("screenType", "Search") ?: "Search"
         recipeType = arguments?.getString("recipeName", "") ?: ""
+
         if (!screenType.equals("Search",true)){
             if (!screenType.equals("Ingredients",true)){
                 arguments?.let { bundle ->
@@ -106,6 +109,10 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
 
         cookbookList.clear()
 
+
+        adapterSearchedRecipeItem = AdapterSearchedRecipeItem(recipes, requireActivity(), this)
+        binding.rcySearchedItem.adapter = adapterSearchedRecipeItem
+
         val data = com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data(
             "", "", 0, "", "Favourites", 0, "", 0)
         cookbookList.add(0, data)
@@ -120,7 +127,7 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
 
 
         if (searchedRecipeViewModel.data!=null){
-            showDataInUi(searchedRecipeViewModel.data!!)
+            showDataInUi(searchedRecipeViewModel.data)
         }else{
             // This Api call when the screen in loaded
             launchApi()
@@ -128,6 +135,7 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
 
 
         binding.pullToRefresh.setOnRefreshListener {
+            recipes.clear()
             // This Api call when the screen in loaded
             launchApi()
         }
@@ -204,11 +212,13 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
             }
 
             is NetworkResult.Error -> {
+                pageReset()
                 showAlert(result.message, false)
                 showNoData()
             }
 
             else -> {
+                pageReset()
                 showAlert(result.message, false)
                 showNoData()
             }
@@ -225,8 +235,11 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
             val apiModel = Gson().fromJson(data, SearchModel::class.java)
             Log.d("@@@ Recipe Details ", "message :- $data")
             if (apiModel.code == 200 && apiModel.success) {
-                apiModel.data?.let { showDataInUi(it) }
+                apiModel.data?.let { showDataInUi(it.recipes) }?: kotlin.run {
+                    pageReset()
+                }
             } else {
+                pageReset()
                 showNoData()
                 handleError(apiModel.code, apiModel.message)
             }
@@ -244,24 +257,28 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun showDataInUi(searchModelData: SearchModelData) {
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showDataInUi(searchModelData: MutableList<Recipe>?) {
         try {
-            searchedRecipeViewModel.setData(searchModelData)
-            recipes.clear()
-            searchModelData.recipes?.let {
+            searchModelData?.let {
                 recipes.addAll(it)
             }
+            val uniqueUsers = recipes.distinctBy { it.recipe?.label }
+            recipes.clear()
+            recipes.addAll(uniqueUsers)
+            searchedRecipeViewModel.setData(recipes)
             if (recipes.size > 0) {
                 binding.rcySearchedItem.visibility = View.VISIBLE
                 binding.tvnoData.visibility = View.GONE
-                adapterSearchedRecipeItem = AdapterSearchedRecipeItem(recipes, requireActivity(), this)
-                binding.rcySearchedItem.adapter = adapterSearchedRecipeItem
+                adapterSearchedRecipeItem?.notifyDataSetChanged()
             } else {
                 showNoData()
             }
         } catch (e: Exception) {
             showNoData()
             Log.d("@@@@SearchFragment", "message:--" + e.message)
+        }finally {
+            isLoading = false
         }
     }
 
@@ -287,8 +304,37 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
             findNavController().navigate(R.id.basketScreenFragment)
         }
 
+        // Scroll listener for pagination
+        binding.rcySearchedItem.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    isUserScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!isUserScrolling || isLoading || !hasMoreData) return
+                if (!recyclerView.canScrollVertically(1)) {
+                    isUserScrolling = false
+                    isLoading = true
+                    // This Api call when the screen in loaded
+                    launchApi()
+                }
+            }
+        })
+
     }
 
+
+    private fun pageReset(){
+        isLoading = false
+        hasMoreData = true
+        isUserScrolling = true
+
+    }
 
     private fun chooseDayDialog(position: Int?) {
         val dialogChooseDay: Dialog = context?.let { Dialog(it) }!!
@@ -899,6 +945,7 @@ class SearchedRecipeBreakfastFragment : Fragment(), OnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        recipes.clear()
         searchedRecipeViewModel.setData(null)
     }
 

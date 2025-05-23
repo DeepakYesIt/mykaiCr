@@ -15,9 +15,11 @@ class CookedTabViewModel@Inject constructor(private val repository: MainReposito
 
 
     private var _data: CookedTabModelData? = null
+    private var _date: String? = null
     val data: CookedTabModelData? get() = _data
-    private var status:String="1"
-    val type: String get() = status
+    val date: String? get() = _date
+    private var _status:String?="1"
+    val type: String? get() = _status
 
 
     suspend fun cookedDateRequest(successCallback: (response: NetworkResult<String>) -> Unit,
@@ -44,11 +46,21 @@ class CookedTabViewModel@Inject constructor(private val repository: MainReposito
         repository.recipeAddToPlanRequestApi({ successCallback(it) },jsonObject)
     }
 
+    suspend fun recipeSearchApi(successCallback: (response: NetworkResult<String>) -> Unit, itemSearch: JsonObject?){
+        repository.recipeSearchApi ({ successCallback(it) },itemSearch)
+    }
+
+    suspend fun recipeAddToPlanRequest(successCallback: (response: NetworkResult<String>) -> Unit, jsonObject: JsonObject
+    ){
+        repository.recipeAddToPlanRequestApi({ successCallback(it) },jsonObject)
+    }
 
 
     // set Home Data
-    fun setData(dataItem: CookedTabModelData?) {
+    fun setData(dataItem: CookedTabModelData?,type:String?,date:String?) {
         _data = dataItem
+        _status = type
+        _date = date
     }
 
 }

@@ -3,6 +3,7 @@ package com.mykaimeal.planner.fragment.mainfragment.hometab.fullcookedScheduleFr
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.mykaimeal.planner.basedata.NetworkResult
+import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.model.CookedTabModelData
 import com.mykaimeal.planner.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -37,6 +38,18 @@ class FullCookingScheduleViewModel @Inject constructor(private val repository: M
     suspend fun recipeAddToPlanRequestApi(successCallback: (response: NetworkResult<String>) -> Unit, jsonObject: JsonObject
     ){
         repository.recipeAddToPlanRequestApi({ successCallback(it) },jsonObject)
+    }
+
+
+
+    private var _data: CookedTabModelData? = null
+    private var _date: String? = null
+    val data: CookedTabModelData? get() = _data
+    val date: String? get() = _date
+
+    fun setData(data: CookedTabModelData?, lastDateSelected: String?){
+        _data=data
+        _date=lastDateSelected
     }
 
 }

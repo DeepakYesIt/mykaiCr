@@ -60,6 +60,7 @@ import com.mykaimeal.planner.model.DataModel
 import com.skydoves.powerspinner.PowerSpinnerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -149,7 +150,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
                 .into(binding.imageProfile)
         }
 
-        currentDateSelected = BaseApplication.currentDateFormat().toString()
+
         Log.d("currentDateSelected", "******$currentDateSelected")
 
         if (sessionManagement.getUserName() != null) {
@@ -162,6 +163,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
             lastDateSelected=viewModel.date.toString()
             showData(viewModel.data!!)
         }else{
+            currentDateSelected = BaseApplication.currentDateFormat().toString()
             lastDateSelected = currentDateSelected
             viewModel.setDate(lastDateSelected)
             // When screen load then api call
@@ -220,6 +222,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
             dataModel.date = dateModel.date
             dataModel.isOpen = false
         }
+
         rcyChooseDaySch?.adapter = ChooseDayAdapter(dataList, requireActivity())
 
         // Initialize the adapter with the updated date list
@@ -942,14 +945,24 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
 
     private fun openDialog() {
         val dialog = Dialog(requireActivity())
-        // Set custom layout
         dialog.setContentView(R.layout.dialog_calendar)
-
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
         val calendarView = dialog.findViewById<CalendarView>(R.id.calendar)
+
         // Disable previous dates
         calendarView.minDate = System.currentTimeMillis()
+
+        // Set previously selected date if available
+        lastDateSelected.let {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            try {
+                val date = dateFormat.parse(it)
+                calendarView.setDate(date!!.time, true, true)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+        }
 
         // Hide navigation arrows
         try {
@@ -969,16 +982,22 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
         calendarView.setOnDateChangeListener { _: CalendarView?, year: Int, month: Int, dayOfMonth: Int ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
-            val date = calendar.time  // This is the Date object
-            // Format the Date object to the desired string format
-            val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.getDefault())
-            val currentDateString = dateFormat.format(date)  // This is the formatted string
-            // To convert the string back to a Date object:
-            currentDate = dateFormat.parse(currentDateString)!!  // This is the Date object
-            // Display current week dates
+            val date = calendar.time
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDateString = dateFormat.format(date)
+
+            currentDate = dateFormat.parse(currentDateString)!!
+            lastDateSelected = currentDateString
+            currentDateSelected = currentDateString
+
+            viewModel.setDate(lastDateSelected)
+            // When screen load then api call
+            fetchDataOnLoad()
             showWeekDates()
             dialog.dismiss()
         }
+
         dialog.show()
     }
 

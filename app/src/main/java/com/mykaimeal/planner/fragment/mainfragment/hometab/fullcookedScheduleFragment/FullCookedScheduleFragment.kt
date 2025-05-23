@@ -51,6 +51,7 @@ import com.mykaimeal.planner.model.DateModel
 import com.skydoves.powerspinner.PowerSpinnerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -107,8 +108,6 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
         sessionManagement = SessionManagement(requireContext())
         commonWorkUtils = CommonWorkUtils(requireContext())
-        currentDateSelected = BaseApplication.currentDateFormat().toString()
-        lastDateSelected=currentDateSelected
         fUllCookingScheduleViewModel = ViewModelProvider(requireActivity())[FullCookingScheduleViewModel::class.java]
 
         backButton()
@@ -122,11 +121,20 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             binding.tvName.text = sessionManagement.getUserName() + "'s week"
         }
 
-        if (BaseApplication.isOnline(requireActivity())) {
-            dataFetchByDate(currentDateSelected, "1")
-        } else {
-            BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+
+        fUllCookingScheduleViewModel.date?.let {
+           lastDateSelected=it
+        }?:run {
+            currentDateSelected = BaseApplication.currentDateFormat().toString()
+            lastDateSelected=currentDateSelected
         }
+
+        fUllCookingScheduleViewModel.data?.let {
+            showDataAccordingDate(it)
+        }?:run {
+            loadApi()
+        }
+
 
         onClickFalseEnabled()
 
@@ -138,6 +146,14 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         showWeekDates()
 
         return binding.root
+    }
+
+    private fun loadApi(){
+        if (BaseApplication.isOnline(requireActivity())) {
+            dataFetchByDate(currentDateSelected, "1")
+        } else {
+            BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
+        }
     }
 
     private fun backButton(){
@@ -175,9 +191,6 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         // Print the dates for debugging
         println("Days between $startDate and $endDate:")
         updatedDaysBetween.forEach { println(it) }
-
-        // Update UI with formatted date ranges
-//        binding?.tvCustomDates?.text = BaseApplication.formatonlyMonthYear(startDate)
         binding.tvCustomDates.text = "${formatDate(startDate)} - ${formatDate(endDate)}"
         binding.textWeekRange.text = "${formatDate(startDate)} - ${formatDate(endDate)}"
         tvWeekRange?.text = "${formatDate(startDate)} - ${formatDate(endDate)}"
@@ -314,7 +327,6 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             }
         }
 
-
     }
 
     private fun dataFetchByDate(date: String, status: String) {
@@ -372,6 +384,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
 
             recipesDateModel = data
 
+            fUllCookingScheduleViewModel.setData(data,lastDateSelected)
+
+
             recipesDateModel?.let {
 
                 fun setupMealAdapter(mealRecipes: MutableList<Breakfast>?, recyclerView: RecyclerView, type: String): IngredientsBreakFastAdapter? {
@@ -426,97 +441,7 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
                     binding.llTeaTime.visibility = View.GONE
                 }
 
-
-
             }
-
-            /*if (recipesDateModel != null) {
-
-
-
-                // Breakfast
-                if (recipesDateModel?.Breakfast != null && recipesDateModel?.Breakfast?.size!! > 0) {
-                    setupDragScrollForRecyclerView(binding.rcySearchBreakFast, ErrorMessage.Breakfast)
-                    binding.llBreakFast.visibility = View.VISIBLE
-                    ingredientBreakFastAdapter = IngredientsBreakFastAdapter(
-                        recipesDateModel?.Breakfast,
-                        requireActivity(),
-                        this,
-                        this,
-                        ErrorMessage.Breakfast
-                    )
-                    binding.rcySearchBreakFast.adapter = ingredientBreakFastAdapter
-                } else {
-                    binding.llBreakFast.visibility = View.GONE
-                }
-
-                ///Lunch
-                if (recipesDateModel?.Lunch != null && recipesDateModel?.Lunch?.size!! > 0) {
-                    setupDragScrollForRecyclerView(binding.rcySearchLunch, ErrorMessage.Lunch)
-                    binding.llLunch.visibility = View.VISIBLE
-                    ingredientLunchAdapter = IngredientsLunchAdapter(
-                        recipesDateModel?.Lunch,
-                        requireActivity(),
-                        this,
-                        this,
-                        ErrorMessage.Lunch
-                    )
-                    binding.rcySearchLunch.adapter = ingredientLunchAdapter
-                } else {
-                    binding.llLunch.visibility = View.GONE
-                }
-
-                // Dinner
-                if (recipesDateModel?.Dinner != null && recipesDateModel?.Dinner?.size!! > 0) {
-                    setupDragScrollForRecyclerView(binding.rcySearchDinner, ErrorMessage.Dinner)
-                    binding.llDinner.visibility = View.VISIBLE
-                    ingredientDinnerAdapter = IngredientsDinnerAdapter(
-                        recipesDateModel?.Dinner,
-                        requireActivity(),
-                        this,
-                        this,
-                        ErrorMessage.Dinner
-                    )
-                    binding.rcySearchDinner.adapter = ingredientDinnerAdapter
-
-                } else {
-                    binding.llDinner.visibility = View.GONE
-                }
-
-                // Snacks
-                if (recipesDateModel?.Snacks != null && recipesDateModel?.Snacks?.size!! > 0) {
-                    setupDragScrollForRecyclerView(binding.rcySearchSnacks, ErrorMessage.Snacks)
-                    binding.llSnacks.visibility = View.VISIBLE
-                    ingredientSnacksAdapter = IngredientsSnacksAdapter(
-                        recipesDateModel?.Snacks, requireActivity(), this,
-                        this, ErrorMessage.Snacks
-                    )
-                    binding.rcySearchSnacks.adapter = ingredientSnacksAdapter
-                } else {
-                    binding.llSnacks.visibility = View.GONE
-                }
-
-                // TeaTime
-                if (recipesDateModel?.Teatime != null && recipesDateModel?.Teatime?.size!! > 0) {
-                    setupDragScrollForRecyclerView(binding.rcySearchTeaTime, ErrorMessage.Brunch)
-                    binding.llTeaTime.visibility = View.VISIBLE
-                    ingredientTeaTimeAdapter = IngredientsTeaTimeAdapter(
-                        recipesDateModel?.Teatime,
-                        requireActivity(),
-                        this,
-                        this,
-                        ErrorMessage.Brunch
-                    )
-                    binding.rcySearchTeaTime.adapter = ingredientTeaTimeAdapter
-                } else {
-                    binding.llTeaTime.visibility = View.GONE
-                }
-
-
-            }*/
-
-
-
         } catch (e: Exception) {
             showAlert(e.message, false)
         }
@@ -866,17 +791,27 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         }
     }
 
+
     private fun openDialog() {
         val dialog = Dialog(requireActivity())
-        // Set custom layout
         dialog.setContentView(R.layout.dialog_calendar)
-
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
         val calendarView = dialog.findViewById<CalendarView>(R.id.calendar)
 
         // Disable previous dates
         calendarView.minDate = System.currentTimeMillis()
+
+        // Set previously selected date if available
+        lastDateSelected.let {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            try {
+                val date = dateFormat.parse(it)
+                calendarView.setDate(date!!.time, true, true)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+        }
 
         // Hide navigation arrows
         try {
@@ -893,22 +828,26 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
             e.printStackTrace()
         }
 
-
         calendarView.setOnDateChangeListener { _: CalendarView?, year: Int, month: Int, dayOfMonth: Int ->
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
-            val date = calendar.time  // This is the Date object
-            // Format the Date object to the desired string format
-            val dateFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.getDefault())
-            val currentDateString = dateFormat.format(date)  // This is the formatted string
-            // To convert the string back to a Date object:
-            currentDate = dateFormat.parse(currentDateString)!!  // This is the Date object
-            // Display current week dates
+            val date = calendar.time
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDateString = dateFormat.format(date)
+
+            currentDate = dateFormat.parse(currentDateString)!!
+            lastDateSelected = currentDateString
+            currentDateSelected = currentDateString
+
+            loadApi()
             showWeekDates()
             dialog.dismiss()
         }
+
         dialog.show()
     }
+
 
 
     private fun setupDragScrollForRecyclerView(recyclerView: RecyclerView, type: String) {
@@ -1339,4 +1278,9 @@ class FullCookedScheduleFragment : Fragment(), OnItemSelectUnSelectListener,
         ingredientTeaTimeAdapter?.setZiggleEnabled(false)
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fUllCookingScheduleViewModel.setData(null,null)
+    }
 }

@@ -84,10 +84,19 @@ class CookedFragment : Fragment(), OnItemClickListener {
             it.llIndicator.visibility = View.VISIBLE
             it.llBottomNavigation.visibility = View.VISIBLE
         }
-
-        currentDateSelected = BaseApplication.currentDateFormat().toString()
-        lastDateSelected=currentDateSelected
         cookedTabViewModel = ViewModelProvider(requireActivity())[CookedTabViewModel::class.java]
+
+
+        cookedTabViewModel.date?.let {
+            lastDateSelected= it
+            currentDateSelected= it
+        }?:run {
+            currentDateSelected = BaseApplication.currentDateFormat().toString()
+            lastDateSelected=currentDateSelected
+        }
+
+
+
         cookbookList.clear()
 
         val data= com.mykaimeal.planner.fragment.mainfragment.viewmodel.planviewmodel.apiresponsecookbooklist.Data("","",0,"","Favorites",0,"",0)
@@ -113,9 +122,17 @@ class CookedFragment : Fragment(), OnItemClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initialize() {
 
-        binding.textFridge.setOnClickListener { updateUI(true) }
+        binding.textFridge.setOnClickListener {
+            cookedTabViewModel.setData(null,"1",lastDateSelected)
+            planType="1"
+            updateUI(true)
+        }
 
-        binding.textFreezer.setOnClickListener { updateUI(false) }
+        binding.textFreezer.setOnClickListener {
+            planType="2"
+            cookedTabViewModel.setData(null,"2",lastDateSelected)
+            updateUI(false)
+        }
 
         // Display current week dates
         showWeekDates()
@@ -175,7 +192,13 @@ class CookedFragment : Fragment(), OnItemClickListener {
         }
 
 
-        updateUI(true)
+        planType= cookedTabViewModel.type.toString()
+
+        if (planType.equals("1",true)){
+            updateUI(true)
+        }else{
+            updateUI(false)
+        }
 
     }
 
@@ -258,7 +281,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
             currentDateSelected = dateList[it].date
             Log.d("Date ", "*****$dateList")
             // Notify the adapter to refresh the changed position
-            calendarAdapter!!.updateList(dateList)
+            calendarAdapter?.updateList(dateList)
             loadApi()
         }
         // Update the RecyclerView
@@ -311,6 +334,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
 
     private fun cookedTabApi(date: String) {
         BaseApplication.showMe(requireActivity())
+        cookedTabViewModel.setData(null,planType,lastDateSelected)
         lifecycleScope.launch {
             cookedTabViewModel.cookedDateRequest({
                 BaseApplication.dismissMe()
@@ -364,75 +388,78 @@ class CookedFragment : Fragment(), OnItemClickListener {
     @SuppressLint("SetTextI18n")
     private fun showDataInUi(cookedTabModelData: CookedTabModelData?) {
         try {
-            if (cookedTabModelData != null) {
-                recipesModel = cookedTabModelData
-                if (cookedTabModelData.fridge != null && cookedTabModelData.freezer != null) {
+            cookedTabModelData?.let {
+                    cookedTabViewModel.setData(it,planType,lastDateSelected)
+                    recipesModel = it
+                    if (it.fridge != null && it.freezer != null) {
 
-                    if (planType.equals("1", true)) {
-                        updateFridgeVisibility(cookedTabModelData.fridge == 0)
-                    } else {
-                        updateFridgeVisibility(cookedTabModelData.freezer == 0)
+                        if (planType.equals("1", true)) {
+                            updateFridgeVisibility(it.fridge == 0)
+                        } else {
+                            updateFridgeVisibility(it.freezer == 0)
+                        }
+
+                        binding.textFreezer.text = "Freezer (" + it.freezer.toString() + ")"
+                        binding.textFridge.text = "Fridge (" + it.fridge.toString() + ")"
+
+                    }else{
+                        binding.llEmptyFridge.visibility = View.VISIBLE
+                        binding.llFilledFridge.visibility = View.GONE
                     }
 
-                    binding.textFreezer.text = "Freezer (" + cookedTabModelData.freezer.toString() + ")"
-                    binding.textFridge.text = "Fridge (" + cookedTabModelData.fridge.toString() + ")"
-
-                }else{
-                    binding.llEmptyFridge.visibility = View.VISIBLE
-                    binding.llFilledFridge.visibility = View.GONE
-                }
-
-                fun setupMealAdapter(mealRecipes: MutableList<Breakfast>?, recyclerView: RecyclerView, type: String): AdapterFoodListItem? {
-                    return if (!mealRecipes.isNullOrEmpty()) {
-                        val adapter = AdapterFoodListItem(mealRecipes,type, requireActivity(), this)
-                        recyclerView.adapter = adapter
-                        adapter
-                    } else {
-                        null
+                    fun setupMealAdapter(mealRecipes: MutableList<Breakfast>?, recyclerView: RecyclerView, type: String): AdapterFoodListItem? {
+                        return if (!mealRecipes.isNullOrEmpty()) {
+                            val adapter = AdapterFoodListItem(mealRecipes,type, requireActivity(), this)
+                            recyclerView.adapter = adapter
+                            adapter
+                        } else {
+                            null
+                        }
                     }
-                }
 
-                // Breakfast
-                if (cookedTabModelData.Breakfast != null && cookedTabModelData.Breakfast.size >0) {
-                    foodListBreakFastAdapter = setupMealAdapter(cookedTabModelData.Breakfast, binding.rcvBreakfast, ErrorMessage.Breakfast)
-                    binding.rlBreakfast.visibility = View.VISIBLE
-                } else {
-                    binding.rlBreakfast.visibility = View.GONE
-                }
+                    // Breakfast
+                    if (it.Breakfast != null && it.Breakfast.size >0) {
+                        foodListBreakFastAdapter = setupMealAdapter(it.Breakfast, binding.rcvBreakfast, ErrorMessage.Breakfast)
+                        binding.rlBreakfast.visibility = View.VISIBLE
+                    } else {
+                        binding.rlBreakfast.visibility = View.GONE
+                    }
 
-                // Lunch
-                if (cookedTabModelData.Lunch != null && cookedTabModelData.Lunch.size >0) {
-                    foodListLunchAdapter = setupMealAdapter(cookedTabModelData.Lunch, binding.rcvLunch, ErrorMessage.Lunch)
-                    binding.rlLunch.visibility = View.VISIBLE
-                } else {
-                    binding.rlLunch.visibility = View.GONE
-                }
+                    // Lunch
+                    if (it.Lunch != null && it.Lunch.size >0) {
+                        foodListLunchAdapter = setupMealAdapter(it.Lunch, binding.rcvLunch, ErrorMessage.Lunch)
+                        binding.rlLunch.visibility = View.VISIBLE
+                    } else {
+                        binding.rlLunch.visibility = View.GONE
+                    }
 
-                // Dinner
-                if (cookedTabModelData.Dinner != null && cookedTabModelData.Dinner.size >0) {
-                    foodListDinnerAdapter = setupMealAdapter(cookedTabModelData.Dinner, binding.rcvDinner, ErrorMessage.Dinner)
-                    binding.relDinner.visibility = View.VISIBLE
-                } else {
-                    binding.relDinner.visibility = View.GONE
-                }
+                    // Dinner
+                    if (it.Dinner != null && it.Dinner.size >0) {
+                        foodListDinnerAdapter = setupMealAdapter(it.Dinner, binding.rcvDinner, ErrorMessage.Dinner)
+                        binding.relDinner.visibility = View.VISIBLE
+                    } else {
+                        binding.relDinner.visibility = View.GONE
+                    }
 
-                // Snacks
-                if (cookedTabModelData.Snacks != null && cookedTabModelData.Snacks.size >0) {
-                    foodListSnacksAdapter = setupMealAdapter(cookedTabModelData.Snacks, binding.rcvSnacks, ErrorMessage.Snacks)
-                    binding.relSnacks.visibility = View.VISIBLE
-                } else {
-                    binding.relSnacks.visibility = View.GONE
-                }
+                    // Snacks
+                    if (it.Snacks != null && it.Snacks.size >0) {
+                        foodListSnacksAdapter = setupMealAdapter(it.Snacks, binding.rcvSnacks, ErrorMessage.Snacks)
+                        binding.relSnacks.visibility = View.VISIBLE
+                    } else {
+                        binding.relSnacks.visibility = View.GONE
+                    }
 
-                // Teatime
-                if (cookedTabModelData.Teatime != null && cookedTabModelData.Teatime.size >0) {
-                    foodListTeaTimeAdapter = setupMealAdapter(cookedTabModelData.Teatime, binding.rcvTeaTime, ErrorMessage.Brunch)
-                    binding.relTeaTime.visibility = View.VISIBLE
-                } else {
-                    binding.relTeaTime.visibility = View.GONE
-                }
-
+                    // Teatime
+                    if (it.Teatime != null && it.Teatime.size >0) {
+                        foodListTeaTimeAdapter = setupMealAdapter(it.Teatime, binding.rcvTeaTime, ErrorMessage.Brunch)
+                        binding.relTeaTime.visibility = View.VISIBLE
+                    } else {
+                        binding.relTeaTime.visibility = View.GONE
+                    }
+                }?:run {
+                cookedTabViewModel.setData(null,planType,lastDateSelected)
             }
+
         }catch (e:Exception){
             Log.d("CookedScreen","message:--"+e.message)
         }
@@ -449,9 +476,13 @@ class CookedFragment : Fragment(), OnItemClickListener {
         binding.textFreezer.setTextColor(if (isFridgeSelected) Color.parseColor("#3C4541") else Color.WHITE)
         binding.llFilledFridge.visibility = if (isFridgeSelected) View.VISIBLE else View.GONE
         binding.llEmptyFridge.visibility = View.GONE
-        planType = if (isFridgeSelected) "1" else "2"
-//        cookedTabViewModel.type=planType
-        loadApi()
+//        planType = if (isFridgeSelected) "1" else "2"
+
+        cookedTabViewModel.data?.let {
+            showDataInUi(it)
+        } ?:run {
+            loadApi()
+        }
     }
 
     override fun itemClick(position: Int?, status: String?, type: String?) {
@@ -542,7 +573,7 @@ class CookedFragment : Fragment(), OnItemClickListener {
                 }
 
 
-                
+
                 if (apiType.equals("remove",true)){
                     removeMealDialog(item, adapter, type, mealList, position)
                 }
@@ -912,6 +943,11 @@ class CookedFragment : Fragment(), OnItemClickListener {
                 }
             }, cookedId)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cookedTabViewModel.setData(null,null,null)
     }
 
 }
