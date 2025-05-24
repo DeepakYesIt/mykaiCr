@@ -172,8 +172,23 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
 
 
 
+
+
         // Display current week dates
         showWeekDates()
+
+
+
+        binding.pullToRefresh.setOnRefreshListener {
+            currentDate = Date()
+            currentDateSelected = BaseApplication.currentDateFormat().toString()
+            lastDateSelected = currentDateSelected
+            viewModel.setDate(lastDateSelected)
+            // When screen load then api call
+            fetchDataOnLoad()
+            // Display current week dates
+            showWeekDates()
+        }
 
         return binding.root
     }
@@ -195,8 +210,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
         viewModel.setDate(lastDateSelected)
         // Define the date format (update to match your `date` string format)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val formattedCurrentDate =
-            dateFormat.format(currentDate) // Format currentDate to match the string format
+        dateFormat.format(currentDate) // Format currentDate to match the string format
         val (startDate, endDate) = getWeekDates(currentDate)
         this.startDate = startDate
         this.endDate = endDate
@@ -302,6 +316,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
         if (BaseApplication.isOnline(requireActivity())) {
             fetchRecipeDetailsData()
         } else {
+            binding.pullToRefresh.isRefreshing=false
             BaseApplication.alertError(requireContext(), ErrorMessage.networkError, false)
         }
     }
@@ -311,6 +326,7 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
         lifecycleScope.launch {
             viewModel.planRequest({
                 BaseApplication.dismissMe()
+                binding.pullToRefresh.isRefreshing=false
                 handleApiResponse(it)
             }, "q")
         }
@@ -983,14 +999,11 @@ class PlanFragment : Fragment(), OnItemClickListener, OnItemSelectPlanTypeListen
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
             val date = calendar.time
-
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val currentDateString = dateFormat.format(date)
-
             currentDate = dateFormat.parse(currentDateString)!!
             lastDateSelected = currentDateString
             currentDateSelected = currentDateString
-
             viewModel.setDate(lastDateSelected)
             // When screen load then api call
             fetchDataOnLoad()

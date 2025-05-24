@@ -104,6 +104,7 @@ import java.util.Date
 import java.util.Locale
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.installations.InstallationTokenResult
+import com.mykaimeal.planner.fragment.mainfragment.cookedtab.cookedfragment.viewmodel.CookedTabViewModel
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.allingredient.viewmodel.AllIngredientsViewModel
 import com.mykaimeal.planner.fragment.mainfragment.searchtab.searchedresipebreakfast.viewmodel.SearchedRecipeViewModel
 
@@ -1706,6 +1707,11 @@ class MainActivity : AppCompatActivity(), OnClickListener, OnItemClickListener{
         ViewModelProvider(this)[CookBookViewModel::class.java].setDataCookBook(null)
         ViewModelProvider(this)[CookBookViewModel::class.java].setDataCookBookList(null)
     }
+
+    fun upDateCookTab(){
+        ViewModelProvider(this)[CookedTabViewModel::class.java].setData(null,"1",null)
+    }
+
 
 
     fun upDateGraph(){
